@@ -1,0 +1,1 @@
+export const COURSES_LOADED = "COURSES_LOADED";

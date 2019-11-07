@@ -5,6 +5,21 @@ class Services{
     constructor(){
         this.domain = "http://localhost:8080/api"; // https://www/api.harusbisa.net/api
     }
+    //HEADERS
+    createHeaders(){
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+        // Setting Authorization header
+        // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
+        if (this.isLoggedIn()) {
+            headers['Authorization'] = 'Bearer ' + this.getToken()
+        }
+
+        return headers;
+    }
 
     // AUTHENTICATION RELATED
     setToken(idToken){
@@ -52,6 +67,19 @@ class Services{
         })
     }
 
+    //COURSES
+    async getCourses(){
+        const headers = this.createHeaders();
+        return await axios.get(this.domain + "/courses",{
+            headers: headers
+        })
+        .then(response => {
+            return response.data.data;
+        })
+        .catch(error =>{
+            console.log(error.message);
+        })
+    }
 }
 
 const services = new Services()
