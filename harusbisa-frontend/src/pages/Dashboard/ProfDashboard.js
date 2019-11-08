@@ -2,17 +2,12 @@ import React, { useEffect } from "react";
 import { withAuth } from "../withAuth";
 import {getLectures} from "../../redux/actions";
 import {connect} from "react-redux";
-import store from "../../redux/store";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 function mapStateToProps(state){
-    if (state){
-        return{
-            // courses: state.courses,
-            loading: false
-        };
-    }
     return{
-        loading: true
+        loading: state.loading,
+        course: state.course
     }
     
 }
@@ -21,11 +16,26 @@ function ProfDashboard(props){
     useEffect(() =>{
         props.getLectures(courseId);
     })
-    console.log(store.getState())
+    if (props.loading){
+        return(<p>Loading</p>)
+    }
+
     return(
         <div>
-            <h1>Dashboard</h1>
-            <p>{courseId}</p>
+            <header>
+                <h1>Dashboard</h1>
+                <p>{props.course.course_name}</p>
+            </header>
+            <div className="row">
+                <div className="col-3">
+                    <Sidebar/>
+                </div>
+                <div className="col">
+                    Content
+                </div>
+            </div>
+            
+            
         </div>
     )
 }

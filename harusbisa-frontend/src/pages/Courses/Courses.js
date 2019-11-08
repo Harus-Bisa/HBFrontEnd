@@ -6,16 +6,10 @@ import { getCourses } from "../../redux/actions";
 import { ProfCourseCard } from "../../components/Card/Card";
 
 function mapStateToProps(state){
-    if (state){
-        return{
-            courses: state.courses,
-            loading: false
-        };
-    }
     return{
-        loading: true
-    }
-    
+        courses: state.courses,
+        loading: state.loading
+    };
 }
 
 function Courses(props){
