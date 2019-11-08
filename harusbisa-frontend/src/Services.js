@@ -74,10 +74,24 @@ class Services{
             headers: headers
         })
         .then(response => {
-            return response.data.data;
+            return response.data.data.courses;
         })
         .catch(error =>{
             console.log(error.message);
+        })
+    }
+
+    // LECTURES
+    async getLectures(courseId){
+        const headers = this.createHeaders();
+        return await axios.get(this.domain + "/courses/"+courseId+"/lectures",{
+            headers:headers
+        })
+        .then(response =>{
+            return response.data.data;
+        })
+        .catch(error =>{
+            console.log(error.message)
         })
     }
 }
