@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import Courses from './pages/Courses/Courses';
 import './App.css';
 import ProfDashboard from './pages/Dashboard/ProfDashboard';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
