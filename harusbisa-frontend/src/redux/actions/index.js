@@ -1,4 +1,4 @@
-import { COURSES_LOADED } from "../constants/action-types";
+import { COURSES_LOADED, LECTURES_LOADED } from "../constants/action-types";
 import services from "../../Services";
 
 export function getCourses(){
@@ -6,6 +6,15 @@ export function getCourses(){
         return await services.getCourses()
         .then(async response =>{
             await dispatch({type:COURSES_LOADED, payload:response})
+        })
+    }
+}
+
+export function getLectures(courseId){
+    return async function(dispatch){
+        return await services.getLectures(courseId)
+        .then(async response => {
+            await dispatch({type:LECTURES_LOADED, payload: response})
         })
     }
 }

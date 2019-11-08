@@ -1,1 +1,2 @@
 export const COURSES_LOADED = "COURSES_LOADED";
+export const LECTURES_LOADED = "LECTURES_LOADED";
