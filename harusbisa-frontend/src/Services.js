@@ -81,6 +81,33 @@ class Services{
         })
     }
 
+    async addCourse(courseName, startTerm, endTerm){
+        const headers = this.createHeaders();
+        const data = {
+            course_name: courseName,
+            start_term: startTerm,
+            end_term: endTerm
+        }
+        return await axios.post(this.domain + "/courses", data, {headers: headers})
+        .then(response =>{
+            return response.data.data.courses
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
+
+    async deleteCourse(courseId){
+        const headers = this.createHeaders();
+        return await axios.delete(this.domain + "/courses/" + courseId, {headers:headers})
+        .then(response =>{
+            return response.data.data.courses
+        })
+        .catch(error =>{
+            console.log(error.message)
+        })
+    }
+
     // LECTURES
     async getLectures(courseId){
         const headers = this.createHeaders();
