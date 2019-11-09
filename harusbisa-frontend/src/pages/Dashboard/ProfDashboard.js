@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withAuth } from "../withAuth";
 import {getLectures} from "../../redux/actions";
 import {connect} from "react-redux";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import Content from "../../components/Content/Content";
 
 function mapStateToProps(state){
     return{
@@ -11,33 +12,36 @@ function mapStateToProps(state){
     }
     
 }
-function ProfDashboard(props){
-    const courseId = props.match.params.id
-    useEffect(() =>{
-        props.getLectures(courseId);
-    })
-    if (props.loading){
-        return(<p>Loading</p>)
-    }
 
-    return(
-        <div>
-            <header>
-                <h1>Dashboard</h1>
-                <p>{props.course.course_name}</p>
-            </header>
-            <div className="row">
-                <div className="col-3">
-                    <Sidebar/>
-                </div>
-                <div className="col">
-                    Content
-                </div>
+class ProfDashboard extends React.Component{
+    componentDidMount(){
+        const courseId = this.props.match.params.id
+        this.props.getLectures(courseId);
+    }
+    render(){
+        if (this.props.loading){
+            return(<p>Loading</p>)
+        }
+    
+        return(
+            <div>
+                <header>
+                    <p>{this.props.course.course_name}</p>
+                </header>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-2">
+                            <Sidebar/>
+                        </div>
+                        <div className="col">
+                            <Content/>
+                        </div>
+                    </div>
+                </div>            
             </div>
-            
-            
-        </div>
-    )
+        )
+    }
 }
+
 
 export default  connect(mapStateToProps, {getLectures})(withAuth(ProfDashboard));
