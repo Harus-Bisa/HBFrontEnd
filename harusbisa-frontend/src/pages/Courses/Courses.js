@@ -4,6 +4,8 @@ import services from "../../Services";
 import {connect} from "react-redux";
 import { getCourses } from "../../redux/actions";
 import ProfCourseCard from "../../components/Card/CourseCard";
+import Popup from "../../components/Popup/Popup";
+import CourseForm from "../../components/Form/CourseForm";
 
 function mapStateToProps(state){
     return{
@@ -40,6 +42,7 @@ class Courses extends React.Component{
             <div>
                 Courses
                 {this.makeCards()}
+                <Popup purpose={"Add Course"} content={<CourseForm/>}/>
                 <button onClick={this.logout}>logout</button>
             </div>
         )
