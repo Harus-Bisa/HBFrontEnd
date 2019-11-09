@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE } from "../constants/action-types";
 import services from "../../Services";
 
 export function getCourses(){
@@ -17,4 +17,8 @@ export function getLectures(courseId){
             await dispatch({type:COURSE_LOADED, payload: response})
         })
     }
+}
+
+export function changeSelectedLecture(payload){
+    return{type: CHANGE_SELECTED_LECTURE, payload:payload}
 }
