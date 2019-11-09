@@ -1,4 +1,6 @@
 import React from "react";
+import {connect} from "react-redux";
+import { addCourse } from "../../redux/actions";
 
 function CourseForm(props){
     const [name, setName] = React.useState();
@@ -7,7 +9,7 @@ function CourseForm(props){
 
     const submit = (event) =>{
         event.preventDefault();
-        console.log(name)
+        props.addCourse(name, startDate, endDate);
     }
     return(
         <div>
@@ -27,4 +29,4 @@ function CourseForm(props){
     )
 }
 
-export default CourseForm;
+export default connect(null,{addCourse})(CourseForm);
