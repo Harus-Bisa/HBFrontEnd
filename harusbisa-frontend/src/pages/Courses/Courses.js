@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withAuth } from "../withAuth";
 import services from "../../Services";
 import {connect} from "react-redux";
 import { getCourses } from "../../redux/actions";
-import { ProfCourseCard } from "../../components/Card/Card";
+import ProfCourseCard from "../../components/Card/CourseCard";
 
 function mapStateToProps(state){
     return{
@@ -12,42 +12,38 @@ function mapStateToProps(state){
     };
 }
 
-function Courses(props){
-    useEffect(() => {
-        props.getCourses();
-    })
-
-    const logout = () =>{
-        services.logout();
-        props.history.push("/")
+class Courses extends React.Component{
+    componentDidMount(){
+        this.props.getCourses();
     }
 
-    
-    const makeCards = () => {
-        var courses = props.courses;
+    logout = () =>{
+        services.logout();
+        this.props.history.push("/")
+    }
+    makeCards = () => {
+        var courses = this.props.courses;
         var cards = []
         for (var i=0; i<courses.length; i++){
             var course = courses[i];
-            var cardProps = {
-                title: course.course_name,
-                link: "/dashboard/"+course._id 
-            }
-            cards.push(<ProfCourseCard key={i} content={cardProps}/>)
+            cards.push(<ProfCourseCard key={i} id={course._id}/>)
         }
         return cards
     };
-    if (props.loading){
-        return(<p>Loading</p>)
+
+    render(){
+        if (this.props.loading){
+            return(<p>Loading</p>)
+        }
+    
+        return(
+            <div>
+                Courses
+                {this.makeCards()}
+                <button onClick={this.logout}>logout</button>
+            </div>
+        )
     }
-
-    return(
-        <div>
-            Courses
-            {makeCards()}
-            <button onClick={logout}>logout</button>
-        </div>
-    )
 }
-
 
 export default connect(mapStateToProps, {getCourses})(withAuth(Courses));
