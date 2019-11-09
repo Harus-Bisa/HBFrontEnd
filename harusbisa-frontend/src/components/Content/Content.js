@@ -15,7 +15,11 @@ function Content(props){
         }
         return quizzes;
     }
-
+    if (!props.lecture){
+        return(
+            <div>Make your first lecture!</div>
+        )
+    }
     return(
         <div>
             <header>
