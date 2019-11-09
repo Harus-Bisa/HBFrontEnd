@@ -1,16 +1,8 @@
 import React from "react";
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 import {connect} from "react-redux";
+import {deleteCourse} from "../../redux/actions";
 
-function FunctionalCard(props){
-    return(
-        <Card>
-            <CardContent style={props.styles.content}>
-                <h3><a href={props.content.link}>{props.content.title}</a></h3>
-            </CardContent>
-        </Card>
-    )
-}
 function mapStateToProps(state, currentProps){
     var courseId = currentProps.id 
     var courses = state.courses
@@ -27,12 +19,20 @@ function ProfCourseCard(props){
     const styles={
         content: {background:"pink"}
     }
-
-    const content = {
-        title: props.course.course_name,
-        link: "/dashboard/"+props.course._id
+    const deleteCourse = () =>{
+        props.deleteCourse(props.course._id)
+        
     }
-    return(<FunctionalCard content={content} styles={styles}/>)
+    return(
+        <Card>
+            <CardContent style={styles.content}>
+                <h3><a href={"/dashboard/"+props.course._id}>{props.course.course_name}</a></h3>
+            </CardContent>
+            <CardActions>
+                <Button onClick={deleteCourse}>Delete</Button>
+            </CardActions>
+        </Card>
+    )
 }
 
-export default connect(mapStateToProps)(ProfCourseCard);
+export default connect(mapStateToProps, {deleteCourse})(ProfCourseCard);
