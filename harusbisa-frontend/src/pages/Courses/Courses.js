@@ -42,7 +42,7 @@ class Courses extends React.Component{
             <div>
                 Courses
                 {this.makeCards()}
-                <Popup purpose={"Add Course"} content={<CourseForm/>}/>
+                <Popup purpose={"Add Course"} content={CourseForm}/>
                 <button onClick={this.logout}>logout</button>
             </div>
         )

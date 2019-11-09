@@ -10,6 +10,7 @@ function CourseForm(props){
     const submit = (event) =>{
         event.preventDefault();
         props.addCourse(name, startDate, endDate);
+        props.closePopup();
     }
     return(
         <div>
