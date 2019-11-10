@@ -2,6 +2,8 @@ import React from "react";
 import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 import {connect} from "react-redux";
 import {deleteCourse} from "../../redux/actions";
+import Popup from "../Popup/Popup";
+import CourseForm from "../Form/CourseForm";
 
 function mapStateToProps(state, currentProps){
     var courseId = currentProps.id 
@@ -20,8 +22,7 @@ function ProfCourseCard(props){
         content: {background:"pink"}
     }
     const deleteCourse = () =>{
-        props.deleteCourse(props.course._id)
-        
+        props.deleteCourse(props.course._id)   
     }
     return(
         <Card>
@@ -30,6 +31,7 @@ function ProfCourseCard(props){
             </CardContent>
             <CardActions>
                 <Button onClick={deleteCourse}>Delete</Button>
+                <Popup purpose={"Edit"} content={CourseForm} id={props.course._id}/>
             </CardActions>
         </Card>
     )
