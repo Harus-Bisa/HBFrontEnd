@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE } from "../constants/action-types";
 import services from "../../Services";
 
 export function getCourses(){
@@ -37,6 +37,15 @@ export function deleteCourse(courseId){
         return await services.deleteCourse(courseId)
         .then(async response =>{
             await dispatch({type:DELETE_COURSE, payload: response})
+        })
+    }
+}
+
+export function editCourse(courseId, name, startDate, endDate){
+    return async function(dispatch){
+        return await services.editCourse(courseId, name, startDate, endDate)
+        .then(async response => {
+            await dispatch({type:EDIT_COURSE, payload: response})
         })
     }
 }

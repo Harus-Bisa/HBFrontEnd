@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE } from "../constants/action-types";
 
 function rootReducer(state ={loading: true}, action){
     if (action.type === COURSES_LOADED){
@@ -30,6 +30,12 @@ function rootReducer(state ={loading: true}, action){
         return Object.assign({}, state, {
             courses: action.payload,
             loading: false,
+        })
+    }
+    if(action.type === EDIT_COURSE){
+        return Object.assign({}, state, {
+            courses: action.payload,
+            loading: false
         })
     }
     return state;

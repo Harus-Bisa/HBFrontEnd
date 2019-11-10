@@ -21,7 +21,7 @@ class Services{
         return headers;
     }
 
-    // AUTHENTICATION RELATED
+    // AUTHENTICATION
     setToken(idToken){
         localStorage.setItem('id_token', idToken);
     }
@@ -100,6 +100,22 @@ class Services{
     async deleteCourse(courseId){
         const headers = this.createHeaders();
         return await axios.delete(this.domain + "/courses/" + courseId, {headers:headers})
+        .then(response =>{
+            return response.data.data.courses
+        })
+        .catch(error =>{
+            console.log(error.message)
+        })
+    }
+
+    async editCourse(courseId, courseName, startTerm, endTerm){
+        const headers = this.createHeaders();
+        const data = {
+            course_name: courseName,
+            start_term: startTerm,
+            end_term: endTerm
+        }
+        return await axios.put(this.domain + "/courses/" + courseId, data, {headers: headers})
         .then(response =>{
             return response.data.data.courses
         })
