@@ -1,0 +1,1 @@
+export const HB_PURPLE = "#6311AB"
