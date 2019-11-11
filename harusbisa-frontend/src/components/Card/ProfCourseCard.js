@@ -27,7 +27,7 @@ function ProfCourseCard(props){
     return(
         <Card>
             <CardContent style={styles.content}>
-                <h3><a href={"/dashboard/"+props.course._id}>{props.course.course_name}</a></h3>
+                <h3><a href={"/faculty/dashboard/"+props.course._id}>{props.course.course_name}</a></h3>
             </CardContent>
             <CardActions>
                 <Button onClick={deleteCourse}>Delete</Button>
