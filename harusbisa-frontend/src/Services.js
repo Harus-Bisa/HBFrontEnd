@@ -61,9 +61,29 @@ class Services{
         })
         .then(response => {
             this.setToken(response.data.token)
+            return this.getUser()
         })
         .catch(error => {
             console.log(error.message)
+        })
+    }
+
+    //USERS
+    async getUser(){
+        const headers = this.createHeaders();
+        return await axios.get(this.domain + "/courses",{
+            headers: headers
+        })
+        .then(response => {
+            var data = response.data.data
+            return{
+                firstName: data.first_name,
+                lastName: data.last_name,
+                role: data.role
+            }
+        })
+        .catch(error =>{
+            console.log(error.message);
         })
     }
 
