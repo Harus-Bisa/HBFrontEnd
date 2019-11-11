@@ -1,9 +1,9 @@
 import React from "react";
-import { withAuth } from "../withAuth";
-import {getLectures} from "../../redux/actions";
+import { withAuth } from "../../withAuth";
+import {getLectures} from "../../../redux/actions";
 import {connect} from "react-redux";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import Content from "../../components/Content/Content";
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import Content from "../../../components/Content/Dashboard/Content";
 
 function mapStateToProps(state){
     return{

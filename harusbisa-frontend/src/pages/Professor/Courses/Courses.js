@@ -1,11 +1,11 @@
 import React from "react";
-import { withAuth } from "../withAuth";
-import services from "../../Services";
+import { withAuth } from "../../withAuth";
+import services from "../../../Services";
 import {connect} from "react-redux";
-import { getCourses } from "../../redux/actions";
-import ProfCourseCard from "../../components/Card/CourseCard";
-import Popup from "../../components/Popup/Popup";
-import CourseForm from "../../components/Form/CourseForm";
+import { getCourses } from "../../../redux/actions";
+import ProfCourseCard from "../../../components/Card/ProfCourseCard";
+import Popup from "../../../components/Popup/Popup";
+import CourseForm from "../../../components/Form/CourseForm";
 
 function mapStateToProps(state){
     return{

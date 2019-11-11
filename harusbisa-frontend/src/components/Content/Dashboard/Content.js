@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import QuizCard from "../Card/QuizCard";
+import QuizCard from "../../Card/QuizCard";
 
 function mapStateToProps(state){
     return {
@@ -17,7 +17,7 @@ function Content(props){
     }
     if (!props.lecture){
         return(
-            <div>Make your first lecture!</div>
+            <div>Make your first lecture</div>
         )
     }
     return(

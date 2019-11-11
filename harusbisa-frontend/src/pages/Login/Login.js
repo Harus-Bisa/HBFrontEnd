@@ -9,13 +9,17 @@ function Login(props){
     var handleSubmit = async (event) => {
         event.preventDefault()
         await services.login(email, password)
-        if (services.isLoggedIn()){
-            props.history.push("/courses")
-        }
-        else{
-            setError(error = {message: "Login error"})
-        }
-        
+        .then(response => {
+            if (response.role === "faculty" && services.isLoggedIn()){
+                props.history.push("/faculty/courses")
+            }
+            else if (response.role === "student" && services.isLoggedIn()){
+                props.history.push("/student/courses")
+            }
+            else{
+                setError(error = {message: "Login error"})
+            }
+        })        
     }
     return(
         <div>
