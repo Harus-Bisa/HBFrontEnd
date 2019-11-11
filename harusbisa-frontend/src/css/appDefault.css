@@ -1,7 +1,7 @@
 h1{
-    font-family: "ITC Avant Garde Gothic Std";
+    font-family: "ITC Avant Garde Gothic Std Demi";
     font-style: normal;
-    font-weight: 500;
+    font-weight: normal;
     font-size: 36px;
     line-height: 43px;
 }
@@ -10,13 +10,32 @@ h5{
     font-family: "Lato";
     font-style: normal;
     font-weight: bold;
+    color: black;
     font-size: 20px;
     line-height: 120%;
 }
+a, a:hover{
+    color: black;
+}
 p, label{
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 133%;
+    margin: 0;
+}
+
+.student-button{
+    background: var(--hb-purple);
+    border-radius: 8px;
     font-family: "Lato";
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 133%;
 }
+
+:root {
+    --hb-purple: #6311AB;
+  }
