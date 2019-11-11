@@ -32,7 +32,7 @@ class Courses extends React.Component{
                 <div className="container">
                     <div className="row">
                         <div className="col-3" style={{borderRight:"2px solid #f4f4f4"}}>
-                            <h2>Selamat datang {this.props.firstName} {this.props.lastName}</h2>
+                            <h1>Selamat datang ke Harus Bisa, {this.props.firstName}</h1>
                         </div>
                         <div className="col">
                             <Content/>
