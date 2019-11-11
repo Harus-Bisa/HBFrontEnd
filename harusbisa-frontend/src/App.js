@@ -6,7 +6,7 @@ import StudentCourses from "./pages/Student/Courses/Courses";
 import './App.css';
 import ProfDashboard from './pages/Professor/Dashboard/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./css/font/ITC_Avant_Garde_Gothic/stylesheet.css";
 function App() {
   return (
       <Switch>
