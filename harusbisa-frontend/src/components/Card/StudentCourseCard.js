@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 import {connect} from "react-redux";
 import {deleteCourse} from "../../redux/actions";
-
+import "../../css/card.css";
 
 function mapStateToProps(state, currentProps){
     var courseId = currentProps.id 
@@ -22,14 +22,15 @@ function StudentCourseCard(props){
     }
     return(
         <div className="col-md-6">
-            <Card>
+            <Card className="card student-card">
                 <CardContent>
-                    <h4><a href={"/student/dashboard/"+props.course._id}>{props.course.course_name}</a></h4>
-                    <p>{props.course.course_name}</p>
+                    <h5><a href={"/student/dashboard/"+props.course._id}>{props.course.course_name}</a></h5>
                     <p>{props.course.start_term} - {props.course.end_term}</p>
+                    <p>{props.course.instructor}</p>
                 </CardContent>
-                <CardActions>
-                    <Button onClick={deleteCourse}>Delete</Button>
+                <CardActions className="action">
+                    {/* <Button onClick={deleteCourse}>Delete</Button> */}
+                    <p>{props.course.number_of_lectures} Sesi</p>
                 </CardActions>
             </Card>
         </div>
