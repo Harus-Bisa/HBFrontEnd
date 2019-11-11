@@ -1,0 +1,22 @@
+h1{
+    font-family: "ITC Avant Garde Gothic Std";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 43px;
+}
+
+h5{
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 120%;
+}
+p, label{
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 133%;
+}
