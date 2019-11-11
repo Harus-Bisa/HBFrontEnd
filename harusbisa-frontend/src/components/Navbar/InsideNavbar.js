@@ -13,13 +13,13 @@ function InsideNavbar(props){
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-4">
-                        Dropdown 1
+                        <p>Dropdown 1</p>
                     </div>
                     <div className="col-4">
                         Logo
                     </div>
                     <div className="col-4">
-                        {props.firstName} {props.lastName}
+                        <p>{props.firstName} {props.lastName}</p>
                         <button onClick={props.logout}>Logout</button>
                     </div>
                 </div>
