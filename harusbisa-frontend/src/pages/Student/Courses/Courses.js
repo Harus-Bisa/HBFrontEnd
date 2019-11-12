@@ -5,6 +5,7 @@ import { getUser, getCourses } from "../../../redux/actions";
 import { withAuth } from "../../withAuth";
 import services from "../../../Services";
 import Content from "../../../components/Content/Course/Content";
+import studentCourseImg from '../../../img/left_panel_picture_stud.png';
 
 function mapStateToProps(state){
     return{
@@ -31,8 +32,15 @@ class Courses extends React.Component{
                 <InsideNavbar logout={this.logout}/>
                 <div className="container">
                     <div className="row">
-                        <div className="col-3" style={{borderRight:"2px solid #f4f4f4"}}>
-                            <h1>Selamat datang ke Harus Bisa, {this.props.firstName}</h1>
+                        <div className="col-4" style={{borderRight:"2px solid #f4f4f4"}}>
+                            <div className="content">
+                                <h1>Selamat datang ke Harus Bisa, {this.props.firstName}</h1>
+                                <div style={{marginTop:"4rem"}}>
+                                    <img src={studentCourseImg} alt={"studentCourseImg"} style={{width:"75%"}}/>
+                                </div>
+                                
+                            </div>
+                            
                         </div>
                         <div className="col">
                             <Content/>
