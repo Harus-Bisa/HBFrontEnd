@@ -32,7 +32,7 @@ class Courses extends React.Component{
                 <InsideNavbar logout={this.logout}/>
                 <div className="container">
                     <div className="row">
-                        <div className="col-4" style={{borderRight:"2px solid #f4f4f4"}}>
+                        <div className="col-4 d-none d-md-block" style={{borderRight:"2px solid #f4f4f4"}}>
                             <div className="content">
                                 <h1>Selamat datang ke Harus Bisa, {this.props.firstName}</h1>
                                 <div style={{marginTop:"4rem"}}>

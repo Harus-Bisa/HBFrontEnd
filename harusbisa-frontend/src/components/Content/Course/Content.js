@@ -30,17 +30,21 @@ function Content(props){
                     <div className="col-6">
                         <h1>Kelas Anda</h1>
                     </div>
-                    <div className="col-3" style={{display:'flex', justifyContent:'flex-end'}}>
-                        <div style={{margin:'auto 0'}}>
-                            <SearchBar placeholder={"Cari kelas"}/>
+                    <div className="col-6 d-none d-md-block" style={{alignSelf: "center"}}>
+                        <div className="row">
+                            <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
+                                <div style={{margin:'auto 0'}}>
+                                    <SearchBar placeholder={"Cari kelas"}/>
+                                </div>
+                            </div>
+                            <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
+                                <div style={{margin:'auto 0'}}>
+                                    <Button className="student-button">+ Tambah Kelas</Button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-3" style={{display:'flex', justifyContent:'flex-end'}}>
-                        <div style={{margin:'auto 0'}}>
-                            <Button className="student-button">+ Tambah Kelas</Button>
-                        </div>
-                        
-                    </div>
+                    
                 </div>
                 
             </header>
