@@ -1,6 +1,8 @@
 import React from "react";
 import StudentCourseCard from "../../Card/StudentCourseCard";
 import {connect} from "react-redux";
+import { Button } from "@material-ui/core";
+import SearchBar from "../../SearchBar/SearchBar";
 
 function mapStateToProps(state){
     return{
@@ -22,9 +24,25 @@ function Content(props){
         return components;
     }
     return(
-        <div>
+        <div className="content">
             <header>
-                <h1>Kelas Anda</h1>
+                <div className="row">
+                    <div className="col-6">
+                        <h1>Kelas Anda</h1>
+                    </div>
+                    <div className="col-3" style={{display:'flex', justifyContent:'flex-end'}}>
+                        <div style={{margin:'auto 0'}}>
+                            <SearchBar placeholder={"Cari kelas"}/>
+                        </div>
+                    </div>
+                    <div className="col-3" style={{display:'flex', justifyContent:'flex-end'}}>
+                        <div style={{margin:'auto 0'}}>
+                            <Button className="student-button">+ Tambah Kelas</Button>
+                        </div>
+                        
+                    </div>
+                </div>
+                
             </header>
             <div className="row">
                 {makeCourses()}
