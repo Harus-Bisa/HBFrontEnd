@@ -1,3 +1,8 @@
+:root {
+    --hb-purple: #6311AB;
+}
+
+/*TEXT*/
 h1{
     font-family: "ITC Avant Garde Gothic Std Demi";
     font-style: normal;
@@ -26,16 +31,47 @@ p, label{
     margin: 0;
 }
 
+/*BUTTON*/
+button{
+    font-family: "Lato" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    line-height: 133% !important;
+    text-transform: none !important;
+}
 .student-button{
-    background: var(--hb-purple);
-    border-radius: 8px;
-    font-family: "Lato";
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 133%;
+    background-color: var(--hb-purple) !important;
+    color: white !important;
 }
 
-:root {
-    --hb-purple: #6311AB;
-  }
+/*DIV*/
+.content{
+    padding: 2rem 1rem;
+}
+
+/*GENERAL COMPONENTS*/
+.search-bar{
+	display: flex;
+	background-color: #F1F2F6;
+	border-radius: 8px;
+	border: 0px;
+    text-align: center;
+    padding: 3px 0;
+}
+
+.search-bar .icon{
+    margin: auto
+}
+
+.search-bar input, .search-bar input:focus{
+	background-color: transparent;
+	border-style: none;
+    outline: none;
+	width: 100%;
+}
+
+/*IMAGE*/
+img{
+    max-width: 100%;
+}
