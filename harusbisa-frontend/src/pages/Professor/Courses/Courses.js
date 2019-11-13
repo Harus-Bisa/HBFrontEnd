@@ -6,6 +6,7 @@ import { getCourses } from "../../../redux/actions";
 import ProfCourseCard from "../../../components/Card/ProfCourseCard";
 import Popup from "../../../components/Popup/Popup";
 import CourseForm from "../../../components/Form/CourseForm";
+import { Button } from "@material-ui/core";
 
 function mapStateToProps(state){
     return{
@@ -42,7 +43,7 @@ class Courses extends React.Component{
             <div>
                 Courses
                 {this.makeCards()}
-                <Popup purpose={"Add Course"} content={CourseForm}/>
+                <Popup purpose={"Add Course"} trigger={{component:Button}} content={CourseForm}/>
                 <button onClick={this.logout}>logout</button>
             </div>
         )
