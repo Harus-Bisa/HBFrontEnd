@@ -70,7 +70,9 @@ button{
     outline: none;
 	width: 100%;
 }
-
+.MuiDialogContent-root, .MuiDialogContent-root:first-child{
+    padding: 0 !important;
+}
 /*IMAGE*/
 img{
     max-width: 100%;
