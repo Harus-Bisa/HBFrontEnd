@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StudentCourseCard component Matches snapshot 1`] = `
+<div
+  className="col-md-6"
+>
+  <div
+    className="MuiPaper-root MuiPaper-elevation1 MuiCard-root card student-card MuiPaper-rounded"
+  >
+    <div
+      className="MuiCardHeader-root"
+    >
+      <div
+        className="MuiCardHeader-content"
+      >
+        <span
+          className="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+        >
+          <h5>
+            <a
+              href="/student/dashboard/5db492c349a67b33b8d0a2a2"
+            >
+              Calculus I
+            </a>
+          </h5>
+        </span>
+      </div>
+      <div
+        className="MuiCardHeader-action"
+      >
+        <button
+          aria-label="settings"
+          className="MuiButtonBase-root MuiIconButton-root"
+          disabled={false}
+          onBlur={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      className="MuiCardContent-root d-none d-md-block"
+    >
+      <p>
+        August 2019
+         - 
+        December 2019
+      </p>
+      <p />
+    </div>
+    <div
+      className="MuiCardActions-root footer MuiCardActions-spacing"
+    >
+      <p>
+        5
+         Sesi
+      </p>
+    </div>
+  </div>
+</div>
+`;
