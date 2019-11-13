@@ -1,23 +1,18 @@
 import React from 'react';
-import { Route, Switch, withRouter} from "react-router-dom";
-import Login from "./pages/Login/Login";
-import FacultyCourses from './pages/Professor/Courses/Courses';
-import StudentCourses from "./pages/Student/Courses/Courses";
-import ProfDashboard from './pages/Professor/Dashboard/Dashboard';
+import {BrowserRouter as Router} from "react-router-dom"; 
+import {Provider} from "react-redux";
+import store from "./redux/store/index";
+import Routes from './Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./css/font/ITC_Avant_Garde_Gothic/stylesheet.css";
 import "./css/appDefault.css";
 
-function App() {
-  return (
-      <Switch>
-        <Route exact path="/" component={Login}/>
-        <Route exact path="/faculty/courses" component={FacultyCourses}/>
-        <Route exact path="/faculty/dashboard/:id" component={ProfDashboard}/>
-
-        <Route exact path="/student/courses" component={StudentCourses}/>
-      </Switch>
-  );
+export default function App(){
+  return(
+    <Provider store={store}>
+        <Router>
+            <Routes/>
+        </Router>
+    </Provider>
+  )
 }
-
-export default withRouter(App);
