@@ -20,7 +20,7 @@ function mapStateToProps(state){
         courses: state.courses
     }
 }
-function InsideNavbar(props){
+export function InsideNavbar(props){
     var [isOpen, setIsOpen] = React.useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const makeCourses = ()  => {
