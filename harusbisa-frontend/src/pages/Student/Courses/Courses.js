@@ -28,7 +28,7 @@ class Courses extends React.Component{
             return(<p>Loading</p>)
         }
         return(
-            <div>
+            <div style={{position:'fixed', width:'100%'}}>
                 <InsideNavbar logout={this.logout}/>
                 <div className="container">
                     <div className="row">
@@ -42,7 +42,7 @@ class Courses extends React.Component{
                             </div>
                             
                         </div>
-                        <div className="col">
+                        <div className="col" style={{overflow:'auto', maxHeight:'95vh'}}>
                             <Content/>
                         </div>
                     </div>
