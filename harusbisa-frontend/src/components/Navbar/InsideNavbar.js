@@ -34,21 +34,34 @@ function InsideNavbar(props){
 
     }
     return(
-        <div style={{background:'#f4f4f4'}}>
+        <div style={{background:'#f4f4f4', position:'sticky', top:0, zIndex:999}} >
             <div className="container">
                 <div className="d-none d-md-block">
-                    <div className="row justify-content-center">
-                        <div className="col-4">
-                            <p>Dropdown 1</p>
-                        </div>
-                        <div className="col-4">
-                            Logo
-                        </div>
-                        <div className="col-4">
-                            <p>{props.firstName} {props.lastName}</p>
-                            <button onClick={props.logout}>Logout</button>
-                        </div>
-                    </div>
+                    <Navbar light expand="md">
+                        <Nav navbar style={{width:'100%', justifyContent:'space-between'}}>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    Kelas
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    {makeCourses()}
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
+                            
+                            <NavbarBrand href="/">Harus Bisa</NavbarBrand>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    {props.firstName} {props.lastName}
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem><NavLink href="/">Setting</NavLink></DropdownItem>
+                                    <DropdownItem><NavLink href="/">Bantuan</NavLink></DropdownItem>
+                                    <DropdownItem onClick={props.logout}>Log off</DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
+
+                        </Nav>
+                    </Navbar>
                 </div>
                 <div className="d-sm-none">
                     <Navbar expand="md" color="faded" light>
