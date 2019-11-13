@@ -32,7 +32,7 @@ function StudentCourseCard(props){
                     <p>{props.course.start_term} - {props.course.end_term}</p>
                     <p>{props.course.instructor}</p>
                 </CardContent>
-                <CardActions className="action">
+                <CardActions className="footer">
                     <p>{props.course.number_of_lectures} Sesi</p>
                 </CardActions>
             </Card>

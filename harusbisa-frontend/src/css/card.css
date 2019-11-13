@@ -6,7 +6,7 @@
     margin:15px 0;
 }
 
-.student-card .action{
+.student-card .footer{
     background: var(--hb-purple);
     color: white;
     border-bottom-left-radius: 8px;
