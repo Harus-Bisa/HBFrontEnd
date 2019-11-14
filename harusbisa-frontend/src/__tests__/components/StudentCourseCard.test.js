@@ -1,7 +1,6 @@
 import React from "react";
 import TestRenderer  from "react-test-renderer";
 import StudentCourseCard from "../../components/Card/StudentCourseCard";
-import { CardHeader, CardContent, CardActions } from "@material-ui/core";
 import {shallow} from "enzyme";
 import configureMockStore from "redux-mock-store";
 import '../../test-config';
