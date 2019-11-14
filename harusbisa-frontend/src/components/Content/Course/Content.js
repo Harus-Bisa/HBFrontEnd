@@ -13,15 +13,35 @@ function mapStateToProps(state){
 }
 
 function Content(props){
-    const makeCourses = () =>{
+    var [displayedCourses, setDisplayedCourses] = React.useState([])
+    var [search, setSearch] = React.useState("")
+
+    const find = (searchKey) =>{
         var courses = props.courses
+        var display = []
+        if (searchKey !== ""){
+            for (let i=0; i<courses.length; i++){
+                var course = courses[i]
+                if (course.course_name.toLowerCase().includes(searchKey.toLowerCase())){
+                    display.push(course)
+                }
+            }
+        }
+        setSearch(search = searchKey)        
+        setDisplayedCourses(displayedCourses = display)
+    }
+    const makeCourses = () =>{
+        if (search !== "" && displayedCourses.length === 0){
+            return(<div className="col content" style={{display:'flex'}}><p style={{margin:'auto'}}>Course not found. Please try another keyword.</p></div>)
+        }
+        var courses = displayedCourses.length === 0 ? props.courses : displayedCourses
         var components = []
         for (let i=0; i<courses.length; i++){
             var id = courses[i]._id
             components.push(<StudentCourseCard key={i} id={id}/>)
         }
         if (courses.length === 0){
-            return(<p>Make your first course!</p>)
+            return(<div className="col content" style={{display:'flex'}}><p style={{margin:'auto'}}>Make your first course!</p></div>)
         }
         return components;
     }
@@ -36,7 +56,7 @@ function Content(props){
                         <div className="row">
                             <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
                                 <div style={{margin:'auto 0'}}>
-                                    <SearchBar placeholder={"Cari kelas"}/>
+                                    <SearchBar placeholder={"Cari kelas"} find={find}/>
                                 </div>
                             </div>
                             <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
