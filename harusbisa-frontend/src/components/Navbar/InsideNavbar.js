@@ -54,8 +54,10 @@ export function InsideNavbar(props){
                                     {props.firstName} {props.lastName}
                                 </DropdownToggle>
                                 <DropdownMenu>
-                                    <DropdownItem><NavLink href="/">Setting</NavLink></DropdownItem>
-                                    <DropdownItem><NavLink href="/">Bantuan</NavLink></DropdownItem>
+                                    <DropdownItem>Notifikasi</DropdownItem>
+                                    <DropdownItem divider/>
+                                    <DropdownItem>Setting</DropdownItem>
+                                    <DropdownItem>Bantuan</DropdownItem>
                                     <DropdownItem onClick={props.logout}>Log off</DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
