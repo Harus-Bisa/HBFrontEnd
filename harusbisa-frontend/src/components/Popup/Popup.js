@@ -1,5 +1,6 @@
 import React from "react";
-import { Dialog, DialogContent } from "@material-ui/core";
+import { Dialog, DialogContent, Button } from "@material-ui/core";
+import CourseForm from "../Form/CourseForm";
 
 export default function Popup(props){
     const [open, setOpen] = React.useState(false);
@@ -14,6 +15,13 @@ export default function Popup(props){
                 </DialogContent>
             </Dialog>
         </div>
-    )
-    
+    )   
+}
+
+Popup.defaultProps={
+    purpose: "default purpose",
+    trigger:{
+        component: Button
+    },
+    content: CourseForm
 }
