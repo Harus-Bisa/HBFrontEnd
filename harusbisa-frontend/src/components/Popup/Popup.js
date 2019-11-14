@@ -10,7 +10,7 @@ export default function Popup(props){
         <div>
             <Trigger className={props.trigger.className} onClick={() => setOpen(true)}>{props.purpose}</Trigger>
             <Dialog open={open} onClose={() => setOpen(false)} style={{padding:0}}>
-                <DialogContent>
+                <DialogContent> 
                     <ContentComponent closePopup={() => setOpen(false)} id={props.id}/>
                 </DialogContent>
             </Dialog>
