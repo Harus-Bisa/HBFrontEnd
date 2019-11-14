@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import services from "../../Services";
+// import ErrorMessage from "../../components/Error/Error";
 
 function Login(props){
     var [email, setEmail] = useState("");
@@ -19,6 +20,9 @@ function Login(props){
             else{
                 setError(error = {message: "Login error"})
             }
+        })
+        .catch(e=>{
+            setError(error = e);
         })        
     }
     return(
