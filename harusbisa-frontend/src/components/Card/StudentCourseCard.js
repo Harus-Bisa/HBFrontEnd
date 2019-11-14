@@ -16,7 +16,7 @@ function mapStateToProps(state, currentProps){
     }
     return null
 }
-export function StudentCourseCard(props){
+function StudentCourseCard(props){
     return(
         <div className="col-md-6">
             <Card className="card student-card">

@@ -1,29 +1,40 @@
 import React from "react";
 import TestRenderer  from "react-test-renderer";
-import {StudentCourseCard} from "../../components/Card/StudentCourseCard";
+import StudentCourseCard from "../../components/Card/StudentCourseCard";
+import { CardHeader, CardContent, CardActions } from "@material-ui/core";
+import {shallow} from "enzyme";
+import configureMockStore from "redux-mock-store";
+import '../../test-config';
 
+const mockStore = configureMockStore();
 describe("StudentCourseCard component", () =>{
-    let props;
+    let initialState;
     let studentCourseCard;
-    let instance;
+    let store;
     beforeEach(() =>{
-        props = {
-            course: {
+        initialState = {
+            courses:[{
                 "_id": "5db492c349a67b33b8d0a2a2",
                 "course_name": "Calculus I",
                 "course_description": "The basic of calculus (derivatives).",
                 "start_term": "August 2019",
                 "end_term": "December 2019",
                 "number_of_lectures": 5,
-                "instructors": "John Doe"
-              }
+                "instructor": "John Doe"
+              }]
         }
-        studentCourseCard = TestRenderer.create(<StudentCourseCard course={props.course}/>)
-        instance = studentCourseCard.root;
+        store = mockStore(initialState);
+        studentCourseCard = shallow(<StudentCourseCard store={store} id={initialState.courses[0]._id}/>)
     })
 
     it("Matches snapshot", () =>{
-        expect(studentCourseCard.toJSON()).toMatchSnapshot();
+        let testRenderer = TestRenderer.create(<StudentCourseCard store={store} id={initialState.courses[0]._id}/>)
+        expect(testRenderer.toJSON()).toMatchSnapshot();
     })
 
+    it("receives proper props", () =>{
+        let props = studentCourseCard.props().children.props
+        expect(props.id).toBe(initialState.courses[0]._id)
+        expect(props.course).toBe(initialState.courses[0])
+    })
 })

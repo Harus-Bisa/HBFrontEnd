@@ -72,7 +72,9 @@ exports[`StudentCourseCard component Matches snapshot 1`] = `
          - 
         December 2019
       </p>
-      <p />
+      <p>
+        John Doe
+      </p>
     </div>
     <div
       className="MuiCardActions-root footer MuiCardActions-spacing"
