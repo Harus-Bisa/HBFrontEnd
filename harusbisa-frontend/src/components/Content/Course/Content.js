@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 import SearchBar from "../../SearchBar/SearchBar";
 import Popup from "../../Popup/Popup";
 import StudentCourseForm from "../../Form/StudentCourseForm";
-// import CourseForm from "../../Form/CourseForm";
 
 function mapStateToProps(state){
     return{
