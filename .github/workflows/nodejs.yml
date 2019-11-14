@@ -24,6 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
+        cd harusbisa-frontend
         npm install
         npm test
       env:
