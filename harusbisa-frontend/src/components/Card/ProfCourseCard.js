@@ -31,7 +31,7 @@ function ProfCourseCard(props){
             </CardContent>
             <CardActions>
                 <Button onClick={deleteCourse}>Delete</Button>
-                <Popup purpose={"Edit"} content={CourseForm} id={props.course._id}/>
+                <Popup purpose={"Edit"} trigger={{component:Button}} content={CourseForm} id={props.course._id}/>
             </CardActions>
         </Card>
     )

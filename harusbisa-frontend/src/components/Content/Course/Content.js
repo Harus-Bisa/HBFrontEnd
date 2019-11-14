@@ -1,6 +1,10 @@
 import React from "react";
 import StudentCourseCard from "../../Card/StudentCourseCard";
 import {connect} from "react-redux";
+import { Button } from "@material-ui/core";
+import SearchBar from "../../SearchBar/SearchBar";
+import Popup from "../../Popup/Popup";
+import StudentCourseForm from "../../Form/StudentCourseForm";
 
 function mapStateToProps(state){
     return{
@@ -22,9 +26,33 @@ function Content(props){
         return components;
     }
     return(
-        <div>
+        <div className="content">
             <header>
-                <h1>Kelas Anda</h1>
+                <div className="row">
+                    <div className="col-6">
+                        <h1>Kelas Anda</h1>
+                    </div>
+                    <div className="col-6 d-none d-md-block" style={{alignSelf: "center"}}>
+                        <div className="row">
+                            <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
+                                <div style={{margin:'auto 0'}}>
+                                    <SearchBar placeholder={"Cari kelas"}/>
+                                </div>
+                            </div>
+                            <div className="col-6" style={{display:'flex', justifyContent:'flex-end'}}>
+                                <div style={{margin:'auto 0'}}>
+                                    <Popup 
+                                        purpose={"+ Tambah Kelas"} 
+                                        trigger={{component:Button, className:"student-button"}} 
+                                        content={StudentCourseForm}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
             </header>
             <div className="row">
                 {makeCourses()}
