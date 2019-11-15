@@ -116,7 +116,16 @@ class Services{
             console.log(error.message)
         })
     }
-
+    async studentAddCourse(join_code){
+        const headers = this.createHeaders();
+        return await axios.post(this.domain + "/courses", {join_code:join_code}, {headers: headers})
+        .then(response =>{
+            return response.data.data.courses
+        })
+        .catch(error =>{
+            throw error
+        })
+    }
     async deleteCourse(courseId){
         const headers = this.createHeaders();
         return await axios.delete(this.domain + "/courses/" + courseId, {headers:headers})

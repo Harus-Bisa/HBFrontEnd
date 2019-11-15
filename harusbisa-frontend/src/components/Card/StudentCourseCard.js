@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, CardContent, CardActions, CardHeader, IconButton } from "@material-ui/core";
+import { Card, CardContent, CardActions, CardHeader} from "@material-ui/core";
 import {connect} from "react-redux";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import "../../css/card.css";
+import MenuOptions from "../MenuOptions/MenuOptions";
 
 function mapStateToProps(state, currentProps){
     var courseId = currentProps.id 
@@ -22,9 +22,7 @@ function StudentCourseCard(props){
             <Card className="card student-card">
                 <CardHeader
                     action={
-                        <IconButton aria-label="settings">
-                            <MoreVertIcon/>
-                        </IconButton>
+                        <MenuOptions/>
                     }
                     title={<h5><a href={"/student/dashboard/"+props.course._id}>{props.course.course_name}</a></h5>}
                 />

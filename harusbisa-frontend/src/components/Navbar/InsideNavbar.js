@@ -12,6 +12,10 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
+import Popup from "../Popup/Popup";
+import { Button } from "@material-ui/core";
+import StudentCourseForm from "../Form/StudentCourseForm";
+import Logo from "../Logo/Logo";
 
 function mapStateToProps(state){
     return{
@@ -48,14 +52,16 @@ export function InsideNavbar(props){
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             
-                            <NavbarBrand href="/">Harus Bisa</NavbarBrand>
+                            <NavbarBrand href="/"><Logo/></NavbarBrand>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
                                     {props.firstName} {props.lastName}
                                 </DropdownToggle>
                                 <DropdownMenu>
-                                    <DropdownItem><NavLink href="/">Setting</NavLink></DropdownItem>
-                                    <DropdownItem><NavLink href="/">Bantuan</NavLink></DropdownItem>
+                                    <DropdownItem>Notifikasi</DropdownItem>
+                                    <DropdownItem divider/>
+                                    <DropdownItem>Setting</DropdownItem>
+                                    <DropdownItem>Bantuan</DropdownItem>
                                     <DropdownItem onClick={props.logout}>Log off</DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
@@ -63,10 +69,14 @@ export function InsideNavbar(props){
                         </Nav>
                     </Navbar>
                 </div>
-                <div className="d-sm-none">
+                <div className="d-md-none">
                     <Navbar expand="md" color="faded" light>
-                        <NavbarBrand href="/">Harus Bisa</NavbarBrand>
-                        <button>+</button>
+                        <NavbarBrand href="/"><Logo/></NavbarBrand>
+                        <Popup 
+                            purpose={"+"} 
+                            trigger={{component:Button}} 
+                            content={StudentCourseForm}
+                        />
                         <NavbarToggler onClick={toggle} className="mr-2"/>
                         <Collapse isOpen={isOpen} navbar>
                             <Nav navbar>

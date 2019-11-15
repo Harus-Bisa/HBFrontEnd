@@ -5,3 +5,9 @@ export const ADD_COURSE = "ADD_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const EDIT_COURSE = "EDIT_COURSE";
 export const USER_LOADED = "USER_LOADED";
+
+/*STUDENT */
+export const STUDENT_ADD_COURSE = "STUDENT_ADD_COURSE";
+
+export const ERROR = "ERROR";
+export const REMOVE_ERROR = "REMOVE_ERROR";
