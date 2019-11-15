@@ -1,12 +1,12 @@
 import React from "react";
+import { Alert } from 'reactstrap';
 import {connect} from "react-redux";
 
 function ErrorMessage(props){
     return(
-        <div>
-            <h5>Error</h5>
-            <p>{props.error.message}</p>
-        </div>
+        <Alert color="danger">
+            {props.error.message}
+        </Alert>
     )
 }
 
