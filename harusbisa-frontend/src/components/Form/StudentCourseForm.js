@@ -2,24 +2,13 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import {connect} from "react-redux";
 import { studentAddCourse } from "../../redux/actions";
-import ErrorMessage from "../Error/ErrorMessage";
 
-function mapStateToProps(state){
-    return {error: state.error}
-}
 function StudentCourseForm(props){
     var [joinCode, setJoinCode] = React.useState("")
     const submit = async (event) =>{
         event.preventDefault();
         await props.studentAddCourse(joinCode)
-        .then((response) =>{
-            console.log(response)
-            console.log(props)
-            // if (!props.error){
-            //     props.closePopup()
-            // } 
-        })
-           
+        props.closePopup()   
     }
     return(
         <div className="container-fluid">
@@ -29,7 +18,6 @@ function StudentCourseForm(props){
                 </div>
                 <div className="content col-md-6">
                     <p style={{marginBottom:'2rem'}}>Temukan kelas Anda untuk semester ini melalui kode bergabung yang dibagikan oleh dosen Anda.</p>
-                    {props.error && <ErrorMessage/>}
                     <form onSubmit={submit} style={{display:'flex', flexDirection:'column'}}>
                         <label>Kode bergabung</label>
                         <input type='text' value={joinCode} onChange={(event) => {setJoinCode(joinCode = event.target.value)}}/>
@@ -40,4 +28,4 @@ function StudentCourseForm(props){
         </div>
     )
 }
-export default connect(mapStateToProps, {studentAddCourse})(StudentCourseForm);
+export default connect(null, {studentAddCourse})(StudentCourseForm);
