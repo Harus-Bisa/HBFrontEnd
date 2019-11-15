@@ -11,15 +11,16 @@ describe("InsideNavbar component", () =>{
             courses: [{course_name:"default", _id:"123"}],
             logout: jest.fn()
         }
+        inside
         insideNavbar = TestRenderer.create(<InsideNavbar courses={props.courses} logout={props.logout}/>)
         instance = insideNavbar.root;
     })
 
-    it("Matches snapshot", () =>{
+    xit("Matches snapshot", () =>{
         expect(insideNavbar.toJSON()).toMatchSnapshot();
     })
     
-    it("Renders the log off button", () =>{
+    xit("Renders the log off button", () =>{
         var logoffButton = instance.find((el) => el.type=="button" && el.children && el.children[0] === "Log off");
         expect(props.logout).not.toHaveBeenCalled()
         logoffButton.props.onClick()
@@ -28,7 +29,7 @@ describe("InsideNavbar component", () =>{
        
     })
 
-    it("Renders courses buttons", () =>{
+    xit("Renders courses buttons", () =>{
         var courses = props.courses;
         courses.forEach(c =>{
             var buttons = instance.findAll((el) => el.type=="a" && el.children && el.children[0] === c.course_name)

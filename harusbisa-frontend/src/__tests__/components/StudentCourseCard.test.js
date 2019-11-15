@@ -27,8 +27,7 @@ describe("StudentCourseCard component", () =>{
     })
 
     it("Matches snapshot", () =>{
-        let testRenderer = TestRenderer.create(<StudentCourseCard store={store} id={initialState.courses[0]._id}/>)
-        expect(testRenderer.toJSON()).toMatchSnapshot();
+        expect(studentCourseCard.html()).toMatchSnapshot();
     })
 
     it("receives proper props", () =>{
