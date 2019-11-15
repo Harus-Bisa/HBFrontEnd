@@ -12,6 +12,9 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
+import Popup from "../Popup/Popup";
+import { Button } from "@material-ui/core";
+import StudentCourseForm from "../Form/StudentCourseForm";
 
 function mapStateToProps(state){
     return{
@@ -68,7 +71,11 @@ export function InsideNavbar(props){
                 <div className="d-sm-none">
                     <Navbar expand="md" color="faded" light>
                         <NavbarBrand href="/">Harus Bisa</NavbarBrand>
-                        <button>+</button>
+                        <Popup 
+                            purpose={"+"} 
+                            trigger={{component:Button}} 
+                            content={StudentCourseForm}
+                        />
                         <NavbarToggler onClick={toggle} className="mr-2"/>
                         <Collapse isOpen={isOpen} navbar>
                             <Nav navbar>
