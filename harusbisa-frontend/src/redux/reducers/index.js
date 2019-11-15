@@ -52,7 +52,6 @@ function rootReducer(state ={loading: true}, action){
         }); 
     }
     if(action.type === ERROR){
-        console.log('error')
         return Object.assign({}, state, {
             error: action.payload
         })
