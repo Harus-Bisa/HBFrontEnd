@@ -1,9 +1,9 @@
 import React from "react";
-import TestRenderer  from "react-test-renderer";
 import StudentCourseCard from "../../components/Card/StudentCourseCard";
-import {shallow} from "enzyme";
+import {mount} from "enzyme";
 import configureMockStore from "redux-mock-store";
 import '../../test-config';
+import {Provider} from "react-redux";
 
 const mockStore = configureMockStore();
 describe("StudentCourseCard component", () =>{
@@ -23,16 +23,13 @@ describe("StudentCourseCard component", () =>{
               }]
         }
         store = mockStore(initialState);
-        studentCourseCard = shallow(<StudentCourseCard store={store} id={initialState.courses[0]._id}/>)
+        studentCourseCard = mount(
+        <Provider store={store}>
+            <StudentCourseCard id={initialState.courses[0]._id}/>
+        </Provider>)
     })
 
     it("Matches snapshot", () =>{
         expect(studentCourseCard.html()).toMatchSnapshot();
-    })
-
-    it("receives proper props", () =>{
-        let props = studentCourseCard.props().children.props
-        expect(props.id).toBe(initialState.courses[0]._id)
-        expect(props.course).toBe(initialState.courses[0])
     })
 })
