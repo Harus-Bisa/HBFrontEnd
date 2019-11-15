@@ -5,10 +5,12 @@ import { Button } from "@material-ui/core";
 import SearchBar from "../../SearchBar/SearchBar";
 import Popup from "../../Popup/Popup";
 import StudentCourseForm from "../../Form/StudentCourseForm";
+import ErrorMessage from "../../Error/ErrorMessage";
 
 function mapStateToProps(state){
     return{
-        courses: state.courses
+        courses: state.courses,
+        error: state.error
     }
 }
 
@@ -70,10 +72,9 @@ function Content(props){
                             </div>
                         </div>
                     </div>
-                    
                 </div>
-                
             </header>
+            {props.error && <ErrorMessage/>}
             <div className="row">
                 {makeCourses()}
             </div>
