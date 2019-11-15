@@ -15,6 +15,7 @@ import {
 import Popup from "../Popup/Popup";
 import { Button } from "@material-ui/core";
 import StudentCourseForm from "../Form/StudentCourseForm";
+import Logo from "../Logo/Logo";
 
 function mapStateToProps(state){
     return{
@@ -51,7 +52,7 @@ export function InsideNavbar(props){
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             
-                            <NavbarBrand href="/">Harus Bisa</NavbarBrand>
+                            <NavbarBrand href="/"><Logo/></NavbarBrand>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
                                     {props.firstName} {props.lastName}
@@ -70,7 +71,7 @@ export function InsideNavbar(props){
                 </div>
                 <div className="d-md-none">
                     <Navbar expand="md" color="faded" light>
-                        <NavbarBrand href="/">Harus Bisa</NavbarBrand>
+                        <NavbarBrand href="/"><Logo/></NavbarBrand>
                         <Popup 
                             purpose={"+"} 
                             trigger={{component:Button}} 
