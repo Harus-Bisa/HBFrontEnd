@@ -68,7 +68,7 @@ export function InsideNavbar(props){
                         </Nav>
                     </Navbar>
                 </div>
-                <div className="d-sm-none">
+                <div className="d-md-none">
                     <Navbar expand="md" color="faded" light>
                         <NavbarBrand href="/">Harus Bisa</NavbarBrand>
                         <Popup 
