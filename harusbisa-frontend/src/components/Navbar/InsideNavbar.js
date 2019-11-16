@@ -70,7 +70,7 @@ function InsideNavbar(props){
                                 <DropdownMenu>
                                     <DropdownItem>Notifikasi</DropdownItem>
                                     <DropdownItem divider/>
-                                    <DropdownItem>Setting</DropdownItem>
+                                    <DropdownItem href="/settings">Setting</DropdownItem>
                                     <DropdownItem>Bantuan</DropdownItem>
                                     <DropdownItem id="big-logoff" onClick={logout}>Log off</DropdownItem>
                                 </DropdownMenu>
@@ -103,7 +103,7 @@ function InsideNavbar(props){
                                         {props.firstName} {props.lastName}
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <DropdownItem>Setting</DropdownItem>
+                                        <DropdownItem href="/settings">Settings</DropdownItem>
                                         <DropdownItem>Bantuan</DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
