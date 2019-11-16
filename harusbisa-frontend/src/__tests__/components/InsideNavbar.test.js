@@ -4,17 +4,16 @@ import {Provider} from "react-redux";
 import {mount} from "enzyme";
 import configureMockStore from "redux-mock-store";
 import '../../test-config';
-import { DropdownItem, NavItem} from "reactstrap";
+import {BrowserRouter as Router} from "react-router-dom";
+import thunk from 'redux-thunk';
 
-const mockStore = configureMockStore();
+const mockStore = configureMockStore([thunk]);
 describe("InsideNavbar component", () =>{
     let initialState;
     let insideNavbar;
     let store;
-    let logout;
 
     beforeEach(() =>{
-        logout = jest.fn();
         initialState = {
             courses:[{
                 "_id": "5db492c349a67b33b8d0a2a2",
@@ -24,10 +23,12 @@ describe("InsideNavbar component", () =>{
                 "end_term": "December 2019",
                 "number_of_lectures": 5,
                 "instructor": "John Doe"
-              }]
+              }],
+            loading: false
         }
         store = mockStore(initialState);
-        insideNavbar = mount(<Provider store={store}><InsideNavbar logout={logout}/></Provider>)
+        store.dispatch = jest.fn()
+        insideNavbar = mount(<Router><Provider store={store}><InsideNavbar/></Provider></Router>)
     })
 
     it("Matches snapshot", () =>{
@@ -36,18 +37,19 @@ describe("InsideNavbar component", () =>{
     
     it("Renders the small navbar log off button", () =>{
         var smallLogoffButton = insideNavbar.find("#small-logoff").at(0);
-        expect(logout).not.toHaveBeenCalled()
+        expect(store.dispatch).not.toHaveBeenCalled()
         smallLogoffButton.simulate('click')
-        expect(logout).toHaveBeenCalled()
-        expect(logout).toHaveBeenCalledTimes(1)
+        expect(store.dispatch).toHaveBeenCalled()
+        expect(store.dispatch).toHaveBeenCalledTimes(1)
        
     })
 
     it("Renders the big navbar log off button", () =>{
         var bigLogoffButton = insideNavbar.find("#big-logoff").at(0);
+        expect(store.dispatch).not.toHaveBeenCalled()
         bigLogoffButton.simulate('click')
-        expect(logout).toHaveBeenCalled()
-        expect(logout).toHaveBeenCalledTimes(1)
+        expect(store.dispatch).toHaveBeenCalled()
+        expect(store.dispatch).toHaveBeenCalledTimes(1)
        
     })
 
