@@ -24,7 +24,7 @@ function mapStateToProps(state){
         courses: state.courses
     }
 }
-export function InsideNavbar(props){
+function InsideNavbar(props){
     var [isOpen, setIsOpen] = React.useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const makeCourses = ()  => {
@@ -62,7 +62,7 @@ export function InsideNavbar(props){
                                     <DropdownItem divider/>
                                     <DropdownItem>Setting</DropdownItem>
                                     <DropdownItem>Bantuan</DropdownItem>
-                                    <DropdownItem onClick={props.logout}>Log off</DropdownItem>
+                                    <DropdownItem id="big-logoff" onClick={props.logout}>Log off</DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
 
@@ -97,7 +97,7 @@ export function InsideNavbar(props){
                                         <DropdownItem>Bantuan</DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <NavItem onClick={props.logout}>
+                                <NavItem id="small-logoff" onClick={props.logout}>
                                     Log off
                                 </NavItem>
                             </Nav>
