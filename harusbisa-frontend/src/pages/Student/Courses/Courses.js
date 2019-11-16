@@ -1,9 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import InsideNavbar from "../../../components/Navbar/InsideNavbar";
 import { getUser, getCourses } from "../../../redux/actions";
 import { withAuth } from "../../withAuth";
-import services from "../../../Services";
 import Content from "../../../components/Content/Course/Content";
 import studentCourseImg from '../../../img/left_panel_picture_stud.png';
 
@@ -16,20 +14,12 @@ function mapStateToProps(state){
     }
 }
 class Courses extends React.Component{
-    async componentDidMount(){
-        await Promise.all([this.props.getUser(), this.props.getCourses()]);
-    }
-    logout = () =>{
-        services.logout();
-        this.props.history.push("/")
-    }
     render(){
         if (this.props.loading){
-            return(<p>Loading</p>)
+            return(null)
         }
         return(
             <div style={{position:'fixed', width:'100%'}}>
-                <InsideNavbar logout={this.logout}/>
                 <div className="container">
                     <div className="row">
                         <div className="col-4 d-none d-md-block" style={{borderRight:"2px solid #f4f4f4"}}>

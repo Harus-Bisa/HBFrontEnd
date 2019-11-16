@@ -1,6 +1,5 @@
 import React from "react";
 import { withAuth } from "../../withAuth";
-import services from "../../../Services";
 import {connect} from "react-redux";
 import { getCourses } from "../../../redux/actions";
 import ProfCourseCard from "../../../components/Card/ProfCourseCard";
@@ -16,14 +15,6 @@ function mapStateToProps(state){
 }
 
 class Courses extends React.Component{
-    componentDidMount(){
-        this.props.getCourses();
-    }
-
-    logout = () =>{
-        services.logout();
-        this.props.history.push("/")
-    }
     makeCards = () => {
         var courses = this.props.courses;
         var cards = []
@@ -36,7 +27,7 @@ class Courses extends React.Component{
 
     render(){
         if (this.props.loading){
-            return(<p>Loading</p>)
+            return null
         }
     
         return(
@@ -44,7 +35,6 @@ class Courses extends React.Component{
                 Courses
                 {this.makeCards()}
                 <Popup purpose={"Add Course"} trigger={{component:Button}} content={CourseForm}/>
-                <button onClick={this.logout}>logout</button>
             </div>
         )
     }
