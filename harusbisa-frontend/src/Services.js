@@ -64,7 +64,7 @@ class Services{
             return this.getUser()
         })
         .catch(error => {
-            console.log(error.message)
+            throw error
         })
     }
 
@@ -83,7 +83,7 @@ class Services{
             }
         })
         .catch(error =>{
-            console.log(error.message);
+            throw error
         })
     }
 
