@@ -9,6 +9,14 @@ const COURSE = "COURSE"
 
 function Settings(props){
     var [settingDisplay, setSettingDisplay] = React.useState(ACCOUNT);
+    if (props.loading){
+        return null
+    }
+    const buttonStyle = {
+        fontFamily: "ITC Avant Garde Gothic Std",
+        color: "black",
+        textAlign: "center"
+    }
     return(
         <div className="container">
             <div className="row justify-content-center">
@@ -22,10 +30,10 @@ function Settings(props){
                             <div className="col-md-6" style={{display:'flex'}}>
                                 <div className="row" style={{margin: "auto"}}>
                                     <div className="col-6">
-                                        <Button onClick={() => setSettingDisplay(settingDisplay=ACCOUNT)}>Akun</Button>
+                                        <Button style={buttonStyle} className= "button" onClick={() => setSettingDisplay(settingDisplay=ACCOUNT)}>Akun</Button>
                                     </div>
                                     <div className="col-6">
-                                        <Button onClick={() => setSettingDisplay(settingDisplay=COURSE)}>Kelas</Button>
+                                        <Button style={buttonStyle} className= "button" onClick={() => setSettingDisplay(settingDisplay=COURSE)}>Kelas</Button>
                                     </div>
                                 </div>
                             </div>
@@ -42,5 +50,10 @@ function Settings(props){
     )
 }
 
+function mapStateToProps(state){
+    return {
+        loading: state.loading
+    }
+}
 
-export default connect(null)(withAuth(Settings));
+export default connect(mapStateToProps)(withAuth(Settings));

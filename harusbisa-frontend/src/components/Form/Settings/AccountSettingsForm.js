@@ -20,7 +20,7 @@ function AccountSettingsForm(props){
         <div>
             <div className="content" style={{borderBottom:"2px solid #F4F4F4", paddingLeft: 0, paddingRight:0}}>
                 <div>
-                    <h5 style={{fontSize:'18px'}}>Basic</h5>
+                    <h5>Basic</h5>
                 </div>
                 <div className="row justify-content-end">
                     <div className="col-md-11">
@@ -64,7 +64,7 @@ function AccountSettingsForm(props){
             </div>
             
             <div className="content" style={{paddingLeft: 0, paddingRight:0}}>
-                <h5 style={{fontSize:'18px'}}>Password</h5>
+                <h5>Password</h5>
                 <div className="row justify-content-end">
                     <div className="col-md-11">
                         <p style={{marginBottom:'2rem'}}>Dengan membuat password memastkan anda dapat log in ke akun Harus Bisa anda</p>
