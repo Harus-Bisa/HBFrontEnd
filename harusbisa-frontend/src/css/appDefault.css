@@ -40,6 +40,12 @@ button{
     line-height: 133% !important;
     text-transform: none !important;
 }
+
+.settings-button{
+    font-family: "ITC Avant Garde Gothic Std Book" !important;
+    color: "black";
+    text-align: "center"
+}
 .student-button{
     background-color: var(--hb-purple) !important;
     color: white !important;
