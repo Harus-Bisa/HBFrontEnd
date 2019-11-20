@@ -1,14 +1,14 @@
 import React from "react";
-import StudentCourseCard from "../../components/Card/StudentCourseCard";
 import {mount} from "enzyme";
 import configureMockStore from "redux-mock-store";
 import '../../test-config';
 import {Provider} from "react-redux";
+import CourseSettingsCard from "../../components/Card/CourseSettingsCard";
 
 const mockStore = configureMockStore();
-describe("StudentCourseCard component", () =>{
+describe("CourseSettingsCard component", () =>{
     let initialState;
-    let studentCourseCard;
+    let component;
     let store;
     beforeEach(() =>{
         initialState = {
@@ -23,13 +23,13 @@ describe("StudentCourseCard component", () =>{
               }]
         }
         store = mockStore(initialState);
-        studentCourseCard = mount(
+        component = mount(
         <Provider store={store}>
-            <StudentCourseCard id={initialState.courses[0]._id}/>
+            <CourseSettingsCard id={initialState.courses[0]._id}/>
         </Provider>)
     })
 
     it("Matches snapshot", () =>{
-        expect(studentCourseCard.html()).toMatchSnapshot();
+        expect(component.html()).toMatchSnapshot();
     })
 })

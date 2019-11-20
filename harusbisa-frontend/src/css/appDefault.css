@@ -26,8 +26,8 @@ p, label{
     font-family: "Lato";
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 133%;
+    font-size: 14px !important;
+    line-height: 133% !important;
     margin: 0;
 }
 
@@ -40,9 +40,23 @@ button{
     line-height: 133% !important;
     text-transform: none !important;
 }
+
+.settings-button{
+    font-family: "ITC Avant Garde Gothic Std Book" !important;
+    color: "black";
+    text-align: "center"
+}
 .student-button{
     background-color: var(--hb-purple) !important;
     color: white !important;
+}
+
+.neutral-button{
+    background: #E3E3E3;
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    border-radius: 3px;
+    color: #484848;
 }
 
 /*DIV*/

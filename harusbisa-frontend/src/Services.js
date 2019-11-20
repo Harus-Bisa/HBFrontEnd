@@ -64,7 +64,7 @@ class Services{
             return this.getUser()
         })
         .catch(error => {
-            console.log(error.message)
+            throw error
         })
     }
 
@@ -79,11 +79,13 @@ class Services{
             return{
                 firstName: data.first_name,
                 lastName: data.last_name,
-                role: data.role
+                role: data.role,
+                school: data.school,
+                email: data.email
             }
         })
         .catch(error =>{
-            console.log(error.message);
+            throw error
         })
     }
 

@@ -1,33 +1,29 @@
 import React, { useState } from "react";
-import services from "../../Services";
-// import ErrorMessage from "../../components/Error/Error";
+import {connect} from "react-redux";
+import {login} from "../../redux/actions";
+import ErrorMessage from "../../components/Error/ErrorMessage";
 
 function Login(props){
     var [email, setEmail] = useState("");
     var [password, setPassword] = useState("");
-    var [error, setError] = useState(null);
 
     var handleSubmit = async (event) => {
         event.preventDefault()
-        await services.login(email, password)
-        .then(response => {
-            if (response.role === "faculty" && services.isLoggedIn()){
-                props.history.push("/faculty/courses")
-            }
-            else if (response.role === "student" && services.isLoggedIn()){
+        props.login(email, password)       
+    }
+    React.useEffect(()=>{
+        if (props.loggedIn){
+            if(props.role === "student"){
                 props.history.push("/student/courses")
             }
-            else{
-                setError(error = {message: "Login error"})
+            else if(props.role === "faculty"){
+                props.history.push("/faculty/courses")
             }
-        })
-        .catch(e=>{
-            setError(error = e);
-        })        
-    }
+        }
+    })
     return(
         <div>
-            {error && <p>{error.message}</p>}
+            {props.error && <ErrorMessage/>}
             <form onSubmit={handleSubmit}>
                 <label>Email*</label>    
                 <input type="text" onChange={(event) => setEmail(email = event.target.value)}/>
@@ -39,4 +35,11 @@ function Login(props){
     )
 }
 
-export default Login;
+function mapStateToProps(state){
+    return{
+        role: state.role,
+        error: state.error,
+        loggedIn: state.loggedIn
+    }
+}
+export default connect(mapStateToProps, {login})(Login);
