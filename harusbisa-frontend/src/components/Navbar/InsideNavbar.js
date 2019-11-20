@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
+import {logout} from "../../redux/actions";
+import {withRouter} from "react-router-dom";
 import {
     Collapse,
     Navbar,
@@ -21,7 +23,8 @@ function mapStateToProps(state){
     return{
         firstName: state.firstName, 
         lastName: state.lastName,
-        courses: state.courses
+        courses: state.courses,
+        loading: state.loading
     }
 }
 function InsideNavbar(props){
@@ -36,6 +39,13 @@ function InsideNavbar(props){
         }
         return courses;
 
+    }
+    const logout = () =>{
+        props.logout()
+        props.history.push("/")
+    }
+    if(props.loading){
+        return <p>Loading</p>
     }
     return(
         <div style={{background:'#f4f4f4', position:'sticky', top:0, zIndex:999}} >
@@ -60,9 +70,9 @@ function InsideNavbar(props){
                                 <DropdownMenu>
                                     <DropdownItem>Notifikasi</DropdownItem>
                                     <DropdownItem divider/>
-                                    <DropdownItem>Setting</DropdownItem>
+                                    <DropdownItem href="/settings">Setting</DropdownItem>
                                     <DropdownItem>Bantuan</DropdownItem>
-                                    <DropdownItem id="big-logoff" onClick={props.logout}>Log off</DropdownItem>
+                                    <DropdownItem id="big-logoff" onClick={logout}>Log off</DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
 
@@ -93,11 +103,11 @@ function InsideNavbar(props){
                                         {props.firstName} {props.lastName}
                                     </DropdownToggle>
                                     <DropdownMenu>
-                                        <DropdownItem>Setting</DropdownItem>
+                                        <DropdownItem href="/settings">Settings</DropdownItem>
                                         <DropdownItem>Bantuan</DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                                <NavItem id="small-logoff" onClick={props.logout}>
+                                <NavItem id="small-logoff" onClick={logout}>
                                     Log off
                                 </NavItem>
                             </Nav>
@@ -109,4 +119,4 @@ function InsideNavbar(props){
     )
 }
 
-export default connect(mapStateToProps)(InsideNavbar);
+export default connect(mapStateToProps,{logout})(withRouter(InsideNavbar));

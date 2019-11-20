@@ -51,7 +51,7 @@ function Content(props){
         <div className="content">
             <header>
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-md-6 col-sm">
                         <h1>Kelas Anda</h1>
                     </div>
                     <div className="col-6 d-none d-md-block" style={{alignSelf: "center"}}>

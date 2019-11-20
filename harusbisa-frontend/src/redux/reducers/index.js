@@ -1,6 +1,7 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN } from "../constants/action-types";
+import services from "../../Services";
 
-function rootReducer(state ={loading: true}, action){
+function rootReducer(state ={loading: true, loggedIn: services.isLoggedIn()}, action){
     if (action.type === COURSES_LOADED){
         return Object.assign({}, state, {
             courses: action.payload,
@@ -42,7 +43,9 @@ function rootReducer(state ={loading: true}, action){
         return Object.assign({}, state, {
             firstName: action.payload.firstName,
             lastName: action.payload.lastName,
-            role: action.payload.role
+            role: action.payload.role,
+            email: action.payload.email,
+            school: action.payload.school
         })
     }
     if (action.type === STUDENT_ADD_COURSE){
@@ -59,6 +62,17 @@ function rootReducer(state ={loading: true}, action){
     if(action.type === REMOVE_ERROR){
         return Object.assign({}, state, {
             error: null
+        })
+    }
+    if(action.type === LOG_OUT){
+        return Object.assign({}, state, {
+            loggedIn: false,
+        })
+    }
+    if(action.type === LOG_IN){
+        return Object.assign({}, state, {
+            loggedIn: true,
+            role: action.payload.role
         })
     }
     return state;
