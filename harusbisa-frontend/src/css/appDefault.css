@@ -91,3 +91,19 @@ button{
 img{
     max-height: 100%;
 }
+
+/*POPUP*/
+.MuiDialog-paperWidthSm{
+    max-width: 750px !important;
+}
+
+/*FORM*/
+.student-course-form .content{
+    padding: 4.5rem 1.5rem;
+}
+
+@media only screen and (max-width: 768px){
+    .student-course-form .content{
+        padding: 2rem 1rem;
+    }
+}
