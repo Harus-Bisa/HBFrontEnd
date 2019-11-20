@@ -31,28 +31,24 @@ function AccountSettingsForm(props){
                                     <Input type="text" id="firstName" value={firstName} onChange={(event) => setFirstName(firstName = event.target.value) }/>
                                 </Col>
                             </FormGroup>
-
                             <FormGroup row>
                                 <Label sm={5}>Nama Belakang</Label>
                                 <Col sm={7}>
                                     <Input type="text" id="lastName" value={lastName} onChange={(event) => setLastName(lastName = event.target.value)}/>
                                 </Col>
                             </FormGroup>
-
                             <FormGroup row>
                                 <Label sm={5}>Nama Universitas</Label>
                                 <Col sm={7}>
                                     <Input type="text" id="school" value={school} onChange={(event) => setSchool(school= event.target.value)}/>
                                 </Col>
                             </FormGroup>
-
                             <FormGroup row>
                                 <Label sm={5}>Email</Label>
                                 <Col sm={7}>
                                     <Input type="email" id="email" value={email} onChange={(event) => setEmail(email = event.target.value)}/>
                                 </Col>
                             </FormGroup>
-
                             <div className="row justify-content-end">
                                 <div className="col-sm-7">
                                     <Button type="submit" className="neutral-button" style={{width:'100%'}}>Simpan perubahan</Button>
