@@ -72,19 +72,19 @@ function AccountSettingsForm(props){
                             <FormGroup row>
                                 <Label sm={5}>Password Lama</Label>
                                 <Col sm={7}>
-                                    <Input type="text" id="oldPassword" value={oldPassword} onChange={(event) => setOldPassword(oldPassword= event.target.value)}/>
+                                    <Input type="password" id="oldPassword" value={oldPassword} onChange={(event) => setOldPassword(oldPassword= event.target.value)}/>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={5}>Password Baru</Label>
                                 <Col sm={7}>
-                                    <Input type="text" id="newPassword" value={newPassword} onChange={(event) => setNewPassword(newPassword= event.target.value)}/>
+                                    <Input type="password" id="newPassword" value={newPassword} onChange={(event) => setNewPassword(newPassword= event.target.value)}/>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={5}>Ulangi Password Baru</Label>
                                 <Col sm={7}>
-                                    <Input type="text" id="verifyNewPassword" value={verifyNewPassword} onChange={(event) => setVerifyNewPassword(verifyNewPassword= event.target.value)}/>
+                                    <Input type="password" id="verifyNewPassword" value={verifyNewPassword} onChange={(event) => setVerifyNewPassword(verifyNewPassword= event.target.value)}/>
                                 </Col>
                             </FormGroup>
                             <div className="row justify-content-end">
