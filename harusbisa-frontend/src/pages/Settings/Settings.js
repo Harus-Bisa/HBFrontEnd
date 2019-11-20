@@ -34,10 +34,10 @@ function Settings(props){
                                 <div className="col-md-6" style={{display:'flex'}}>
                                     <div className="row" style={{margin: "auto"}}>
                                         <div className="col-6">
-                                            <Button className= "button settings-button" onClick={() => setSettingDisplay(settingDisplay=ACCOUNT)}>Akun</Button>
+                                            <Button className= "button settings-button" id={ACCOUNT+"-button"} onClick={() => setSettingDisplay(settingDisplay=ACCOUNT)}>Akun</Button>
                                         </div>
                                         <div className="col-6">
-                                            <Button className= "button settings-button" onClick={() => setSettingDisplay(settingDisplay=COURSE)}>Kelas</Button>
+                                            <Button className= "button settings-button" id={COURSE+"-button"} onClick={() => setSettingDisplay(settingDisplay=COURSE)}>Kelas</Button>
                                         </div>
                                     </div>
                                 </div>

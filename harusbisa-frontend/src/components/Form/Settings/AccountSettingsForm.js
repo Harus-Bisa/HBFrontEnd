@@ -101,7 +101,6 @@ function AccountSettingsForm(props){
 }
 
 function mapStateToProps(state){
-    console.log(state)
     return{
         firstName: state.firstName,
         lastName: state.lastName,
