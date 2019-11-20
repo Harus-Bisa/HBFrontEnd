@@ -8,9 +8,13 @@ function AccountSettingsForm(props){
     var [school, setSchool] = React.useState(props.school);
     var [email, setEmail] = React.useState(props.email);
 
+    var [oldPassword, setOldPassword] = React.useState();
+    var [newPassword, setNewPassword] = React.useState();
+    var [verifyNewPassword, setVerifyNewPassword] = React.useState();
+
     const submitProfile = (event) =>{
         event.preventDefault();
-        console.log("submitProfile")
+        props.changeProfile()
     }
 
     if(props.loading){
@@ -24,7 +28,7 @@ function AccountSettingsForm(props){
                 </div>
                 <div className="row justify-content-end">
                     <div className="col-md-11">
-                        <Form onSubmit={submitProfile}>
+                        <Form onSubmit={submitProfile} id="profile-form">
                             <FormGroup row>
                                 <Label sm={5}>Nama Depan</Label>
                                 <Col sm={7}>
@@ -64,23 +68,23 @@ function AccountSettingsForm(props){
                 <div className="row justify-content-end">
                     <div className="col-md-11">
                         <p style={{marginBottom:'2rem'}}>Dengan membuat password memastkan anda dapat log in ke akun Harus Bisa anda</p>
-                        <Form onSubmit={submitProfile}>
+                        <Form onSubmit={submitProfile} id="password-form">
                             <FormGroup row>
                                 <Label sm={5}>Password Lama</Label>
                                 <Col sm={7}>
-                                    <Input type="text" id="oldPassword"/>
+                                    <Input type="text" id="oldPassword" value={oldPassword} onChange={(event) => setOldPassword(oldPassword= event.target.value)}/>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={5}>Password Baru</Label>
                                 <Col sm={7}>
-                                    <Input type="text" id="newPassword"/>
+                                    <Input type="text" id="newPassword" value={newPassword} onChange={(event) => setNewPassword(newPassword= event.target.value)}/>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={5}>Ulangi Password Baru</Label>
                                 <Col sm={7}>
-                                    <Input type="text" id="verifyNewPassword"/>
+                                    <Input type="text" id="verifyNewPassword" value={verifyNewPassword} onChange={(event) => setVerifyNewPassword(verifyNewPassword= event.target.value)}/>
                                 </Col>
                             </FormGroup>
                             <div className="row justify-content-end">
@@ -106,4 +110,7 @@ function mapStateToProps(state){
     }
 }
 
+AccountSettingsForm.defaultProps ={
+    changeProfile: (() =>{})
+}
 export default connect(mapStateToProps)(AccountSettingsForm);
