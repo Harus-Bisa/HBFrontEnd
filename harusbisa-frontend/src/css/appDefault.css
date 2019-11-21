@@ -118,3 +118,7 @@ img{
         padding: 2rem 1rem;
     }
 }
+
+.student-icon{
+    color: var(--hb-yellow);
+}
