@@ -6,6 +6,7 @@ import Popup from "../Popup/Popup";
 import CourseForm from "../Form/CourseForm";
 import "../../css/card.css";
 import MenuOptions from "../MenuOptions/MenuOptions";
+import { Button} from "@material-ui/core";
 
 function mapStateToProps(state, currentProps){
     var courseId = currentProps.id 
@@ -55,7 +56,10 @@ function ProfCourseCard(props){
                                 <MenuOptions 
                                     icon={MoreHorizIcon} 
                                     className="icon" 
-                                    options={["Edit", "Delete"]}
+                                    options={[
+                                        <Popup purpose={"Edit"} trigger={{component:Button, style:{width:'100%'}}} content={CourseForm} id={props.course._id}/>, 
+                                        <Button fullWidth onClick={deleteCourse}>Hapus</Button>]
+                                    }
                                 />
                             </div>
                         </div>

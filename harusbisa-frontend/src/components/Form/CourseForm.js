@@ -53,11 +53,12 @@ function CourseForm(props){
     if(addedNewCourse){
         return(<JoinCourseAnnoucement closePopup={props.closePopup}/>)
     }
+    var verified = name && startDate && endDate;
     return(
         <div className="container-fluid">
             <div className="row" style={{borderBottom:'2px solid '+HB_YELLOW}}>
                 <div className="col-12" style={{display:'flex', justifyContent:'center', padding:'1rem 2rem'}}>
-                    <h3>Tambahkah Kelas Baru</h3>
+                    <h3>{type === ADD ? "Tambahkah Kelas Baru" : "Edit Kelas"}</h3>
                 </div>
             </div>
             <div className="content">
@@ -99,7 +100,7 @@ function CourseForm(props){
                     </FormGroup>
                     <div className="row justify-content-end">
                         <div className="col-3">
-                            <Button fullWidth className="prof-button" type="submit">{type === ADD ? "Tambahkan" : "Edit"}</Button>
+                            <Button fullWidth className="prof-button" type="submit" disabled={!verified}>{type === ADD ? "Tambahkan" : "Edit"}</Button>
                         </div>
                     </div>
                 </Form>

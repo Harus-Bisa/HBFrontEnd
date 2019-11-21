@@ -56,6 +56,11 @@ button{
     color: black;
 }
 
+.prof-button:disabled, .student-button:disabled{
+    background-color:#c2c2c2 !important;
+    color:black;
+}
+
 .neutral-button{
     background: #E3E3E3;
     border: 1px solid #D9D9D9;
