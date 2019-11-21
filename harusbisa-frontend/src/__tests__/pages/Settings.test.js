@@ -24,7 +24,8 @@ describe("Settings page", () =>{
                 "number_of_lectures": 5,
                 "instructor": "John Doe"
               }],
-              loading: false
+              loading: false,
+              loggedIn: true,
         }
         history = {
             push: jest.fn()
