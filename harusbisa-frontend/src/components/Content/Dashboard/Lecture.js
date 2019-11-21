@@ -22,11 +22,6 @@ function Lecture(props){
         }
         return quizzes;
     }
-    if (!props.lecture){
-        return(
-            <div>Make your first lecture</div>
-        )
-    }
     return(
         <div className="content">
             <header>
