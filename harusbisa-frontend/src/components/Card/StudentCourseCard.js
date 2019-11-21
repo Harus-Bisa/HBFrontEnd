@@ -26,7 +26,7 @@ function StudentCourseCard(props){
                     }
                     title={<h5><a href={"/student/dashboard/"+props.course._id}>{props.course.course_name}</a></h5>}
                 />
-                <CardContent className="d-none d-md-block">
+                <CardContent className="d-none d-md-block" style={{padding:'0px 16px 16px'}}>
                     <p>{props.course.start_term} - {props.course.end_term}</p>
                     <p>{props.course.instructor}</p>
                 </CardContent>
