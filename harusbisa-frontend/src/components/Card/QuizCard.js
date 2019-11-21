@@ -18,7 +18,7 @@ function QuizCard(props){
         return answers
     }
     return(
-        <Card>
+        <Card className="card">
             <CardContent>
                 <div>
                     <p>{props.index + 1}.  {props.quiz.question}</p>

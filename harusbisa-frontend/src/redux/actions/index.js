@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_IN, LOG_OUT } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_IN, LOG_OUT, CHANGE_CONTENT_TYPE } from "../constants/action-types";
 import services from "../../Services";
 
 export function getCourses(){
@@ -117,4 +117,8 @@ export function logout(){
         services.logout()
         return dispatch({type: LOG_OUT})
     }
+}
+
+export function changeContentType(contentType){
+    return {type:CHANGE_CONTENT_TYPE, payload:contentType}
 }

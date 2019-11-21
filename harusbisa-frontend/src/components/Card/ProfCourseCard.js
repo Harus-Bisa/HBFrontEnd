@@ -25,16 +25,18 @@ function ProfCourseCard(props){
         props.deleteCourse(props.course._id)   
     }
     return(
-        <Card>
-            <CardContent style={styles.content}>
-                <h3><a href={"/faculty/dashboard/"+props.course._id}>{props.course.course_name}</a></h3>
-                <p>{props.course.join_code}</p>
-            </CardContent>
-            <CardActions>
-                <Button onClick={deleteCourse}>Delete</Button>
-                <Popup purpose={"Edit"} trigger={{component:Button}} content={CourseForm} id={props.course._id}/>
-            </CardActions>
-        </Card>
+        <div className="col-md-12">
+            <Card>
+                <CardContent style={styles.content}>
+                    <h3><a href={"/faculty/dashboard/"+props.course._id}>{props.course.course_name}</a></h3>
+                    <p>{props.course.join_code}</p>
+                </CardContent>
+                <CardActions>
+                    <Button onClick={deleteCourse}>Delete</Button>
+                    <Popup purpose={"Edit"} trigger={{component:Button}} content={CourseForm} id={props.course._id}/>
+                </CardActions>
+            </Card>
+        </div>
     )
 }
 
