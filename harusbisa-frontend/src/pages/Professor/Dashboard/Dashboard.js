@@ -32,7 +32,7 @@ class ProfDashboard extends React.Component{
     
         return(
             <div style={{position:'fixed', width:'100%'}}>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row">
                         <div className="col-md-2">
                             <Sidebar/>

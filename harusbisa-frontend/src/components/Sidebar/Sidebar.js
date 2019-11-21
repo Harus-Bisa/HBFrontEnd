@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import { Button, Collapse } from "@material-ui/core";
 import { changeSelectedLecture, changeContentType } from "../../redux/actions";
 import Popup from "../Popup/Popup";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function mapStateToProps(state){
     return{
@@ -33,10 +34,10 @@ function Sidebar(props){
         return buttons;
     }
     return(
-        <div>
-            <Button fullWidth onClick={()=>setOpen(open => open = !open)}>Sesi</Button>
+        <div style={{borderRight:"2px solid #f4f4f4", height:'100vh'}}>
+            <Button fullWidth onClick={()=>setOpen(open => open = !open)}>Sesi <ExpandMoreIcon/></Button>
             <Collapse in={open} timeout="auto" unmountOnExit>
-                <div style={{height:'50vh', overflowY:'auto', display:'flex', flexDirection:'column',justifyContent:'space-between'}}>
+                <div style={{height:'50vh', overflowY:'auto', display:'flex', flexDirection:'column',justifyContent:'space-between', padding:'1rem 0rem'}}>
                     <div>
                         {makeButtons()}
                     </div>
@@ -49,8 +50,11 @@ function Sidebar(props){
                     </div>
                 </div>
             </Collapse>
-            <Button fullWidth onClick={() => props.changeContentType("GRADEBOOK")}>Daftar Nilai</Button>
-            <Button fullWidth onClick={() => props.changeContentType("SETTINGS")}>Setting Kelas</Button>
+            <div style={{borderTop:"2px solid #f4f4f4"}}>
+                <Button fullWidth onClick={() => props.changeContentType("GRADEBOOK")}>Daftar Nilai</Button>
+                <Button fullWidth onClick={() => props.changeContentType("SETTINGS")}>Setting Kelas</Button>
+            </div>
+            
         </div>
         
     )
