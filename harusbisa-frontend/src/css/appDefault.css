@@ -75,6 +75,10 @@ button{
     padding: 2rem 1rem;
 }
 
+header{
+    margin-bottom: 1.5rem;
+}
+
 /*GENERAL COMPONENTS*/
 .search-bar{
 	display: flex;

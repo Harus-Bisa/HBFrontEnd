@@ -20,7 +20,7 @@ export default function MenuOptions(props){
     }
     return(
         <div>
-            <Trigger onClick={handleClick}/>
+            <Trigger icon={props.icon} className={props.className} onClick={handleClick}/>
             <Menu
                 anchorEl={anchorEl}
                 keepMounted
