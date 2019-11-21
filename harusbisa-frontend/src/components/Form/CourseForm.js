@@ -63,17 +63,17 @@ function CourseForm(props){
                 </div>
             </div>
             <div className="content">
-                <Form onSubmit={submit}>
+                <Form onSubmit={submit} style={{minWidth:'50vw'}}>
                     <FormGroup row>
-                        <Label sm={5}>Nama Kelas</Label>
-                        <Col sm={7}>
+                        <Label sm={4}>Nama Kelas</Label>
+                        <Col sm={8}>
                             <Input type="text" value={name} placeholder={"Contoh: Biologi Molekuler Kelas A"} onChange={(event) => setName(event.target.value)}/>
                             <FormText>Nama ini adalah nama yang akan dilihat siswa Anda.</FormText>
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label sm={5}>Periode Kelas</Label>
-                        <Col sm={7}>
+                        <Label sm={4}>Periode Kelas</Label>
+                        <Col sm={8}>
                             <div className="row">
                                 <div className="col-5">
                                     <Input type="select" name="select" id="exampleSelect">
@@ -84,8 +84,8 @@ function CourseForm(props){
                                         <option>Juli 2023</option>
                                     </Input>
                                 </div>
-                                <div className="col-2">
-                                    <p>-</p>
+                                <div className="col-2" style={{display:'flex'}}>
+                                    <p style={{margin:'auto'}}>-</p>
                                 </div>
                                 <div className="col-5">
                                     <Input type="select" name="select" id="exampleSelect">
