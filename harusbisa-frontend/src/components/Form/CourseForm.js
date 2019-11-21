@@ -4,6 +4,7 @@ import { addCourse, editCourse } from "../../redux/actions";
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Col} from 'reactstrap';
 import { HB_YELLOW } from "../../css/constants/color";
 import { Button } from "@material-ui/core";
+import JoinCourseAnnoucement from "./JoinCourseAnnoucement";
 
 function mapStateToProps(state, ownProps){
     if (ownProps.id){
@@ -28,35 +29,32 @@ function mapStateToProps(state, ownProps){
     }
     
 }
+const EDIT = "EDIT";
+const ADD = "ADD";
+
 function CourseForm(props){
     const [name, setName] = React.useState(props.course.course_name);
     const [startDate, setStartDate] = React.useState(props.course.start_term);
     const [endDate, setEndDate] = React.useState(props.course.end_term);
-    
+    const [addedNewCourse, setAddedNewCourse] = React.useState(false)
+    const type = (props.id ? EDIT : ADD)
+
     const submit = (event) =>{
         event.preventDefault();
-        if (props.id){
+        if (type === EDIT){
             props.editCourse(props.id, name, startDate, endDate);
+            props.closePopup();
         }
         else{
             props.addCourse(name, startDate, endDate);
+            setAddedNewCourse(true)
         }
-        props.closePopup();
+    }
+    if(addedNewCourse){
+        return(<JoinCourseAnnoucement closePopup={props.closePopup}/>)
     }
     return(
         <div className="container-fluid">
-            {/* <form onSubmit={submit}>
-                <label>Course Name*</label>
-                <input type="text" value={name} onChange={(event) => setName(event.target.value)}></input>
-                <br/>
-                <label>Start Date*</label>
-                <input type="text" value={startDate} onChange={(event) => setStartDate(event.target.value)}></input>
-                <br/>
-                <label>End Date*</label>
-                <input type="text" value={endDate} onChange={(event) => setEndDate(event.target.value)}></input>
-                <br/>
-                <button type="submit">Submit</button>
-            </form> */}
             <div className="row" style={{borderBottom:'2px solid '+HB_YELLOW}}>
                 <div className="col-12" style={{display:'flex', justifyContent:'center', padding:'1rem 2rem'}}>
                     <h3>Tambahkah Kelas Baru</h3>
@@ -76,7 +74,7 @@ function CourseForm(props){
                         <Col sm={8}>
                             <div className="row">
                                 <div className="col-5">
-                                    <Input type="select" name="select" id="exampleSelect">
+                                    <Input type="select" name="select" id="startDate" value={startDate} onChange={(event) => setStartDate(event.target.value)}>
                                         <option>Juli 2019</option>
                                         <option>Juli 2020</option>
                                         <option>Juli 2021</option>
@@ -88,7 +86,7 @@ function CourseForm(props){
                                     <p style={{margin:'auto'}}>-</p>
                                 </div>
                                 <div className="col-5">
-                                    <Input type="select" name="select" id="exampleSelect">
+                                    <Input type="select" name="select" id="endDate" value={endDate} onChange={(event) => setEndDate(event.target.value)}>
                                         <option>Juli 2019</option>
                                         <option>Juli 2020</option>
                                         <option>Juli 2021</option>
@@ -99,7 +97,11 @@ function CourseForm(props){
                             </div>
                         </Col>
                     </FormGroup>
-                    <Button className="prof-button" type="submit">Submit</Button>
+                    <div className="row justify-content-end">
+                        <div className="col-3">
+                            <Button fullWidth className="prof-button" type="submit">{type === ADD ? "Tambahkan" : "Edit"}</Button>
+                        </div>
+                    </div>
                 </Form>
             </div>
         </div>
