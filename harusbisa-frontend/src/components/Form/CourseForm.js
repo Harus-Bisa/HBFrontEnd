@@ -58,7 +58,7 @@ function CourseForm(props){
         <div className="container-fluid">
             <div className="row" style={{borderBottom:'2px solid '+HB_YELLOW}}>
                 <div className="col-12" style={{display:'flex', justifyContent:'center', padding:'1rem 2rem'}}>
-                    <h3>{type === ADD ? "Tambahkah Kelas Baru" : "Edit Kelas"}</h3>
+                    <h3>{type === ADD ? "Tambahkan Kelas Baru" : "Edit Kelas"}</h3>
                 </div>
             </div>
             <div className="content">
@@ -66,7 +66,7 @@ function CourseForm(props){
                     <FormGroup row>
                         <Label sm={4}>Nama Kelas</Label>
                         <Col sm={8}>
-                            <Input type="text" value={name} placeholder={"Contoh: Biologi Molekuler Kelas A"} onChange={(event) => setName(event.target.value)}/>
+                            <Input type="text" id="courseName" value={name} placeholder={"Contoh: Biologi Molekuler Kelas A"} onChange={(event) => setName(event.target.value)}/>
                             <FormText>Nama ini adalah nama yang akan dilihat siswa Anda.</FormText>
                         </Col>
                     </FormGroup>

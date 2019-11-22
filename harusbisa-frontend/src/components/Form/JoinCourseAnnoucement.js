@@ -38,7 +38,7 @@ function JoinCourseAnnoucement(props){
                 </div>
                 <div className="row justify-content-end">
                     <div className="col-3">
-                        <Button className="prof-button" fullWidth onClick={props.closePopup}>Selesai</Button>
+                        <Button id="close-button" className="prof-button" fullWidth onClick={props.closePopup}>Selesai</Button>
                     </div>
                 </div>
                 
