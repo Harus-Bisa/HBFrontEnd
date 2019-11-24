@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import { addCourse, editCourse } from "../../redux/actions";
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Col} from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormText, Col} from 'reactstrap';
 import { HB_YELLOW } from "../../css/constants/color";
 import { Button } from "@material-ui/core";
 import JoinCourseAnnoucement from "./JoinCourseAnnoucement";

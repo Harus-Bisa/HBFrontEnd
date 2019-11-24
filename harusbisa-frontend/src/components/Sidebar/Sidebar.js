@@ -4,6 +4,7 @@ import { Button, Collapse } from "@material-ui/core";
 import { changeSelectedLecture, changeContentType } from "../../redux/actions";
 import Popup from "../Popup/Popup";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import LectureForm from "../Form/LectureForm";
 
 function mapStateToProps(state){
     return{
@@ -31,6 +32,9 @@ function Sidebar(props){
                 <Button fullWidth key={i} props={lecture} onClick={openLecture.bind(this,lecture)}>Sesi {lecture.date}</Button>
             )
         }
+        if(buttons.length === 0){
+            buttons.push(<p>Buatlah sesi pertama anda!</p>)
+        }
         return buttons;
     }
     return(
@@ -45,7 +49,7 @@ function Sidebar(props){
                         <Popup 
                             purpose={"+ Tambah Sesi"} 
                             trigger={{component:Button, className:"prof-button"}} 
-                            // content={props.role === "student" ? StudentCourseForm : CourseForm}
+                            content={LectureForm}
                         />
                     </div>
                 </div>

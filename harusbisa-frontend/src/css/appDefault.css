@@ -42,6 +42,10 @@ button{
     text-transform: none !important;
 }
 
+button:focus{
+    outline:none;
+}
+
 .settings-button{
     font-family: "ITC Avant Garde Gothic Std Book" !important;
     color: "black";
