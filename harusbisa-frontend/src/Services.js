@@ -99,7 +99,7 @@ class Services{
             return response.data.data.courses;
         })
         .catch(error =>{
-            console.log(error.message);
+            throw error;
         })
     }
 

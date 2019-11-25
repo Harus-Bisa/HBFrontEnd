@@ -15,7 +15,7 @@ function Popup(props){
     }
     return(
         <div>
-            <Trigger className={props.trigger.className} onClick={openPopup}>{props.purpose}</Trigger>
+            <Trigger className={props.trigger.className} onClick={openPopup} style={props.trigger.style}>{props.purpose}</Trigger>
             <Dialog open={open} onClose={() => setOpen(false)} style={{padding:0}}>
                 <DialogContent> 
                     <ContentComponent closePopup={() => setOpen(false)} id={props.id}/>

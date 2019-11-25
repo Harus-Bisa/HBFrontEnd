@@ -10,7 +10,7 @@ export default function MenuOptions(props){
         var menuItems = [];
         for (let i=0; i<props.options.length; i++){
             menuItems.push(
-                <MenuItem key={i}>{props.options[i]}</MenuItem>
+                <div key={i}>{props.options[i]}</div>
             )
         }
         return menuItems;
@@ -20,7 +20,7 @@ export default function MenuOptions(props){
     }
     return(
         <div>
-            <Trigger onClick={handleClick}/>
+            <Trigger icon={props.icon} className={props.className} onClick={handleClick}/>
             <Menu
                 anchorEl={anchorEl}
                 keepMounted
@@ -36,5 +36,5 @@ export default function MenuOptions(props){
 
 MenuOptions.defaultProps={
     trigger: ButtonIcon,
-    options:["Settings"]
+    options:[<MenuItem href="/settings">Settings</MenuItem>]
 }

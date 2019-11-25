@@ -1,5 +1,6 @@
 :root {
     --hb-purple: #6311AB;
+    --hb-yellow: #FFE01C;
 }
 
 /*TEXT*/
@@ -41,6 +42,10 @@ button{
     text-transform: none !important;
 }
 
+button:focus{
+    outline:none;
+}
+
 .settings-button{
     font-family: "ITC Avant Garde Gothic Std Book" !important;
     color: "black";
@@ -49,6 +54,15 @@ button{
 .student-button{
     background-color: var(--hb-purple) !important;
     color: white !important;
+}
+.prof-button{
+    background-color: var(--hb-yellow) !important;
+    color: black;
+}
+
+.prof-button:disabled, .student-button:disabled{
+    background-color:#c2c2c2 !important;
+    color:black;
 }
 
 .neutral-button{
@@ -59,9 +73,19 @@ button{
     color: #484848;
 }
 
+.lecture-button{
+    background-color: #f4f4f4 !important;
+    min-height: 3rem;
+    width:100%;
+}
+
 /*DIV*/
 .content{
     padding: 2rem 1rem;
+}
+
+header{
+    margin-bottom: 1.5rem;
 }
 
 /*GENERAL COMPONENTS*/
@@ -106,4 +130,8 @@ img{
     .student-course-form .content{
         padding: 2rem 1rem;
     }
+}
+
+.student-icon{
+    color: var(--hb-yellow);
 }
