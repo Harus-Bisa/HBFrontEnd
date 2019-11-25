@@ -2,15 +2,18 @@ import React from "react";
 import {connect} from "react-redux";
 import { Form, FormGroup, Label, Input, FormText, Col} from 'reactstrap';
 import { Button, Slider } from "@material-ui/core";
+import {addLecture} from "../../redux/actions";
 
 function LectureForm(props){
     var [date, setDate] = React.useState("");
+    var [lectureDescription, setLectureDescription] = React.useState("")
     var [participationPercentage, setParticipationPercentage] = React.useState(Number(100));
 
     const submit = (event) =>{
         event.preventDefault();
         console.log(date)
         console.log(participationPercentage)
+        // props.addLecture(date, lectureDescription, participationPercentage, props.courseId, props.role)
     }
     return(
         <div className="container-fluid student-course-form">
@@ -21,7 +24,7 @@ function LectureForm(props){
                 <div className="content col-md-7">
                 <Form onSubmit={submit}>
                     <FormGroup row>
-                        <Label sm={4}>Nama Kelas</Label>
+                        <Label sm={4}>Nama Sesi</Label>
                         <Col sm={8}>
                             <Input
                                 type="date"
@@ -30,6 +33,17 @@ function LectureForm(props){
                                 onChange={(event) => setDate(event.target.value)}
                             />
                             <FormText>Tanggal ini akan menjadi nama sesi anda.</FormText>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label sm={4}>Deskripsi</Label>
+                        <Col sm={8}>
+                            <Input
+                                type="text"
+                                id="lectureDescription"
+                                value={lectureDescription}
+                                onChange={(event) => setLectureDescription(event.target.value)}
+                            />
                         </Col>
                     </FormGroup>
                     <FormGroup>
@@ -52,7 +66,7 @@ function LectureForm(props){
                         </div>
                     </FormGroup>
                     <div style={{justifyContent:'flex-end', display:'flex'}}>
-                        <Button type="submit" className="prof-button">Lanjutkan</Button>
+                        <Button type="submit" className="prof-button">Tambahkan</Button>
                     </div>
                 </Form>
                 </div>
@@ -61,4 +75,10 @@ function LectureForm(props){
     )
 }
 
-export default connect()(LectureForm);
+function mapStateToProps(state){
+    return{
+        role: state.role,
+        courseId: state.course.courseId
+    }
+}
+export default connect(mapStateToProps,{addLecture})(LectureForm);

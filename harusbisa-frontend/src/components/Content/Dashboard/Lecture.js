@@ -11,7 +11,8 @@ import LectureButtonContent from "../../LectureButton/LectureButtonContent";
 
 function mapStateToProps(state){
     return {
-        lecture: state.selectedLecture
+        lecture: state.selectedLecture,
+        courseName: state.course.courseName
     }
 }
 function Lecture(props){
@@ -25,6 +26,7 @@ function Lecture(props){
     return(
         <div className="content">
             <header>
+                <p>{props.courseName}</p>
                 <h1>Sesi {props.lecture.date}</h1>
             </header>
             <div style={{margin:"1rem 0"}}>

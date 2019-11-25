@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_IN, LOG_OUT, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_IN, LOG_OUT, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE } from "../constants/action-types";
 import services from "../../Services";
 
 export function getCourses(role){
@@ -128,4 +128,17 @@ export function logout(){
 
 export function changeContentType(contentType){
     return {type:CHANGE_CONTENT_TYPE, payload:contentType}
+}
+
+export function addLecture(date, lectureDescription, participationRewardPercentage, courseId, role){
+    return async function(dispatch){
+        return await services.addLecture(date, lectureDescription, participationRewardPercentage, courseId, role)
+        .then(async response => {
+            await dispatch({type: ADD_LECTURE, payload: response})
+            dispatch(removeError())
+        })
+        .catch(error =>{
+            dispatch({type:ERROR, payload: error})
+        })
+    }
 }

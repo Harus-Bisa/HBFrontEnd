@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -116,6 +116,25 @@ function rootReducer(state ={loadingCount:0, loading: true, loggedIn: services.i
             loadingCount: count,
             loading: count !== 0
         })
+    }
+    if(action.type === ADD_LECTURE){
+        let newLectures = state.course.lectures.slice();
+        newLectures.splice(0,0,action.payload)
+        
+        return Object.assign({}, state, {
+            course: {
+                instructors: state.course.instructors,
+                courseName: state.course.courseName,
+                startTerm: state.course.startTerm,
+                endTerm: state.course.endTerm,
+                joinCode: state.course.joinCode,
+                courseId: state.course.courseId,
+                numberOfStudents: state.course.numberOfStudents,
+                numberOfLectures: state.course.numberOfLectures + 1,
+                lectures: newLectures
+            }
+        })
+
     }
     return state;
 };

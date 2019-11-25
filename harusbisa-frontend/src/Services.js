@@ -192,6 +192,24 @@ class Services{
             console.log(error.message)
         })
     }
+
+    async addLecture(date, lectureDescription, participationRewardPercentage, courseId, role){
+        const headers = this.createHeaders();
+        const url = this.domain + "/" + role + "/courses/" + courseId + "/lectures"; 
+        const data = {
+            date: date,
+            lectureDescription: lectureDescription,
+            participationRewardPercentage: participationRewardPercentage
+        }
+
+        return await axios.post(url, data, {headers: headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
 }
 
 const services = new Services()
