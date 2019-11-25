@@ -4,12 +4,12 @@ import {connect} from "react-redux";
 function Home(props){
     return(
         <div className="content">
-            <h1>{props.course.course_name}</h1>
-            <p>{props.course.description}</p>
-            <p>{props.course.start_term} - {props.course.end_term}</p>
-            <p>Kode bergabung: {props.course.join_code}</p>
-            <p>Jumlah sesi: {props.course.number_of_lectures}</p>
-            <p>Jumlah murid: {props.course.number_of_students}</p>
+            <h1>{props.course.courseName}</h1>
+            <p>{props.course.courseDescription}</p>
+            <p>{props.course.startTerm} - {props.course.endTerm}</p>
+            <p>Kode bergabung: {props.course.joinCode}</p>
+            <p>Jumlah sesi: {props.course.numberOfLectures}</p>
+            <p>Jumlah murid: {props.course.numberOfStudents}</p>
         </div>
     )
 }

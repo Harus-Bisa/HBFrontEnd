@@ -49,7 +49,7 @@ function JoinCourseAnnoucement(props){
 
 function MapStateToProps(state){
     return{
-        joinCode:state.courses[state.courses.length-1].join_code
+        joinCode:state.courses[state.courses.length-1].joinCode
     }
 }
 export default connect(MapStateToProps)(JoinCourseAnnoucement);

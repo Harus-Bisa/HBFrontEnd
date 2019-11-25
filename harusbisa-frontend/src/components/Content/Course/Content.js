@@ -27,7 +27,7 @@ function Content(props){
         if (searchKey !== ""){
             for (let i=0; i<courses.length; i++){
                 var course = courses[i]
-                if (course.course_name.toLowerCase().includes(searchKey.toLowerCase())){
+                if (course.courseName.toLowerCase().includes(searchKey.toLowerCase())){
                     display.push(course)
                 }
             }
@@ -42,7 +42,7 @@ function Content(props){
         var courses = displayedCourses.length === 0 ? props.courses : displayedCourses
         var components = []
         for (let i=0; i<courses.length; i++){
-            var id = courses[i]._id
+            var id = courses[i].courseId
             if (props.role === "student"){
                 components.push(<StudentCourseCard key={i} id={id}/>)
             }

@@ -8,7 +8,7 @@ function mapStateToProps(state, currentProps){
     var courseId = currentProps.id 
     var courses = state.courses
     for (var i=0; i<courses.length; i++){
-        if (courses[i]._id === courseId){
+        if (courses[i].courseId === courseId){
             return {
                 course: courses[i]
             }
@@ -24,14 +24,14 @@ function StudentCourseCard(props){
                     action={
                         <MenuOptions/>
                     }
-                    title={<h5><a href={"/student/dashboard/"+props.course._id}>{props.course.course_name}</a></h5>}
+                    title={<h5><a href={"/student/dashboard/"+props.course.courseId}>{props.course.courseNae}</a></h5>}
                 />
                 <CardContent className="d-none d-md-block" style={{padding:'0px 16px 16px'}}>
-                    <p>{props.course.start_term} - {props.course.end_term}</p>
-                    <p>{props.course.instructor}</p>
+                    <p>{props.course.startTerm} - {props.course.endTerm}</p>
+                    <p>{props.course.instructors[0]}</p>
                 </CardContent>
                 <CardActions className="footer">
-                    <p>{props.course.number_of_lectures} Sesi</p>
+                    <p>{props.course.numberOfLectures} Sesi</p>
                 </CardActions>
             </Card>
         </div>

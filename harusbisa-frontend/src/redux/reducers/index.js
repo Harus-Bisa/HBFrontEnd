@@ -1,18 +1,16 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING } from "../constants/action-types";
 import services from "../../Services";
 
-function rootReducer(state ={loading: true, loggedIn: services.isLoggedIn()}, action){
+function rootReducer(state ={loadingCount:0, loading: true, loggedIn: services.isLoggedIn()}, action){
     if (action.type === COURSES_LOADED){
         return Object.assign({}, state, {
             courses: action.payload,
-            loading: false,
+        
         });
     }
     if (action.type === COURSE_LOADED){
-        // var lecture = action.payload.lectures.length === 0 ? null: action.payload.lectures[0]
         return Object.assign({},state,{
-            course : action.payload,
-            // selectedLecture: lecture
+            course : action.payload
         })   
     }
     if (action.type === CHANGE_SELECTED_LECTURE){
@@ -22,20 +20,17 @@ function rootReducer(state ={loading: true, loggedIn: services.isLoggedIn()}, ac
     }
     if (action.type === ADD_COURSE){
         return Object.assign({}, state, {
-            courses: action.payload,
-            loading: false,
+            courses: action.payload
         });
     }
     if (action.type === DELETE_COURSE){
         return Object.assign({}, state, {
-            courses: action.payload,
-            loading: false,
+            courses: action.payload
         })
     }
     if(action.type === EDIT_COURSE){
         return Object.assign({}, state, {
-            courses: action.payload,
-            loading: false
+            courses: action.payload
         })
     }
     if(action.type === USER_LOADED){
@@ -51,7 +46,6 @@ function rootReducer(state ={loading: true, loggedIn: services.isLoggedIn()}, ac
     if (action.type === STUDENT_ADD_COURSE){
         return Object.assign({}, state, {
             courses: action.payload,
-            loading: false,
         }); 
     }
     if(action.type === ERROR){
@@ -79,6 +73,19 @@ function rootReducer(state ={loading: true, loggedIn: services.isLoggedIn()}, ac
     if(action.type === CHANGE_CONTENT_TYPE){
         return Object.assign({}, state, {
             contentType: action.payload
+        })
+    }
+    if(action.type === SET_LOADING){
+        return Object.assign({}, state, {
+            loadingCount: state.loadingCount + 1,
+            loading: true
+        })
+    }
+    if(action.type === REMOVE_LOADING){
+        let count = state.loadingCount - 1;
+        return Object.assign({}, state, {
+            loadingCount: count,
+            loading: count !== 0
         })
     }
     return state;

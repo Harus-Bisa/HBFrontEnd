@@ -112,14 +112,14 @@ class Services{
         })
     }
 
-    async addCourse(courseName, startTerm, endTerm){
+    async addCourse(courseName, startTerm, endTerm, role){
         const headers = this.createHeaders();
         const data = {
-            course_name: courseName,
-            start_term: startTerm,
-            end_term: endTerm
+            courseName: courseName,
+            startTerm: startTerm,
+            endTerm: endTerm
         }
-        return await axios.post(this.domain + "/courses", data, {headers: headers})
+        return await axios.post(this.domain + "/"+role+ "/courses", data, {headers: headers})
         .then(response =>{
             return response.data.data.courses
         })
@@ -164,14 +164,29 @@ class Services{
         })
     }
 
-    // LECTURES
-    async getLectures(courseId){
+    async getCourse(courseId, role){
         const headers = this.createHeaders();
-        return await axios.get(this.domain + "/courses/"+courseId+"/lectures",{
+        return await axios.get(this.domain + "/" + role + "/courses/" + courseId,{headers:headers})
+        .then(async response =>{
+            var course= response.data
+            return await this.getLectures(courseId, role)
+            .then(lectures =>{
+                course.lectures = lectures;
+                return course
+            })
+        })
+        .catch(error=>{
+            throw error
+        })
+    }
+    // LECTURES
+    async getLectures(courseId, role){
+        const headers = this.createHeaders();
+        return await axios.get(this.domain + "/"+role+"/courses/"+courseId+"/lectures",{
             headers:headers
         })
         .then(response =>{
-            return response.data.data;
+            return response.data;
         })
         .catch(error =>{
             console.log(error.message)

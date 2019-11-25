@@ -35,7 +35,7 @@ function InsideNavbar(props){
         var courses = []
         for (let i=0; i<props.courses.length; i++){
             courses.push(
-                <DropdownItem key={i}><NavLink href={"/"+props.role+"/dashboard/"+props.courses[i]._id}>{props.courses[i].course_name}</NavLink></DropdownItem>
+                <DropdownItem key={i}><NavLink href={"/"+props.role+"/dashboard/"+props.courses[i].courseId}>{props.courses[i].courseName}</NavLink></DropdownItem>
             )
         }
         return courses;
