@@ -14,7 +14,8 @@ function mapStateToProps(state, currentProps){
     for (var i=0; i<courses.length; i++){
         if (courses[i].courseId === courseId){
             return {
-                course: courses[i]
+                course: courses[i],
+                role: state.role
             }
         }
     }
@@ -22,7 +23,7 @@ function mapStateToProps(state, currentProps){
 }
 function ProfCourseCard(props){
     const deleteCourse = () =>{
-        props.deleteCourse(props.course.courseId)   
+        props.deleteCourse(props.course.courseId,props.role)   
     }
     return(
         <div className="col-md-12">

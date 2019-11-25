@@ -35,9 +35,9 @@ export function changeSelectedLecture(payload){
     return{type: CHANGE_SELECTED_LECTURE, payload:payload}
 }
 
-export function addCourse(name, startDate, endDate){
+export function addCourse(name, startDate, endDate, role){
     return async function(dispatch){
-        return await services.addCourse(name, startDate, endDate)
+        return await services.addCourse(name, startDate, endDate, role)
         .then(async response => {
             await dispatch({type: ADD_COURSE, payload: response})
             dispatch(removeError())
@@ -48,9 +48,9 @@ export function addCourse(name, startDate, endDate){
     }
 }
 
-export function deleteCourse(courseId){
+export function deleteCourse(courseId,role){
     return async function(dispatch){
-        return await services.deleteCourse(courseId)
+        return await services.deleteCourse(courseId,role)
         .then(async response =>{
             await dispatch({type:DELETE_COURSE, payload: response})
             dispatch(removeError())
@@ -61,9 +61,9 @@ export function deleteCourse(courseId){
     }
 }
 
-export function editCourse(courseId, name, startDate, endDate){
+export function editCourse(courseId, name, startDate, endDate, role){
     return async function(dispatch){
-        return await services.editCourse(courseId, name, startDate, endDate)
+        return await services.editCourse(courseId, name, startDate, endDate, role)
         .then(async response => {
             await dispatch({type:EDIT_COURSE, payload: response})
             dispatch(removeError())

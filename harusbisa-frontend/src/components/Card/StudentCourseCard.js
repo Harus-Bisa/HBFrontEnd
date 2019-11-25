@@ -24,7 +24,7 @@ function StudentCourseCard(props){
                     action={
                         <MenuOptions/>
                     }
-                    title={<h5><a href={"/student/dashboard/"+props.course.courseId}>{props.course.courseNae}</a></h5>}
+                    title={<h5><a href={"/student/dashboard/"+props.course.courseId}>{props.course.courseName}</a></h5>}
                 />
                 <CardContent className="d-none d-md-block" style={{padding:'0px 16px 16px'}}>
                     <p>{props.course.startTerm} - {props.course.endTerm}</p>

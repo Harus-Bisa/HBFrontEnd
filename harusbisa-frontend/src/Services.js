@@ -56,7 +56,7 @@ class Services{
         return !!token && !this.isTokenExpired(token)
     }
     
-    login(email, password){
+    async login(email, password){
         return axios.post(`${this.domain}/login`,{
             email:email,
             password:password
@@ -121,46 +121,46 @@ class Services{
         }
         return await axios.post(this.domain + "/"+role+ "/courses", data, {headers: headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error => {
             console.log(error.message)
         })
     }
-    async studentAddCourse(join_code){
+    async studentAddCourse(joinCode){
         const headers = this.createHeaders();
-        return await axios.post(this.domain + "/courses", {join_code:join_code}, {headers: headers})
+        return await axios.post(this.domain + "/student/courses", {joinCode:joinCode}, {headers: headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error =>{
             throw error
         })
     }
-    async deleteCourse(courseId){
+    async deleteCourse(courseId,role){
         const headers = this.createHeaders();
-        return await axios.delete(this.domain + "/courses/" + courseId, {headers:headers})
+        return await axios.delete(this.domain + "/"+role+"/courses/" + courseId, {headers:headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error =>{
-            console.log(error.message)
+            throw error
         })
     }
 
-    async editCourse(courseId, courseName, startTerm, endTerm){
+    async editCourse(courseId, courseName, startTerm, endTerm, role){
         const headers = this.createHeaders();
         const data = {
-            course_name: courseName,
-            start_term: startTerm,
-            end_term: endTerm
+            courseName: courseName,
+            startTerm: startTerm,
+            endTerm: endTerm
         }
-        return await axios.put(this.domain + "/courses/" + courseId, data, {headers: headers})
+        return await axios.put(this.domain + "/"+role+ "/courses/" + courseId, data, {headers: headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error =>{
-            console.log(error.message)
+            throw error
         })
     }
 

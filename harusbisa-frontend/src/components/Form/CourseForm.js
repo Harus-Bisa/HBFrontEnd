@@ -44,7 +44,7 @@ function CourseForm(props){
     const submit = (event) =>{
         event.preventDefault();
         if (type === EDIT){
-            props.editCourse(props.id, name, startDate, endDate);
+            props.editCourse(props.id, name, startDate, endDate, props.role);
             props.closePopup();
         }
         else{
