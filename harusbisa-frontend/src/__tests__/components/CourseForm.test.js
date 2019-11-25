@@ -124,7 +124,7 @@ describe("CourseForm component", () =>{
         expect(store.dispatch).not.toHaveBeenCalled()
         expect(mockPreventDefault).not.toHaveBeenCalled()
         
-        var labels = ["courseName", "startDate", "endDate"]
+        var labels = ["courseName", "startTermMonth", "startTermYear", "endTermMonth", "endTermYear"]
         labels.forEach(l =>{
             var input = component.find("#"+l).at(0)
             input.simulate("change", {target:{value:"Calcu"}})
