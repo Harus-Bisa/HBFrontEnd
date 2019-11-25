@@ -2,7 +2,7 @@ import React from "react";
 import SearchIcon from '@material-ui/icons/Search';
 
 function SearchBar(props){
-    var [search, setSearch] = React.useState();
+    var [search, setSearch] = React.useState("");
 
     const handleChange = (event) =>{
         setSearch(search = event.target.value)

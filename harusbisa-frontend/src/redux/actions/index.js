@@ -1,11 +1,14 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_IN, LOG_OUT, CHANGE_CONTENT_TYPE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_IN, LOG_OUT, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING } from "../constants/action-types";
 import services from "../../Services";
 
-export function getCourses(){
+export function getCourses(role){
     return async function(dispatch){
-        return await services.getCourses()
+        dispatch({type:SET_LOADING})
+        return await services.getCourses(role)
         .then(async response =>{
             await dispatch({type:COURSES_LOADED, payload:response})
+            dispatch({type:REMOVE_LOADING})
+            dispatch(removeError())
         })
         .catch(error =>{
             dispatch({type:ERROR, payload: error})
@@ -13,11 +16,13 @@ export function getCourses(){
     }
 }
 
-export function getLectures(courseId){
+export function getCourse(courseId,role){
     return async function(dispatch){
-        return await services.getLectures(courseId)
+        dispatch({type:SET_LOADING})
+        return await services.getCourse(courseId,role)
         .then(async response => {
             await dispatch({type:COURSE_LOADED, payload: response})
+            dispatch({type:REMOVE_LOADING})
             dispatch(removeError())
         })
         .catch(error =>{
@@ -30,9 +35,9 @@ export function changeSelectedLecture(payload){
     return{type: CHANGE_SELECTED_LECTURE, payload:payload}
 }
 
-export function addCourse(name, startDate, endDate){
+export function addCourse(name, startDate, endDate, role){
     return async function(dispatch){
-        return await services.addCourse(name, startDate, endDate)
+        return await services.addCourse(name, startDate, endDate, role)
         .then(async response => {
             await dispatch({type: ADD_COURSE, payload: response})
             dispatch(removeError())
@@ -43,9 +48,9 @@ export function addCourse(name, startDate, endDate){
     }
 }
 
-export function deleteCourse(courseId){
+export function deleteCourse(courseId,role){
     return async function(dispatch){
-        return await services.deleteCourse(courseId)
+        return await services.deleteCourse(courseId,role)
         .then(async response =>{
             await dispatch({type:DELETE_COURSE, payload: response})
             dispatch(removeError())
@@ -56,9 +61,9 @@ export function deleteCourse(courseId){
     }
 }
 
-export function editCourse(courseId, name, startDate, endDate){
+export function editCourse(courseId, name, startDate, endDate, role){
     return async function(dispatch){
-        return await services.editCourse(courseId, name, startDate, endDate)
+        return await services.editCourse(courseId, name, startDate, endDate, role)
         .then(async response => {
             await dispatch({type:EDIT_COURSE, payload: response})
             dispatch(removeError())
@@ -69,11 +74,13 @@ export function editCourse(courseId, name, startDate, endDate){
     }
 }
 
-export function getUser(){
+export function getUser(userId){
     return async function(dispatch){
-        return await services.getUser()
+        dispatch({type:SET_LOADING})
+        return await services.getUser(userId)
         .then(async response =>{
             await dispatch({type: USER_LOADED, payload: response})
+            dispatch({type:REMOVE_LOADING})
             dispatch(removeError())
         })
         .catch(error =>{

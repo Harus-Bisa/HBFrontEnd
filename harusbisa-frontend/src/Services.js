@@ -3,7 +3,7 @@ import decode from 'jwt-decode';
 
 class Services{
     constructor(){
-        this.domain = "http://localhost:8080/api"; // https://www/api.harusbisa.net/api
+        this.domain = "http://localhost:8000"; // https://www/api.harusbisa.net/api
     }
     //HEADERS
     createHeaders(){
@@ -22,12 +22,14 @@ class Services{
     }
 
     // AUTHENTICATION
-    setToken(idToken){
+    setVariables(idToken, userId, role){
         localStorage.setItem('id_token', idToken);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("role", role);
     }
 
     getToken(){
-        return localStorage.getItem('id_token');
+        return localStorage.getItem("id_token");
     }
 
     isTokenExpired(token){
@@ -50,18 +52,23 @@ class Services{
     }
     
     isLoggedIn(){
-        const token = this.getToken();
+        const token = this.getToken()
         return !!token && !this.isTokenExpired(token)
     }
-
+    
     async login(email, password){
         return axios.post(`${this.domain}/login`,{
             email:email,
             password:password
         })
         .then(response => {
-            this.setToken(response.data.token)
-            return this.getUser()
+            var userId = response.data.userId;
+            var role = response.data.role;
+            this.setVariables(response.data.token, userId, role)
+            return {
+                role: role,
+                userId: userId
+            }
         })
         .catch(error => {
             throw error
@@ -69,19 +76,20 @@ class Services{
     }
 
     //USERS
-    async getUser(){
+    async getUser(userId){
         const headers = this.createHeaders();
-        return await axios.get(this.domain + "/courses",{
+        return await axios.get(this.domain + "/users/"+userId,{
             headers: headers
         })
         .then(response => {
-            var data = response.data.data
+            var data = response.data
             return{
-                firstName: data.first_name,
-                lastName: data.last_name,
+                firstName: data.firstName,
+                lastName: data.lastName,
                 role: data.role,
                 school: data.school,
-                email: data.email
+                email: data.email,
+                userId: data.userId
             }
         })
         .catch(error =>{
@@ -90,79 +98,95 @@ class Services{
     }
 
     //COURSES
-    async getCourses(){
+    async getCourses(role){
         const headers = this.createHeaders();
-        return await axios.get(this.domain + "/courses",{
+        const url = this.domain + "/" + role + "/courses" 
+        return await axios.get(url,{
             headers: headers
         })
         .then(response => {
-            return response.data.data.courses;
+            return response.data;
         })
         .catch(error =>{
             throw error;
         })
     }
 
-    async addCourse(courseName, startTerm, endTerm){
+    async addCourse(courseName, startTerm, endTerm, role){
         const headers = this.createHeaders();
         const data = {
-            course_name: courseName,
-            start_term: startTerm,
-            end_term: endTerm
+            courseName: courseName,
+            startTerm: startTerm,
+            endTerm: endTerm
         }
-        return await axios.post(this.domain + "/courses", data, {headers: headers})
+        return await axios.post(this.domain + "/"+role+ "/courses", data, {headers: headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error => {
             console.log(error.message)
         })
     }
-    async studentAddCourse(join_code){
+    async studentAddCourse(joinCode){
         const headers = this.createHeaders();
-        return await axios.post(this.domain + "/courses", {join_code:join_code}, {headers: headers})
+        return await axios.post(this.domain + "/student/courses", {joinCode:joinCode}, {headers: headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error =>{
             throw error
         })
     }
-    async deleteCourse(courseId){
+    async deleteCourse(courseId,role){
         const headers = this.createHeaders();
-        return await axios.delete(this.domain + "/courses/" + courseId, {headers:headers})
+        return await axios.delete(this.domain + "/"+role+"/courses/" + courseId, {headers:headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error =>{
-            console.log(error.message)
+            throw error
         })
     }
 
-    async editCourse(courseId, courseName, startTerm, endTerm){
+    async editCourse(courseId, courseName, startTerm, endTerm, role){
         const headers = this.createHeaders();
         const data = {
-            course_name: courseName,
-            start_term: startTerm,
-            end_term: endTerm
+            courseName: courseName,
+            startTerm: startTerm,
+            endTerm: endTerm
         }
-        return await axios.put(this.domain + "/courses/" + courseId, data, {headers: headers})
+        return await axios.put(this.domain + "/"+role+ "/courses/" + courseId, data, {headers: headers})
         .then(response =>{
-            return response.data.data.courses
+            return response.data
         })
         .catch(error =>{
-            console.log(error.message)
+            throw error
         })
     }
 
-    // LECTURES
-    async getLectures(courseId){
+    async getCourse(courseId, role){
         const headers = this.createHeaders();
-        return await axios.get(this.domain + "/courses/"+courseId+"/lectures",{
+        return await axios.get(this.domain + "/" + role + "/courses/" + courseId,{headers:headers})
+        .then(async response =>{
+            var course= response.data
+            return await this.getLectures(courseId, role)
+            .then(lectures =>{
+                course.lectures = lectures;
+                return course
+            })
+        })
+        .catch(error=>{
+            throw error
+        })
+    }
+    // LECTURES
+    async getLectures(courseId, role){
+        const headers = this.createHeaders();
+        return await axios.get(this.domain + "/"+role+"/courses/"+courseId+"/lectures",{
             headers:headers
         })
         .then(response =>{
-            return response.data.data;
+            return response.data;
         })
         .catch(error =>{
             console.log(error.message)

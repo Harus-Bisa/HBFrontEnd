@@ -1,6 +1,6 @@
 import React from "react";
 import { withAuth } from "../../withAuth";
-import {getLectures, changeContentType} from "../../../redux/actions";
+import {getCourse, changeContentType} from "../../../redux/actions";
 import {connect} from "react-redux";
 import Sidebar from "../../../components/Sidebar/Sidebar";
 import Lecture from "../../../components/Content/Dashboard/Lecture";
@@ -10,7 +10,8 @@ function mapStateToProps(state){
     return{
         loading: state.loading,
         course: state.course,
-        contentType: state.contentType
+        contentType: state.contentType,
+        role: state.role
     }
     
 }
@@ -22,7 +23,8 @@ const SETTINGS = "SETTINGS";
 class ProfDashboard extends React.Component{
     componentDidMount(){
         const courseId = this.props.match.params.id
-        this.props.getLectures(courseId);
+        var role = this.props.role ? this.props.role : localStorage.getItem("role")
+        this.props.getCourse(courseId, role);
         this.props.changeContentType(HOME);
     }
     render(){
@@ -51,4 +53,4 @@ class ProfDashboard extends React.Component{
 }
 
 
-export default  connect(mapStateToProps, {getLectures, changeContentType})(withAuth(ProfDashboard));
+export default  connect(mapStateToProps, {getCourse, changeContentType})(withAuth(ProfDashboard));

@@ -10,9 +10,10 @@ function mapStateToProps(state, ownProps){
     if (ownProps.id){
         let courses = state.courses
         for (let i=0; i<courses.length; i++){
-            if (courses[i]._id === ownProps.id){
+            if (courses[i].courseId === ownProps.id){
                 return{
-                    course: courses[i]
+                    course: courses[i],
+                    role: state.role
                 }
             }
         }
@@ -21,10 +22,11 @@ function mapStateToProps(state, ownProps){
     else{
         return {
             course:{
-                course_name: "",
-                start_term: "",
-                end_term: ""
-            }
+                courseName: "",
+                startTerm: "",
+                endTerm: ""
+            },
+            role: state.role
         }
     }
     
@@ -33,20 +35,20 @@ const EDIT = "EDIT";
 const ADD = "ADD";
 
 function CourseForm(props){
-    const [name, setName] = React.useState(props.course.course_name);
-    const [startDate, setStartDate] = React.useState(props.course.start_term);
-    const [endDate, setEndDate] = React.useState(props.course.end_term);
+    const [name, setName] = React.useState(props.course.courseName);
+    const [startDate, setStartDate] = React.useState(props.course.startTerm);
+    const [endDate, setEndDate] = React.useState(props.course.endTerm);
     const [addedNewCourse, setAddedNewCourse] = React.useState(false)
     const type = (props.id ? EDIT : ADD)
 
     const submit = (event) =>{
         event.preventDefault();
         if (type === EDIT){
-            props.editCourse(props.id, name, startDate, endDate);
+            props.editCourse(props.id, name, startDate, endDate, props.role);
             props.closePopup();
         }
         else{
-            props.addCourse(name, startDate, endDate);
+            props.addCourse(name, startDate, endDate, props.role);
             setAddedNewCourse(true)
         }
     }

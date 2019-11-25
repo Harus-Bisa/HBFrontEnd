@@ -33,7 +33,7 @@ function Sidebar(props){
             )
         }
         if(buttons.length === 0){
-            buttons.push(<p>Buatlah sesi pertama anda!</p>)
+            buttons.push(<p key={0}>Buatlah sesi pertama anda!</p>)
         }
         return buttons;
     }

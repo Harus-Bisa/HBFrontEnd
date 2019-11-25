@@ -45,13 +45,18 @@ describe("CourseContent component", () =>{
     it("renders faculty Card", () =>{
         initialState = {
             courses:[{
-                "_id": "5db492c349a67b33b8d0a2a2",
-                "course_name": "Calculus I",
-                "course_description": "The basic of calculus (derivatives).",
-                "start_term": "August 2019",
-                "end_term": "December 2019",
-                "number_of_lectures": 5,
-                "instructor": "John Doe"
+                "courseId": "5db492c349a67b33b8d0a2a2",
+                "courseName": "Calculus I",
+                "courseDescription": "The basic of calculus (derivatives).",
+                "startTerm": "August 2019",
+                "endTerm": "December 2019",
+                "numberOfLectures": 5,
+                "numberOfStudents": 21,
+                "instructors": [
+                    "John Doe",
+                    "Bryan Smith"
+                ],
+                "joinCode": "123654"
               }],
               role:"faculty"
         }
@@ -65,13 +70,18 @@ describe("CourseContent component", () =>{
     it("renders student Card", () =>{
         initialState = {
             courses:[{
-                "_id": "5db492c349a67b33b8d0a2a2",
-                "course_name": "Calculus I",
-                "course_description": "The basic of calculus (derivatives).",
-                "start_term": "August 2019",
-                "end_term": "December 2019",
-                "number_of_lectures": 5,
-                "instructor": "John Doe"
+                "courseId": "5db492c349a67b33b8d0a2a2",
+                "courseName": "Calculus I",
+                "courseDescription": "The basic of calculus (derivatives).",
+                "startTerm": "August 2019",
+                "endTerm": "December 2019",
+                "numberOfLectures": 5,
+                "numberOfStudents": 21,
+                "instructors": [
+                  "John Doe",
+                  "Bryan Smith"
+                ],
+                "joinCode": "123654"
               }],
               role:"student"
         }
@@ -85,13 +95,18 @@ describe("CourseContent component", () =>{
     it("renders nothing after search", () =>{
         initialState = {
             courses:[{
-                "_id": "5db492c349a67b33b8d0a2a2",
-                "course_name": "Calculus I",
-                "course_description": "The basic of calculus (derivatives).",
-                "start_term": "August 2019",
-                "end_term": "December 2019",
-                "number_of_lectures": 5,
-                "instructor": "John Doe"
+                "courseId": "5db492c349a67b33b8d0a2a2",
+                "courseName": "Calculus I",
+                "courseDescription": "The basic of calculus (derivatives).",
+                "startTerm": "August 2019",
+                "endTerm": "December 2019",
+                "numberOfLectures": 5,
+                "numberOfStudents": 21,
+                "instructors": [
+                    "John Doe",
+                    "Bryan Smith"
+                ],
+                "joinCode": "123654"
               }],
               role:"student"
         }
@@ -106,22 +121,32 @@ describe("CourseContent component", () =>{
     it("renders specific card after search", () =>{
         initialState = {
             courses:[{
-                "_id": "5db492c349a67b33b8d0a2a2",
-                "course_name": "Calculus I",
-                "course_description": "The basic of calculus (derivatives).",
-                "start_term": "August 2019",
-                "end_term": "December 2019",
-                "number_of_lectures": 5,
-                "instructor": "John Doe"
+                "courseId": "5db492c349a67b33b8d0a2a2",
+                "courseName": "Calculus I",
+                "courseDescription": "The basic of calculus (derivatives).",
+                "startTerm": "August 2019",
+                "endTerm": "December 2019",
+                "numberOfLectures": 5,
+                "numberOfStudents": 21,
+                "instructors": [
+                    "John Doe",
+                    "Bryan Smith"
+                ],
+                "joinCode": "123654"
               },
               {
-                "_id": "5db492c349a67b33b8d0a2a2",
-                "course_name": "Chemistry I",
-                "course_description": "The basic of Chemistry (derivatives).",
-                "start_term": "August 2019",
-                "end_term": "December 2019",
-                "number_of_lectures": 5,
-                "instructor": "John Doe"
+                "courseId": "5db492c349a67b33b8d0a2a2",
+                "courseName": "Chemistry I",
+                "courseDescription": "The basic of calculus (derivatives).",
+                "startTerm": "August 2019",
+                "endTerm": "December 2019",
+                "numberOfLectures": 5,
+                "numberOfStudents": 21,
+                "instructors": [
+                    "John Doe",
+                    "Bryan Smith"
+                ],
+                "joinCode": "123654"
               }],
               role:"student"
         }
@@ -142,13 +167,18 @@ describe("CourseContent component", () =>{
     it("displays error message", () =>{
         initialState = {
             courses:[{
-                "_id": "5db492c349a67b33b8d0a2a2",
-                "course_name": "Calculus I",
-                "course_description": "The basic of calculus (derivatives).",
-                "start_term": "August 2019",
-                "end_term": "December 2019",
-                "number_of_lectures": 5,
-                "instructor": "John Doe"
+                "courseId": "5db492c349a67b33b8d0a2a2",
+                "courseName": "Calculus I",
+                "courseDescription": "The basic of calculus (derivatives).",
+                "startTerm": "August 2019",
+                "endTerm": "December 2019",
+                "numberOfLectures": 5,
+                "numberOfStudents": 21,
+                "instructors": [
+                  "John Doe",
+                  "Bryan Smith"
+                ],
+                "joinCode": "123654"
               }],
               role:"student",
               error:{message:'error'}
