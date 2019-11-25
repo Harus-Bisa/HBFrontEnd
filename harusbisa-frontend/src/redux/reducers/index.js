@@ -44,7 +44,8 @@ function rootReducer(state ={loading: true, loggedIn: services.isLoggedIn()}, ac
             lastName: action.payload.lastName,
             role: action.payload.role,
             email: action.payload.email,
-            school: action.payload.school
+            school: action.payload.school,
+            userId: action.payload.userId
         })
     }
     if (action.type === STUDENT_ADD_COURSE){
@@ -71,7 +72,8 @@ function rootReducer(state ={loading: true, loggedIn: services.isLoggedIn()}, ac
     if(action.type === LOG_IN){
         return Object.assign({}, state, {
             loggedIn: true,
-            role: action.payload.role
+            role: action.payload.role,
+            userId: action.payload.userId
         })
     }
     if(action.type === CHANGE_CONTENT_TYPE){

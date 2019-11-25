@@ -10,14 +10,14 @@ import InsideNavbar from './components/Navbar/InsideNavbar';
 
 class App extends React.Component{
   async componentDidUpdate(){
-    if (this.props.loggedIn){
-      await Promise.all([this.props.getUser(), this.props.getCourses()]);
+    if (this.props.loggedIn && this.props.role && this.props.userId){
+      await Promise.all([this.props.getUser(this.props.userId), this.props.getCourses(this.props.role)]);
     }
   }
 
   async componentDidMount(){
-    if (this.props.loggedIn){
-      await Promise.all([this.props.getUser(), this.props.getCourses()]);
+    if (this.props.loggedIn && this.props.role && this.props.userId){
+      await Promise.all([this.props.getUser(this.props.userId), this.props.getCourses(this.props.role)]);
     }
   }
   render(){
@@ -32,7 +32,9 @@ class App extends React.Component{
 
 function mapStateToProps(state){
   return{
-    loggedIn: state.loggedIn
+    loggedIn: state.loggedIn,
+    role:state.role ? state.role : localStorage.getItem("role"),
+    userId: state.userId ? state.userId : localStorage.getItem("userId")
   }
 }
 export default connect(mapStateToProps, {getCourses, getUser})(App)

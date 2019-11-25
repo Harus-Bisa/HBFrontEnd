@@ -1,9 +1,9 @@
 import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_IN, LOG_OUT, CHANGE_CONTENT_TYPE } from "../constants/action-types";
 import services from "../../Services";
 
-export function getCourses(){
+export function getCourses(role){
     return async function(dispatch){
-        return await services.getCourses()
+        return await services.getCourses(role)
         .then(async response =>{
             await dispatch({type:COURSES_LOADED, payload:response})
         })
@@ -69,9 +69,9 @@ export function editCourse(courseId, name, startDate, endDate){
     }
 }
 
-export function getUser(){
+export function getUser(userId){
     return async function(dispatch){
-        return await services.getUser()
+        return await services.getUser(userId)
         .then(async response =>{
             await dispatch({type: USER_LOADED, payload: response})
             dispatch(removeError())
