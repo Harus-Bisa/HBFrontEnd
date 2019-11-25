@@ -15,6 +15,9 @@ describe("Course Lecture component", () =>{
                     "question": "1 + 1 = ?",
                     "answers": ["4","2","0"]
                 }]
+            },
+            course:{
+                courseName:'abc'
             }
         }
         let store = mockStore(initialState);
