@@ -36,26 +36,49 @@ const ADD = "ADD";
 
 function CourseForm(props){
     const [name, setName] = React.useState(props.course.courseName);
-    const [startDate, setStartDate] = React.useState(props.course.startTerm);
-    const [endDate, setEndDate] = React.useState(props.course.endTerm);
+    const [startTermMonth, setStartTermMonth] = React.useState(props.course.startTerm.split(" ")[0]);
+    const [startTermYear, setStartTermYear] = React.useState(props.course.startTerm.split(" ")[1])
+    const [endTermMonth, setEndTermMonth] = React.useState(props.course.endTerm.split(" ")[0]);
+    const [endTermYear, setEndTermYear] = React.useState(props.course.endTerm.split(" ")[1])
     const [addedNewCourse, setAddedNewCourse] = React.useState(false)
     const type = (props.id ? EDIT : ADD)
 
     const submit = (event) =>{
+        let startTerm = startTermMonth + " " + startTermYear
+        let endTerm = endTermMonth + " " + endTermYear
+
         event.preventDefault();
         if (type === EDIT){
-            props.editCourse(props.id, name, startDate, endDate, props.role);
+            props.editCourse(props.id, name, startTerm, endTerm, props.role);
             props.closePopup();
         }
         else{
-            props.addCourse(name, startDate, endDate, props.role);
+            props.addCourse(name, startTerm, endTerm, props.role);
             setAddedNewCourse(true)
         }
     }
     if(addedNewCourse){
         return(<JoinCourseAnnoucement closePopup={props.closePopup}/>)
     }
-    var verified = name && startDate && endDate;
+    var verified = name && startTermMonth && startTermYear && endTermYear && endTermMonth;
+    const month = ["","Jan", "Feb","Mar", "Apr", "Mei", "Jun", "Jul","Agu", "Sep", "Okt", "Nov", "Des"]
+    const currentYear = (new Date()).getFullYear()
+    const makeYearArray = () =>{
+        var years = [""]
+        let y = currentYear;
+        while (y < currentYear + 5){
+            years.push(y)
+            y +=1
+        }
+        return years
+    }
+    const makeOptions = (array) =>{
+        var options = []
+        for (let i=0; i<array.length; i++){
+            options.push(<option key={i}>{array[i]}</option>)
+        }
+        return options
+    }
     return(
         <div className="container-fluid">
             <div className="row" style={{borderBottom:'2px solid '+HB_YELLOW}}>
@@ -66,37 +89,31 @@ function CourseForm(props){
             <div className="content">
                 <Form onSubmit={submit} style={{minWidth:'50vw'}}>
                     <FormGroup row>
-                        <Label sm={4}>Nama Kelas</Label>
-                        <Col sm={8}>
+                        <Label sm={3}>Nama Kelas</Label>
+                        <Col sm={9}>
                             <Input type="text" id="courseName" value={name} placeholder={"Contoh: Biologi Molekuler Kelas A"} onChange={(event) => setName(event.target.value)}/>
                             <FormText>Nama ini adalah nama yang akan dilihat siswa Anda.</FormText>
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label sm={4}>Periode Kelas</Label>
-                        <Col sm={8}>
-                            <div className="row">
-                                <div className="col-5">
-                                    <Input type="select" name="select" id="startDate" value={startDate} onChange={(event) => setStartDate(event.target.value)}>
-                                        <option>Juli 2019</option>
-                                        <option>Juli 2020</option>
-                                        <option>Juli 2021</option>
-                                        <option>Juli 2022</option>
-                                        <option>Juli 2023</option>
-                                    </Input>
-                                </div>
-                                <div className="col-2" style={{display:'flex'}}>
+                        <Label sm={3}>Periode Kelas</Label>
+                        <Col sm={9}>
+                            <div style={{display:'flex', flexDirection:'row'}}>
+                                <Input type="select" name="select" id="startTermMonth" value={startTermMonth} onChange={(event) => setStartTermMonth(event.target.value)}>
+                                    {makeOptions(month)}
+                                </Input>
+                                <Input type="select" name="select" id="startTermYear" value={startTermYear} onChange={(event) => setStartTermYear(event.target.value)}>
+                                    {makeOptions(makeYearArray())}
+                                </Input>
+                                <div className="col-2" style={{display:'flex', padding:0}}>
                                     <p style={{margin:'auto'}}>-</p>
                                 </div>
-                                <div className="col-5">
-                                    <Input type="select" name="select" id="endDate" value={endDate} onChange={(event) => setEndDate(event.target.value)}>
-                                        <option>Juli 2019</option>
-                                        <option>Juli 2020</option>
-                                        <option>Juli 2021</option>
-                                        <option>Juli 2022</option>
-                                        <option>Juli 2023</option>
-                                    </Input>
-                                </div>
+                                <Input type="select" name="select" id="endTermMonth" value={endTermMonth} onChange={(event) => setEndTermMonth(event.target.value)}>
+                                    {makeOptions(month)}
+                                </Input>
+                                <Input type="select" name="select" id="endTermYear" value={endTermYear} onChange={(event) => setEndTermYear(event.target.value)}>
+                                    {makeOptions(makeYearArray())}
+                                </Input>
                             </div>
                         </Col>
                     </FormGroup>

@@ -60,7 +60,7 @@ describe("CourseForm component", () =>{
         store = mockStore(initialState);
         component = mount(<Provider store={store}><CourseForm/></Provider>)
         
-        var labels = ["courseName", "startDate", "endDate"]
+        var labels = ["courseName", "startTermMonth", "startTermYear", "endTermMonth", "endTermYear"]
         labels.forEach(l =>{
             var input = component.find("#"+l).at(0)
             expect(setState).not.toHaveBeenCalled()
