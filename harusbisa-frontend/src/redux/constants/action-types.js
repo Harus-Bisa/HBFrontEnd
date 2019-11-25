@@ -16,3 +16,10 @@ export const REMOVE_ERROR = "REMOVE_ERROR";
 /* USER */
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
+
+/*DASHBOARD CONTENT_TYPE */
+export const CHANGE_CONTENT_TYPE = "CHANGE_CONTENT_TYPE"
+
+/*LOADING */
+export const SET_LOADING = "SET_LOADING"
+export const REMOVE_LOADING = "REMOVE_LOADING"

@@ -14,3 +14,30 @@
     padding-right: 16px;
     padding-left: 16px;
 }
+
+.prof-card{
+    background-color: transparent;
+    border-top: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f4f4f4;
+    padding:1.5rem 1rem;
+}
+
+.prof-card h3{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.prof-card .more-info{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.prof-card .icon{
+    color: #c2c2c2;
+    position: absolute;
+    bottom: 55%;
+}

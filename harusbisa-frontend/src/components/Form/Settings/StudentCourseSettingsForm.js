@@ -9,7 +9,7 @@ function StudentCourseSettingsForm(props){
     const makeCards = ()=>{
         var cards = []
         for (let i=0; i<props.courses.length; i++){
-            cards.push(<CourseSettingsCard key={i} id={props.courses[i]._id}/>)
+            cards.push(<CourseSettingsCard key={i} id={props.courses[i].courseId}/>)
         }   
         return cards;     
     }

@@ -6,11 +6,14 @@ import SearchBar from "../../SearchBar/SearchBar";
 import Popup from "../../Popup/Popup";
 import StudentCourseForm from "../../Form/StudentCourseForm";
 import ErrorMessage from "../../Error/ErrorMessage";
+import CourseForm from "../../Form/CourseForm";
+import ProfCourseCard from "../../Card/ProfCourseCard";
 
 function mapStateToProps(state){
     return{
         courses: state.courses,
-        error: state.error
+        error: state.error,
+        role: state.role
     }
 }
 
@@ -24,7 +27,7 @@ function Content(props){
         if (searchKey !== ""){
             for (let i=0; i<courses.length; i++){
                 var course = courses[i]
-                if (course.course_name.toLowerCase().includes(searchKey.toLowerCase())){
+                if (course.courseName.toLowerCase().includes(searchKey.toLowerCase())){
                     display.push(course)
                 }
             }
@@ -39,8 +42,13 @@ function Content(props){
         var courses = displayedCourses.length === 0 ? props.courses : displayedCourses
         var components = []
         for (let i=0; i<courses.length; i++){
-            var id = courses[i]._id
-            components.push(<StudentCourseCard key={i} id={id}/>)
+            var id = courses[i].courseId
+            if (props.role === "student"){
+                components.push(<StudentCourseCard key={i} id={id}/>)
+            }
+            else if(props.role === "faculty"){
+                components.push(<ProfCourseCard key={i} id={id}/>)
+            }
         }
         if (courses.length === 0){
             return(<div className="col content" style={{display:'flex'}}><p style={{margin:'auto'}}>Make your first course!</p></div>)
@@ -65,8 +73,8 @@ function Content(props){
                                 <div style={{margin:'auto 0'}}>
                                     <Popup 
                                         purpose={"+ Tambah Kelas"} 
-                                        trigger={{component:Button, className:"student-button"}} 
-                                        content={StudentCourseForm}
+                                        trigger={{component:Button, className:(props.role === "student" ? "student-button": "prof-button")}} 
+                                        content={props.role === "student" ? StudentCourseForm : CourseForm}
                                     />
                                 </div>
                             </div>
