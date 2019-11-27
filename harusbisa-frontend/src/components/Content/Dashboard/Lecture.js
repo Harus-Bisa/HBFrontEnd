@@ -12,6 +12,7 @@ import { convertDate } from "../../Sidebar/Sidebar";
 import LectureForm from "../../Form/LectureForm";
 import ErrorMessage from "../../Error/ErrorMessage";
 import { changeContentType } from "../../../redux/actions";
+import QuizForm from "../../Form/QuizForm";
 
 function mapStateToProps(state){
     return {
@@ -61,6 +62,7 @@ function Lecture(props){
                                     <LectureButtonContent icon={AddIcon} content={"Tambah Pertanyaan"}/>
                                 }
                                 trigger={{component:Button, className:"lecture-button"}}
+                                content={QuizForm}
                             />
                         </div>
                         <div className="col-3">

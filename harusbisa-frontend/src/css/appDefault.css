@@ -32,6 +32,11 @@ p, label{
     margin: 0;
 }
 
+input:focus{
+    outline-color: var(--hb-yellow);
+    outline-width: 1px;
+}
+
 /*BUTTON*/
 button{
     font-family: "Lato" !important;
