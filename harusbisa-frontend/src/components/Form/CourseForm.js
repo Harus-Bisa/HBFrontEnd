@@ -6,7 +6,7 @@ import { HB_YELLOW } from "../../css/constants/color";
 import { Button } from "@material-ui/core";
 import JoinCourseAnnoucement from "./JoinCourseAnnoucement";
 import Picker from 'react-month-picker';
-import "../../../node_modules/react-month-picker/css/month-picker.css";
+import "../../css/month-picker.css";
 function mapStateToProps(state, ownProps){
     if (ownProps.id){
         let courses = state.courses
