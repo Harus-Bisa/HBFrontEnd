@@ -11,9 +11,8 @@ function LectureForm(props){
 
     const submit = (event) =>{
         event.preventDefault();
-        console.log(date)
-        console.log(participationPercentage)
-        // props.addLecture(date, lectureDescription, participationPercentage, props.courseId, props.role)
+        let dateMS = (new Date(date)).getTime()
+        props.addLecture(dateMS, lectureDescription, participationPercentage, props.courseId, props.role)
     }
     return(
         <div className="container-fluid student-course-form">

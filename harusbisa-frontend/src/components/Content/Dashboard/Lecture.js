@@ -8,11 +8,17 @@ import AddIcon from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import StatisticIcon from '@material-ui/icons/Equalizer';
 import LectureButtonContent from "../../LectureButton/LectureButtonContent";
+import { convertDate } from "../../Sidebar/Sidebar";
+import LectureForm from "../../Form/LectureForm";
+import ErrorMessage from "../../Error/ErrorMessage";
+import { changeContentType } from "../../../redux/actions";
 
 function mapStateToProps(state){
     return {
         lecture: state.selectedLecture,
-        courseName: state.course.courseName
+        courseName: state.course.courseName,
+        error: state.error,
+        cLoading: state.cLoading
     }
 }
 function Lecture(props){
@@ -23,48 +29,63 @@ function Lecture(props){
         }
         return quizzes;
     }
-    return(
-        <div className="content">
-            <header>
-                <p>{props.courseName}</p>
-                <h1>Sesi {props.lecture.date}</h1>
-            </header>
-            <div style={{margin:"1rem 0"}}>
-                <div className="row">
-                    <div className="col-3">
-                        <Button fullWidth className="lecture-button">
-                            <LectureButtonContent icon={PlayIcon} content={"Buka kelas"}/>
-                        </Button>
-                    </div>
-                    <div className="col-3">
-                        <Popup
-                            purpose={
-                                <LectureButtonContent icon={AddIcon} content={"Tambah Pertanyaan"}/>
-                            }
-                            trigger={{component:Button, className:"lecture-button"}}
-                        />
-                    </div>
-                    <div className="col-3">
-                        <Popup
-                            purpose={
-                                <LectureButtonContent icon={StatisticIcon} content={"Statistik Sesi " + props.lecture.date}/>
-                            }
-                            trigger={{component:Button, className:"lecture-button"}}
-                        />
-                    </div>
-                    <div className="col-3">
-                        <Popup
-                            purpose= {<LectureButtonContent icon={MoreVertIcon} content={"Setting Sesi "+props.lecture.date}/>}
-                            trigger={{component:Button, className:"lecture-button"}}
-                        />
+    const goToHome = () =>{
+        props.changeContentType("HOME")
+    }
+    
+    if (props.cLoading){
+        return <p>Loading</p>
+
+    }
+    else if(props.error){
+        return <ErrorMessage/>
+    }
+    else{
+        const date = convertDate(props.lecture.date)
+        return(
+            <div className="content">
+                <header>
+                    <a onClick={goToHome}>{props.courseName}</a>
+                    <h1>Sesi {date}</h1>
+                </header>
+                <div style={{margin:"1rem 0"}}>
+                    <div className="row">
+                        <div className="col-3">
+                            <Button fullWidth className="lecture-button">
+                                <LectureButtonContent icon={PlayIcon} content={"Buka kelas"}/>
+                            </Button>
+                        </div>
+                        <div className="col-3">
+                            <Popup
+                                purpose={
+                                    <LectureButtonContent icon={AddIcon} content={"Tambah Pertanyaan"}/>
+                                }
+                                trigger={{component:Button, className:"lecture-button"}}
+                            />
+                        </div>
+                        <div className="col-3">
+                            <Popup
+                                purpose={
+                                    <LectureButtonContent icon={StatisticIcon} content={"Statistik Sesi " + date}/>
+                                }
+                                trigger={{component:Button, className:"lecture-button"}}
+                            />
+                        </div>
+                        <div className="col-3">
+                            <Popup
+                                purpose= {<LectureButtonContent icon={MoreVertIcon} content={"Setting Sesi "+date}/>}
+                                trigger={{component:Button, className:"lecture-button"}}
+                                content= {LectureForm}
+                            />
+                        </div>
                     </div>
                 </div>
+                <div>
+                    {makeQuizzes()}
+                </div>
             </div>
-            <div>
-                {makeQuizzes()}
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
-export default connect(mapStateToProps)(Lecture);
+export default connect(mapStateToProps,{changeContentType})(Lecture);

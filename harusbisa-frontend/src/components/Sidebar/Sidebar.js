@@ -8,20 +8,29 @@ import LectureForm from "../Form/LectureForm";
 
 function mapStateToProps(state){
     return{
-        lectures: state.course.lectures
+        lectures: state.course.lectures,
+        role: state.role
     }
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        changeSelectedLecture: lecture => dispatch(changeSelectedLecture(lecture)),
+        changeSelectedLecture: (lecture, lectureId, role) => dispatch(changeSelectedLecture(lecture, lectureId, role)),
         changeContentType: contentType => dispatch(changeContentType(contentType))
     };
+}
+export function convertDate(time){
+    let date = new Date(time)
+    var day = date.getDate()
+    var month = date.getMonth()+ 1
+    var year = date.getFullYear()
+
+    return day + "/" + month + "/" + year
 }
 function Sidebar(props){
     var [open, setOpen] = React.useState(false)
     const openLecture = (lecture) =>{
-        props.changeSelectedLecture(lecture);
+        props.changeSelectedLecture(lecture, lecture.lectureId, props.role);
         props.changeContentType("LECTURE")
     }
     const makeButtons = () =>{
@@ -29,7 +38,7 @@ function Sidebar(props){
         for (var i=0; i<props.lectures.length; i++){
             var lecture = props.lectures[i]
             buttons.push(
-                <Button fullWidth key={i} props={lecture} onClick={openLecture.bind(this,lecture)}>Sesi {lecture.date}</Button>
+                <Button fullWidth key={i} props={lecture} onClick={openLecture.bind(this,lecture)}>Sesi {convertDate(lecture.date)}</Button>
             )
         }
         if(buttons.length === 0){
