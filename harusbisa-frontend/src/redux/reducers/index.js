@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -15,7 +15,7 @@ function findIndex(array, target, type){
     return -1;
     
 }
-function rootReducer(state ={loadingCount:0, loading: true, loggedIn: services.isLoggedIn()}, action){
+function rootReducer(state ={loadingCount:0, loading: true, cLoadingCount:0, cLoading:false,loggedIn: services.isLoggedIn()}, action){
     if (action.type === COURSES_LOADED){
         return Object.assign({}, state, {
             courses: action.payload,
@@ -115,6 +115,19 @@ function rootReducer(state ={loadingCount:0, loading: true, loggedIn: services.i
         return Object.assign({}, state, {
             loadingCount: count,
             loading: count !== 0
+        })
+    }
+    if(action.type === SET_COMPONENT_LOADING){
+        return Object.assign({}, state, {
+            cLoadingCount: state.cLoadingCount + 1,
+            cLoading: true
+        })
+    }
+    if(action.type === REMOVE_COMPONENT_LOADING){
+        let count = state.cLoadingCount - 1;
+        return Object.assign({}, state, {
+            cLoadingCount: count,
+            cLoading: count !== 0
         })
     }
     if(action.type === ADD_LECTURE){
