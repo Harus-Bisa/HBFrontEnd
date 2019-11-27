@@ -189,7 +189,7 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            console.log(error.message)
+            throw error
         })
     }
 
@@ -208,6 +208,20 @@ class Services{
         })
         .catch(error => {
             console.log(error.message)
+        })
+    }
+
+    async getQuizzes(lectureId, role){
+        const headers = this.createHeaders();
+        const url = this.domain + "/" + role + "/lectures/" + lectureId + "/quizzes" 
+        return await axios.get(url,{
+            headers:headers
+        })
+        .then(response =>{
+            return response.data;
+        })
+        .catch(error =>{
+            throw error
         })
     }
 }

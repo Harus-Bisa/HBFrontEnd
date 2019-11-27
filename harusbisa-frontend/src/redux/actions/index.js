@@ -31,8 +31,22 @@ export function getCourse(courseId,role){
     }
 }
 
-export function changeSelectedLecture(payload){
-    return{type: CHANGE_SELECTED_LECTURE, payload:payload}
+
+export function changeSelectedLecture(selectedLecture, lectureId, role){
+    return async function(dispatch){
+        dispatch({type:SET_COMPONENT_LOADING})
+        return await services.getQuizzes(lectureId, role)
+        .then(async response =>{
+            selectedLecture.quizzes = response
+            await dispatch({type: CHANGE_SELECTED_LECTURE, payload: selectedLecture})
+            dispatch({type:REMOVE_COMPONENT_LOADING})
+            dispatch({type:REMOVE_ERROR})
+        })
+        .catch(error =>{
+            dispatch({type:ERROR, payload: error})
+            dispatch({type:REMOVE_LOADING})
+        })
+    }
 }
 
 export function addCourse(name, startDate, endDate, role){
