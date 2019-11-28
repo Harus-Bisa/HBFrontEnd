@@ -10,6 +10,12 @@ export const EDIT_COURSE = "EDIT_COURSE";
 export const CHANGE_SELECTED_LECTURE = "CHANGE_SELECTED_LECTURE";
 export const ADD_LECTURE = "ADD_LECTURE";
 
+/*QUIZ*/
+export const ADD_QUIZ = "ADD_QUIZ";
+export const SET_ANSWER = "SET_ANSWER"
+export const REMOVE_ANSWERS = "REMOVE_ANSWERS"
+export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER"
+
 /* ERROR */
 export const ERROR = "ERROR";
 export const REMOVE_ERROR = "REMOVE_ERROR";

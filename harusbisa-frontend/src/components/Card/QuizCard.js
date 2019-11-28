@@ -12,8 +12,8 @@ function mapStateToProps(state, ownProps){
 function QuizCard(props){
     const makeAnswers = () =>{
         var answers = []
-        for (let i=0; i<props.quiz.answers.length; i++){
-            answers.push(<div key={i}>{String.fromCharCode(i+65)}. {props.quiz.answers[i]}</div>)
+        for (let i=0; i<props.quiz.answerOptions.length; i++){
+            answers.push(<div key={i}>{String.fromCharCode(i+65)}. {props.quiz.answerOptions[i]}</div>)
         }
         return answers
     }

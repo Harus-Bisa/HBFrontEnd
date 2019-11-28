@@ -3,15 +3,17 @@ import { Form, FormGroup, Label, Input, Button as RButton, Col} from 'reactstrap
 import {connect} from "react-redux";
 import { Button } from "@material-ui/core";
 import AnswerForm from "./AnswerForm";
+import { addQuiz, removeAnwers } from "../../redux/actions";
 
 function QuizForm(props){
     var [question, setQuestion] = React.useState("")
     var [numOfAnswers, setNumOfAnswers] = React.useState(2)
     var [points, setPoints] = React.useState(1)
-    var [time, setTime] = React.useState(60)
+    var [duration, setDuration] = React.useState(60)
     
     const submit = (event) =>{
         event.preventDefault();
+        props.addQuiz(props.lectureId, question, props.answers,props.correctAnswer, duration, points)
     }
     const incrementNumOfAns = () =>{
         setNumOfAnswers(numOfAnswers + 1)
@@ -23,10 +25,15 @@ function QuizForm(props){
                 <AnswerForm option={i} key={i}/>
             )
         }
-
         return answers
     }
-    var verified = question && points
+
+    React.useEffect(() => {
+        return () => {
+            props.removeAnwers();
+        }
+      }, []);
+    var verified = question !=="" && points !=="" && duration!=="" && props.answers!==[] && props.correctAnswer!==null
     return(
         <div className="container">
             <div className="row">
@@ -67,8 +74,8 @@ function QuizForm(props){
                                     <Col sm={6}>
                                         <Input
                                             type="number"
-                                            value={time}
-                                            onChange={(event) => setTime(event.target.value)}
+                                            value={duration}
+                                            onChange={(event) => setDuration(event.target.value)}
                                             required
                                         />
                                     </Col>
@@ -92,4 +99,11 @@ function QuizForm(props){
     )
 }
 
-export default connect()(QuizForm);
+function mapStateToProps(state){
+    return{
+        lectureId: state.selectedLecture.lectureId,
+        answers: state.answers,
+        correctAnswer: state.correctAnswer
+    }
+}
+export default connect(mapStateToProps,{addQuiz, removeAnwers})(QuizForm);

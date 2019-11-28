@@ -46,7 +46,7 @@ function Lecture(props){
         return(
             <div className="content">
                 <header>
-                    <a onClick={goToHome}>{props.courseName}</a>
+                    <Button onClick={goToHome}>{props.courseName}</Button>
                     <h1>Sesi {date}</h1>
                 </header>
                 <div style={{margin:"1rem 0"}}>

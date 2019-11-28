@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -148,6 +148,55 @@ function rootReducer(state ={loadingCount:0, loading: true, cLoadingCount:0, cLo
             }
         })
 
+    }
+    if(action.type === ADD_QUIZ){
+        let newQuizzes = state.selectedLecture.quizzes.slice();
+        newQuizzes.splice(newQuizzes.length,0,action.payload);
+        
+        return Object.assign({}, state, {
+            selectedLecture:{
+                date:state.selectedLecture.date,
+                participationRewardPercentage:state.selectedLecture.participationRewardPercentage,
+                courseId:state.selectedLecture.courseId,
+                live:state.selectedLecture.live,
+                hasLived:state.selectedLecture.hasLived,
+                lectureId:state.selectedLecture.lectureId,
+                attendanceNumber:state.selectedLecture.attendanceNumber,
+                quizzes:newQuizzes
+            }
+        })
+    }
+    if(action.type === SET_ANSWER){
+        let index = action.payload.index
+        let answer = action.payload.answer
+        let newAnswers;
+        if (state.answers){
+            newAnswers = state.answers.slice();
+            if (index < newAnswers.length){
+                newAnswers.splice(index, 1, answer)
+            }
+            else{
+                newAnswers.splice(newAnswers.length, 0, answer)
+            }
+        }
+        else{
+            newAnswers = [answer]
+        }
+
+        return Object.assign({}, state, {
+            answers: newAnswers
+        })
+    }
+    if(action.type ===  REMOVE_ANSWERS){
+        return Object.assign({}, state, {
+            answers: null,
+            correctAnswer:null
+        })
+    }
+    if(action.type === SET_CORRECT_ANSWER){
+        return Object.assign({}, state, {
+            correctAnswer: action.payload
+        })
     }
     return state;
 };
