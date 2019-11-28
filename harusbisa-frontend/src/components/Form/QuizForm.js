@@ -22,7 +22,7 @@ function QuizForm(props){
         let answers = []
         for (let i=0; i<numOfAnswers; i++){
             answers.push(
-                <AnswerForm option={i} key={i}/>
+                <AnswerForm option={i} key={i} numOfAnswers={numOfAnswers} setNumOfAnswers={setNumOfAnswers}/>
             )
         }
         return answers

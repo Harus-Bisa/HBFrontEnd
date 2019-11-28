@@ -1,24 +1,31 @@
 import React from "react";
 import {Input} from "reactstrap";
-import { setAnswer, setCorrectAnswer } from "../../redux/actions";
+import { setAnswer, setCorrectAnswer, removeAnswer } from "../../redux/actions";
 import { connect } from "react-redux";
 import { FormControlLabel, Switch } from "@material-ui/core";
+import ButtonIcon from "../ButtonIcon/ButtonIcon";
+import CloseIcon from "@material-ui/icons/Close";
 
 function AnswerForm(props){
     var [correct, setCorrect] = React.useState(props.option === props.correctAnswer)
-    var [answer, setLocalAnswer] = React.useState("");
+    var [answer, setLocalAnswer] = React.useState(props.answer);
     
     const changeAnswer = (event) =>{
-        setLocalAnswer(event.target.value)
+        // setLocalAnswer(event.target.value)
         props.setAnswer(props.option, event.target.value)
     }
 
     const changeCorrectAnswer = ()=>{
-        // setCorrect(!correct)
         props.setCorrectAnswer(props.option)
     }
-
-    React.useEffect(() => setCorrect(props.option === props.correctAnswer), [props.correctAnswer, props.option]);
+    const removeAnswer = () =>{
+        props.setNumOfAnswers(props.numOfAnswers - 1)
+        props.removeAnswer(props.option)
+    }
+    React.useEffect(() => {
+        setCorrect(props.option === props.correctAnswer)
+        setLocalAnswer(props.answer)
+    }, [props.correctAnswer, props.option, props.answer]);
     return(
         <div className="row" style={{marginTop:"15px", marginBottom:'15px'}}>
             <div className="col-1" style={{display:'flex'}}>
@@ -26,13 +33,16 @@ function AnswerForm(props){
             </div> 
             <div className="col-11">
                 <div className="form-control" style={{height:'auto'}}>
-                    <Input
-                        type="textArea"
-                        placeholder={"Tulis jawaban anda disini"}
-                        style={{padding:"0 0 .75rem 0", border:"none", boxShadow:"none"}}
-                        value={answer}
-                        onChange={changeAnswer}
-                    />
+                    <div style={{display:'flex', justifyContent:'space-between'}}>
+                        <Input
+                            type="textArea"
+                            placeholder={"Tulis jawaban anda disini"}
+                            style={{padding:"0 0 .75rem 0", border:"none", boxShadow:"none"}}
+                            value={answer}
+                            onChange={changeAnswer}
+                        />
+                        {props.numOfAnswers > 2 && <ButtonIcon icon={CloseIcon} onClick={removeAnswer}/>}
+                    </div>
                     <div style={{display:'flex', justifyContent:'flex-end'}}>
                         <FormControlLabel
                             control={
@@ -46,9 +56,10 @@ function AnswerForm(props){
         </div>
     )
 }
-function mapStateToProps(state){
+function mapStateToProps(state, ownProps){
     return{
-        correctAnswer: state.correctAnswer
+        correctAnswer: state.correctAnswer,
+        answer:state.answers && state.answers[ownProps.option] ? state.answers[ownProps.option] : ""
     }
 }
-export default connect(mapStateToProps, {setAnswer, setCorrectAnswer})(AnswerForm)
+export default connect(mapStateToProps, {setAnswer, setCorrectAnswer,removeAnswer})(AnswerForm)

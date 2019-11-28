@@ -13,6 +13,7 @@ export const ADD_LECTURE = "ADD_LECTURE";
 /*QUIZ*/
 export const ADD_QUIZ = "ADD_QUIZ";
 export const SET_ANSWER = "SET_ANSWER"
+export const REMOVE_ANSWER = "REMOVE_ANSWER";
 export const REMOVE_ANSWERS = "REMOVE_ANSWERS"
 export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER"
 
