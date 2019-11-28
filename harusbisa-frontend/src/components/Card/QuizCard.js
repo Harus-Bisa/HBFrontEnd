@@ -5,6 +5,9 @@ import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import "../../css/card.css";
 import { withStyles } from "@material-ui/styles";
+import QuizForm from "../Form/QuizForm";
+import Popup from "../Popup/Popup";
+import MenuOptions from "../MenuOptions/MenuOptions";
 
 function mapStateToProps(state, ownProps){
     var quizzes = state.selectedLecture.quizzes
@@ -56,7 +59,8 @@ function QuizCard(props){
         checked: {},
         track: {}
       })(Switch);
-
+    
+    const deleteQuiz = () =>{}
     return(
         <Card className="card quiz-card">
             <CardContent className="card-content">
@@ -68,7 +72,13 @@ function QuizCard(props){
                         <p id="question">{props.quiz.question}</p>
                     </div>
                     <div className="col-1">
-                        <ButtonIcon style={{margin:'auto'}}/>
+                        <MenuOptions
+                            className="icon" 
+                            options={[
+                                <Popup purpose={"Edit"} trigger={{component:Button, style:{width:'100%'}}} content={QuizForm} id={props.index}/>, 
+                                <Button fullWidth onClick={deleteQuiz}>Hapus</Button>]
+                            }
+                        />
                     </div>
                 </div>
             </CardContent>

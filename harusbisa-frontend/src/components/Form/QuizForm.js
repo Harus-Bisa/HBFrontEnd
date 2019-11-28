@@ -3,14 +3,15 @@ import { Form, FormGroup, Label, Input, Button as RButton, Col} from 'reactstrap
 import {connect} from "react-redux";
 import { Button } from "@material-ui/core";
 import AnswerForm from "./AnswerForm";
-import { addQuiz, removeAnwers } from "../../redux/actions";
+import { addQuiz, removeAnwers, setAnswer, setCorrectAnswer } from "../../redux/actions";
 
 function QuizForm(props){
-    var [question, setQuestion] = React.useState("")
-    var [numOfAnswers, setNumOfAnswers] = React.useState(2)
-    var [points, setPoints] = React.useState(1)
-    var [duration, setDuration] = React.useState(60)
-    
+    var [question, setQuestion] = React.useState(props.quiz ? props.quiz.question : "")
+    var [numOfAnswers, setNumOfAnswers] = React.useState(props.quiz ? props.quiz.answerOptions.length : 2)
+    var [points, setPoints] = React.useState(props.quiz ? props.quiz.pointWorth : 1)
+    var [duration, setDuration] = React.useState(props.quiz ? props.quiz.duration : 60)
+    const type = (props.id !== null && props.id !== undefined ? "EDIT" : "ADD")
+
     const submit = (event) =>{
         event.preventDefault();
         props.addQuiz(props.lectureId, question, props.answers,props.correctAnswer, duration, points)
@@ -29,6 +30,12 @@ function QuizForm(props){
     }
 
     React.useEffect(() => {
+        if(type === "EDIT" && props.quiz){
+            for(let i=0; i<props.quiz.answerOptions.length; i++){
+                props.setAnswer(i, props.quiz.answerOptions[i])
+            }
+            props.setCorrectAnswer(props.quiz.correctAnswerIndex)
+        }
         return () => {
             props.removeAnwers();
         }
@@ -38,7 +45,7 @@ function QuizForm(props){
         <div className="container">
             <div className="row">
                 <div className="col-12" style={{display:'flex', justifyContent:'center', padding:'1rem 2rem'}}>
-                    <h3>Tambah Pertanyaan</h3>
+                    <h3>{type === "ADD" ? "Tambah Pertanyaan": "Edit Pertanyaan"}</h3>
                 </div>
             </div>
             <div className="content">
@@ -86,11 +93,11 @@ function QuizForm(props){
                     </FormGroup>
                     
                     <div className="row justify-content-end">
-                        <div className="col-3">
+                        {type === "ADD" && <div className="col-3">
                             <Button fullWidth className="prof-button">Kembali</Button>
-                        </div>
+                        </div>}
                         <div className="col-3">
-                            <Button fullWidth className="prof-button" type="submit" disabled={!verified}>Tambahkan</Button>
+                            <Button fullWidth className="prof-button" type="submit" disabled={!verified}>{type === "ADD" ? "Tambahkan" : "Edit"}</Button>
                         </div>
                     </div>
                 </Form>
@@ -99,11 +106,16 @@ function QuizForm(props){
     )
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state, ownProps){
+    var targetQuiz = null;
+    if (ownProps.id !== null && ownProps.id !== undefined){
+        targetQuiz = state.selectedLecture.quizzes[ownProps.id]
+    }
     return{
         lectureId: state.selectedLecture.lectureId,
         answers: state.answers,
-        correctAnswer: state.correctAnswer
+        correctAnswer: state.correctAnswer,
+        quiz: targetQuiz
     }
 }
-export default connect(mapStateToProps,{addQuiz, removeAnwers})(QuizForm);
+export default connect(mapStateToProps,{addQuiz, removeAnwers, setAnswer,setCorrectAnswer})(QuizForm);
