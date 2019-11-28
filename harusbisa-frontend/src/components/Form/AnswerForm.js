@@ -1,10 +1,11 @@
 import React from "react";
-import {Input, CustomInput} from "reactstrap";
+import {Input} from "reactstrap";
 import { setAnswer, setCorrectAnswer } from "../../redux/actions";
 import { connect } from "react-redux";
+import { FormControlLabel, Switch } from "@material-ui/core";
 
 function AnswerForm(props){
-    var [correct, setCorrect] = React.useState(false)
+    var [correct, setCorrect] = React.useState(props.option === props.correctAnswer)
     var [answer, setLocalAnswer] = React.useState("");
     
     const changeAnswer = (event) =>{
@@ -13,9 +14,11 @@ function AnswerForm(props){
     }
 
     const changeCorrectAnswer = ()=>{
-        setCorrect(!correct)
+        // setCorrect(!correct)
         props.setCorrectAnswer(props.option)
     }
+
+    React.useEffect(() => setCorrect(props.option === props.correctAnswer), [props.correctAnswer, props.option]);
     return(
         <div className="row" style={{marginTop:"15px", marginBottom:'15px'}}>
             <div className="col-1" style={{display:'flex'}}>
@@ -31,11 +34,21 @@ function AnswerForm(props){
                         onChange={changeAnswer}
                     />
                     <div style={{display:'flex', justifyContent:'flex-end'}}>
-                        <CustomInput type="switch" id={"switch-"+props.option} value={correct} label="Jawaban benar" onChange={changeCorrectAnswer}/>
+                        <FormControlLabel
+                            control={
+                            <Switch checked={correct} onChange={changeCorrectAnswer}/>
+                            }
+                            label="Jawaban benar"
+                        />
                     </div>
                 </div>
             </div>   
         </div>
     )
 }
-export default connect(null, {setAnswer, setCorrectAnswer})(AnswerForm)
+function mapStateToProps(state){
+    return{
+        correctAnswer: state.correctAnswer
+    }
+}
+export default connect(mapStateToProps, {setAnswer, setCorrectAnswer})(AnswerForm)
