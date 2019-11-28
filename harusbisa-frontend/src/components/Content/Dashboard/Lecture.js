@@ -7,11 +7,12 @@ import PlayIcon from '@material-ui/icons/PlayArrow';
 import AddIcon from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import StatisticIcon from '@material-ui/icons/Equalizer';
+import StopIcon from "@material-ui/icons/Stop";
 import LectureButtonContent from "../../LectureButton/LectureButtonContent";
 import { convertDate } from "../../Sidebar/Sidebar";
 import LectureForm from "../../Form/LectureForm";
 import ErrorMessage from "../../Error/ErrorMessage";
-import { changeContentType } from "../../../redux/actions";
+import { changeContentType, setLiveLecture } from "../../../redux/actions";
 import QuizForm from "../../Form/QuizForm";
 
 function mapStateToProps(state){
@@ -19,7 +20,8 @@ function mapStateToProps(state){
         lecture: state.selectedLecture,
         courseName: state.course.courseName,
         error: state.error,
-        cLoading: state.cLoading
+        cLoading: state.cLoading,
+        live: state.live
     }
 }
 function Lecture(props){
@@ -52,8 +54,8 @@ function Lecture(props){
                 <div style={{margin:"1rem 0"}}>
                     <div className="row">
                         <div className="col-3">
-                            <Button fullWidth className="lecture-button">
-                                <LectureButtonContent icon={PlayIcon} content={"Buka kelas"}/>
+                            <Button fullWidth className="lecture-button" onClick={() => props.setLiveLecture(!props.live)}>
+                                <LectureButtonContent icon={props.live ? StopIcon : PlayIcon} content={props.live ? "Tutup kelas":"Buka kelas"}/>
                             </Button>
                         </div>
                         <div className="col-3">
@@ -90,4 +92,4 @@ function Lecture(props){
     }
 }
 
-export default connect(mapStateToProps,{changeContentType})(Lecture);
+export default connect(mapStateToProps,{changeContentType, setLiveLecture})(Lecture);

@@ -9,7 +9,8 @@ import LectureForm from "../Form/LectureForm";
 function mapStateToProps(state){
     return{
         lectures: state.course.lectures,
-        role: state.role
+        role: state.role,
+        live: state.live
     }
 }
 
@@ -38,7 +39,7 @@ function Sidebar(props){
         for (var i=0; i<props.lectures.length; i++){
             var lecture = props.lectures[i]
             buttons.push(
-                <Button fullWidth key={i} props={lecture} onClick={openLecture.bind(this,lecture)}>Sesi {convertDate(lecture.date)}</Button>
+                <Button fullWidth key={i} props={lecture} onClick={openLecture.bind(this,lecture)} disabled={props.live}>Sesi {convertDate(lecture.date)}</Button>
             )
         }
         if(buttons.length === 0){

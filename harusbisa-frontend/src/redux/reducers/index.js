@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -15,7 +15,15 @@ function findIndex(array, target, type){
     return -1;
     
 }
-function rootReducer(state ={loadingCount:0, loading: true, cLoadingCount:0, cLoading:false,loggedIn: services.isLoggedIn()}, action){
+const initialState ={
+    loadingCount:0, 
+    loading: true, 
+    cLoadingCount:0, 
+    cLoading:false,
+    loggedIn: services.isLoggedIn(),
+    live: false //remember to change this when u have socket setup
+}
+function rootReducer(state = initialState, action){
     if (action.type === COURSES_LOADED){
         return Object.assign({}, state, {
             courses: action.payload,
@@ -217,6 +225,11 @@ function rootReducer(state ={loadingCount:0, loading: true, cLoadingCount:0, cLo
     if(action.type === SET_CORRECT_ANSWER){
         return Object.assign({}, state, {
             correctAnswer: action.payload
+        })
+    }
+    if(action.type === SET_LIVE_LECTURE){
+        return Object.assign({}, state,{
+            live: action.payload
         })
     }
     return state;

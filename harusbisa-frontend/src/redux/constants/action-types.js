@@ -9,6 +9,7 @@ export const EDIT_COURSE = "EDIT_COURSE";
 /* LECTURE */
 export const CHANGE_SELECTED_LECTURE = "CHANGE_SELECTED_LECTURE";
 export const ADD_LECTURE = "ADD_LECTURE";
+export const SET_LIVE_LECTURE = "SET_LIVE_LECTURE";
 
 /*QUIZ*/
 export const ADD_QUIZ = "ADD_QUIZ";
