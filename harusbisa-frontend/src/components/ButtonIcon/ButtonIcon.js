@@ -5,7 +5,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 export default function ButtonIcon(props){
     const Icon = props.icon;
     return(
-        <IconButton className={props.className} onClick={props.onClick}>
+        <IconButton className={props.className} onClick={props.onClick} style={props.style}>
             <Icon/>
         </IconButton>
     )

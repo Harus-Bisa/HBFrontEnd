@@ -39,7 +39,7 @@ class ProfDashboard extends React.Component{
                         <div className="col-md-2">
                             <Sidebar/>
                         </div>
-                        <div className="col">
+                        <div className="col" style={{overflow:'auto', maxHeight:'95vh'}}>
                             {this.props.contentType === HOME && <Home/>}
                             {this.props.contentType === LECTURE && <Lecture/>}
                             {this.props.contentType === SETTINGS && <h1>SETTINGS</h1>}
