@@ -211,6 +211,25 @@ class Services{
         })
     }
 
+    async editLecture(date, lectureDescription, participationRewardPercentage, courseId, role ){
+        const headers = this.createHeaders();
+        const url = this.domain + "/" + role + "/courses/" + courseId + "/lectures"; 
+        const data = {
+            date: date,
+            lectureDescription: lectureDescription,
+            participationRewardPercentage: participationRewardPercentage
+        }
+
+        return await axios.put(url, data, {headers: headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
+
+    // QUIZZES
     async getQuizzes(lectureId, role){
         const headers = this.createHeaders();
         const url = this.domain + "/" + role + "/lectures/" + lectureId + "/quizzes" 

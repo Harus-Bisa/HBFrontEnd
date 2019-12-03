@@ -80,6 +80,7 @@ function Lecture(props){
                                 purpose= {<LectureButtonContent icon={MoreVertIcon} content={"Setting Sesi "+date}/>}
                                 trigger={{component:Button, className:"lecture-button"}}
                                 content= {LectureForm}
+                                id={props.lecture.lectureId}
                             />
                         </div>
                     </div>
