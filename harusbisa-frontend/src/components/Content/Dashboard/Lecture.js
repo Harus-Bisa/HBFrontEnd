@@ -13,7 +13,7 @@ import { convertDate } from "../../Sidebar/Sidebar";
 import LectureForm from "../../Form/LectureForm";
 import ErrorMessage from "../../Error/ErrorMessage";
 import { changeContentType, setLiveLecture } from "../../../redux/actions";
-import QuizForm from "../../Form/QuizForm";
+import QuizForm from "../../Form/Quiz/QuizForm";
 
 function mapStateToProps(state){
     return {

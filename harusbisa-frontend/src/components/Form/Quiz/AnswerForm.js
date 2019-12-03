@@ -1,9 +1,9 @@
 import React from "react";
 import {Input} from "reactstrap";
-import { setAnswer, setCorrectAnswer, removeAnswer } from "../../redux/actions";
+import { setAnswer, setCorrectAnswer, removeAnswer } from "../../../redux/actions";
 import { connect } from "react-redux";
 import { FormControlLabel, Switch } from "@material-ui/core";
-import ButtonIcon from "../ButtonIcon/ButtonIcon";
+import ButtonIcon from "../../ButtonIcon/ButtonIcon";
 import CloseIcon from "@material-ui/icons/Close";
 
 function AnswerForm(props){

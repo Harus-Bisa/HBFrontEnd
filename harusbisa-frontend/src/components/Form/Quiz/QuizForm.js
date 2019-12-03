@@ -3,7 +3,7 @@ import { Form, FormGroup, Label, Input, Button as RButton, Col} from 'reactstrap
 import {connect} from "react-redux";
 import { Button } from "@material-ui/core";
 import AnswerForm from "./AnswerForm";
-import { addQuiz, removeAnwers, setAnswer, setCorrectAnswer } from "../../redux/actions";
+import { addQuiz, removeAnwers, setAnswer, setCorrectAnswer } from "../../../redux/actions";
 
 function QuizForm(props){
     var [question, setQuestion] = React.useState(props.quiz ? props.quiz.question : "")

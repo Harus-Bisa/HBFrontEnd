@@ -5,7 +5,7 @@ import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import "../../css/card.css";
 import { withStyles } from "@material-ui/styles";
-import QuizForm from "../Form/QuizForm";
+import QuizForm from "../Form/Quiz/QuizForm";
 import Popup from "../Popup/Popup";
 import MenuOptions from "../MenuOptions/MenuOptions";
 
