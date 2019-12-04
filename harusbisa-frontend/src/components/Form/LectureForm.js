@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import { Form, FormGroup, Label, Input, FormText, Col} from 'reactstrap';
 import { Button, Slider } from "@material-ui/core";
-import {addLecture, editLecture} from "../../redux/actions";
+import {addLecture, editLecture, deleteLecture} from "../../redux/actions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -25,6 +25,9 @@ function LectureForm(props){
         }
         props.closePopup()
         
+    }
+    const handleDelete = () =>{
+        props.deleteLecture(props.id, props.role)
     }
     return(
         <div className="container-fluid student-course-form">
@@ -74,6 +77,7 @@ function LectureForm(props){
                             </div>
                         </div>
                     </FormGroup>
+                    {type === "EDIT" && <Button onClick={handleDelete}>Hapus sesi</Button>}
                     <div style={{justifyContent:'flex-end', display:'flex'}}>
                         <Button type="submit" className="prof-button">{type === "ADD" ? "Tambahkan":"Edit"}</Button>
                     </div>
@@ -101,4 +105,4 @@ function mapStateToProps(state, ownProps){
     }
     
 }
-export default connect(mapStateToProps,{addLecture, editLecture})(LectureForm);
+export default connect(mapStateToProps,{addLecture, editLecture, deleteLecture})(LectureForm);

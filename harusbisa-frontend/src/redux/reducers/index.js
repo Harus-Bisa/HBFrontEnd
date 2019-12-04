@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE, DELETE_LECTURE } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -188,6 +188,27 @@ function rootReducer(state = initialState, action){
             selectedLecture: newLecture
         })
 
+    }
+    if(action.type === DELETE_LECTURE){
+        let newLecture = action.payload
+        let index = findIndex(state.course.lectures,newLecture, "lecture")
+        let newLectures = state.course.lectures.slice();
+        newLectures.splice(index,1)
+        return Object.assign({}, state, {
+            course: {
+                instructors: state.course.instructors,
+                courseName: state.course.courseName,
+                startTerm: state.course.startTerm,
+                endTerm: state.course.endTerm,
+                joinCode: state.course.joinCode,
+                courseId: state.course.courseId,
+                numberOfStudents: state.course.numberOfStudents,
+                numberOfLectures: newLectures.length,
+                lectures: newLectures
+            },
+            selectedLecture: null,
+            contentType:"HOME"
+        })
     }
     if(action.type === ADD_QUIZ){
         let newQuizzes = state.selectedLecture.quizzes.slice();

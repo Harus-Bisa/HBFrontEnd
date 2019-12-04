@@ -230,6 +230,18 @@ class Services{
         })
     }
 
+    async deleteLecture(lectureId, role){
+        const headers = this.createHeaders();
+        const url = this.domain + "/" + role + "/lectures/" + lectureId;
+        return await axios.delete(url, {headers:headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            throw error
+        })
+
+    }
     // QUIZZES
     async getQuizzes(lectureId, role){
         const headers = this.createHeaders();
