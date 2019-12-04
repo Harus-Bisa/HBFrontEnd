@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -10,7 +10,11 @@ function findIndex(array, target, type){
         }
     }
     else if (type === "lecture"){
-        return -1;
+        for (let i=0; i<array.length; i++){
+            if(array[i].lectureId === target.lectureId){
+                return i
+            }
+        }
     }
     return -1;
     
@@ -160,6 +164,28 @@ function rootReducer(state = initialState, action){
                 numberOfLectures: state.course.numberOfLectures + 1,
                 lectures: newLectures
             }
+        })
+
+    }
+    if(action.type === EDIT_LECTURE){
+        let newLecture = action.payload
+        let index = findIndex(state.course.lectures,newLecture, "lecture")
+        let newLectures = state.courses.slice();
+        newLectures.splice(index,1,newLecture)
+        newLecture.quizzes = state.selectedLecture.quizzes
+        return Object.assign({}, state, {
+            course: {
+                instructors: state.course.instructors,
+                courseName: state.course.courseName,
+                startTerm: state.course.startTerm,
+                endTerm: state.course.endTerm,
+                joinCode: state.course.joinCode,
+                courseId: state.course.courseId,
+                numberOfStudents: state.course.numberOfStudents,
+                numberOfLectures: newLectures.length,
+                lectures: newLectures
+            },
+            selectedLecture: newLecture
         })
 
     }

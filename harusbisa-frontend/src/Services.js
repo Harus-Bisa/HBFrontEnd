@@ -211,9 +211,10 @@ class Services{
         })
     }
 
-    async editLecture(date, lectureDescription, participationRewardPercentage, courseId, role ){
+    async editLecture(date, lectureDescription, participationRewardPercentage, courseId, lectureId, role ){
         const headers = this.createHeaders();
-        const url = this.domain + "/" + role + "/courses/" + courseId + "/lectures"; 
+        // const url = this.domain + "/" + role + "/courses/" + courseId + "/lectures"; 
+        const url = this.domain + "/" + role + "/lectures/" + lectureId; 
         const data = {
             date: date,
             lectureDescription: lectureDescription,

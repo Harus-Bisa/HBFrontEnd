@@ -44,7 +44,7 @@ function Lecture(props){
         return <ErrorMessage/>
     }
     else{
-        const date = convertDate(props.lecture.date)
+        var date = convertDate(props.lecture.date)
         return(
             <div className="content">
                 <header>

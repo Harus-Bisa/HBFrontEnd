@@ -10,6 +10,7 @@ export const EDIT_COURSE = "EDIT_COURSE";
 export const CHANGE_SELECTED_LECTURE = "CHANGE_SELECTED_LECTURE";
 export const ADD_LECTURE = "ADD_LECTURE";
 export const SET_LIVE_LECTURE = "SET_LIVE_LECTURE";
+export const EDIT_LECTURE = "EDIT_LECTURE";
 
 /*QUIZ*/
 export const ADD_QUIZ = "ADD_QUIZ";
