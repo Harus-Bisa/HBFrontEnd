@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE, DELETE_LECTURE, EDIT_QUIZ, DELETE_QUIZ } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -10,12 +10,24 @@ function findIndex(array, target, type){
         }
     }
     else if (type === "lecture"){
-        return -1;
+        for (let i=0; i<array.length; i++){
+            if(array[i].lectureId === target.lectureId){
+                return i
+            }
+        }
     }
     return -1;
     
 }
-function rootReducer(state ={loadingCount:0, loading: true, loggedIn: services.isLoggedIn()}, action){
+const initialState ={
+    loadingCount:0, 
+    loading: true, 
+    cLoadingCount:0, 
+    cLoading:false,
+    loggedIn: services.isLoggedIn(),
+    live: false //remember to change this when u have socket setup
+}
+function rootReducer(state = initialState, action){
     if (action.type === COURSES_LOADED){
         return Object.assign({}, state, {
             courses: action.payload,
@@ -55,6 +67,13 @@ function rootReducer(state ={loadingCount:0, loading: true, loggedIn: services.i
         let index = findIndex(state.courses, targetCourse, "course")
         let newCourses = state.courses.slice();
         newCourses[index] = targetCourse
+        if (state.course){
+            targetCourse.lectures = state.course.lectures.slice()
+            return Object.assign({}, state, {
+                courses: newCourses,
+                course: targetCourse
+            })
+        }
         return Object.assign({}, state, {
             courses: newCourses
         })
@@ -112,9 +131,193 @@ function rootReducer(state ={loadingCount:0, loading: true, loggedIn: services.i
     }
     if(action.type === REMOVE_LOADING){
         let count = state.loadingCount - 1;
+        if(count<0){
+            count = 0
+        }
         return Object.assign({}, state, {
             loadingCount: count,
             loading: count !== 0
+        })
+    }
+    if(action.type === SET_COMPONENT_LOADING){
+        return Object.assign({}, state, {
+            cLoadingCount: state.cLoadingCount + 1,
+            cLoading: true
+        })
+    }
+    if(action.type === REMOVE_COMPONENT_LOADING){
+        let count = state.cLoadingCount - 1;
+        if(count<0){
+            count = 0
+        }
+        return Object.assign({}, state, {
+            cLoadingCount: count,
+            cLoading: count !== 0
+        })
+    }
+    if(action.type === ADD_LECTURE){
+        let newLectures = state.course.lectures.slice();
+        newLectures.splice(0,0,action.payload)
+        
+        return Object.assign({}, state, {
+            course: {
+                instructors: state.course.instructors,
+                courseName: state.course.courseName,
+                startTerm: state.course.startTerm,
+                endTerm: state.course.endTerm,
+                joinCode: state.course.joinCode,
+                courseId: state.course.courseId,
+                numberOfStudents: state.course.numberOfStudents,
+                numberOfLectures: state.course.numberOfLectures + 1,
+                lectures: newLectures
+            }
+        })
+
+    }
+    if(action.type === EDIT_LECTURE){
+        let newLecture = action.payload
+        let index = findIndex(state.course.lectures,newLecture, "lecture")
+        let newLectures = state.courses.slice();
+        newLectures.splice(index,1,newLecture)
+        newLecture.quizzes = state.selectedLecture.quizzes
+        return Object.assign({}, state, {
+            course: {
+                instructors: state.course.instructors,
+                courseName: state.course.courseName,
+                startTerm: state.course.startTerm,
+                endTerm: state.course.endTerm,
+                joinCode: state.course.joinCode,
+                courseId: state.course.courseId,
+                numberOfStudents: state.course.numberOfStudents,
+                numberOfLectures: newLectures.length,
+                lectures: newLectures
+            },
+            selectedLecture: newLecture
+        })
+
+    }
+    if(action.type === DELETE_LECTURE){
+        let newLecture = action.payload
+        let index = findIndex(state.course.lectures,newLecture, "lecture")
+        let newLectures = state.course.lectures.slice();
+        newLectures.splice(index,1)
+        return Object.assign({}, state, {
+            course: {
+                instructors: state.course.instructors,
+                courseName: state.course.courseName,
+                startTerm: state.course.startTerm,
+                endTerm: state.course.endTerm,
+                joinCode: state.course.joinCode,
+                courseId: state.course.courseId,
+                numberOfStudents: state.course.numberOfStudents,
+                numberOfLectures: newLectures.length,
+                lectures: newLectures
+            },
+            selectedLecture: null,
+            contentType:"HOME"
+        })
+    }
+    if(action.type === ADD_QUIZ){
+        let newQuizzes = state.selectedLecture.quizzes.slice();
+        newQuizzes.splice(newQuizzes.length,0,action.payload);
+        
+        return Object.assign({}, state, {
+            selectedLecture:{
+                date:state.selectedLecture.date,
+                participationRewardPercentage:state.selectedLecture.participationRewardPercentage,
+                courseId:state.selectedLecture.courseId,
+                live:state.selectedLecture.live,
+                hasLived:state.selectedLecture.hasLived,
+                lectureId:state.selectedLecture.lectureId,
+                attendanceNumber:state.selectedLecture.attendanceNumber,
+                quizzes:newQuizzes
+            }
+        })
+    }
+    if(action.type === EDIT_QUIZ){
+        let newQuizzes = state.selectedLecture.quizzes.slice();
+        newQuizzes.splice(action.payload.quizIndex,1,action.payload.quiz);
+        
+        return Object.assign({}, state, {
+            selectedLecture:{
+                date:state.selectedLecture.date,
+                participationRewardPercentage:state.selectedLecture.participationRewardPercentage,
+                courseId:state.selectedLecture.courseId,
+                live:state.selectedLecture.live,
+                hasLived:state.selectedLecture.hasLived,
+                lectureId:state.selectedLecture.lectureId,
+                attendanceNumber:state.selectedLecture.attendanceNumber,
+                quizzes:newQuizzes
+            }
+        })
+    }
+    if(action.type === DELETE_QUIZ){
+        let newQuizzes = state.selectedLecture.quizzes.slice();
+        newQuizzes.splice(action.payload.quizIndex,1);
+        
+        return Object.assign({}, state, {
+            selectedLecture:{
+                date:state.selectedLecture.date,
+                participationRewardPercentage:state.selectedLecture.participationRewardPercentage,
+                courseId:state.selectedLecture.courseId,
+                live:state.selectedLecture.live,
+                hasLived:state.selectedLecture.hasLived,
+                lectureId:state.selectedLecture.lectureId,
+                attendanceNumber:state.selectedLecture.attendanceNumber,
+                quizzes:newQuizzes
+            }
+        })
+    }
+    if(action.type === SET_ANSWER){
+        let index = action.payload.index
+        let answer = action.payload.answer
+        let newAnswers;
+        if (state.answers){
+            newAnswers = state.answers.slice();
+            if (index < newAnswers.length){
+                newAnswers.splice(index, 1, answer)
+            }
+            else{
+                newAnswers.splice(newAnswers.length, 0, answer)
+            }
+        }
+        else{
+            newAnswers = [answer]
+        }
+
+        return Object.assign({}, state, {
+            answers: newAnswers
+        })
+    }
+    if(action.type === REMOVE_ANSWER){
+        let newAnswers = state.answers.slice()
+        newAnswers.splice(action.payload,1)
+        let correctAnswer = state.correctAnswer
+        if (action.payload === state.correctAnswer){
+            correctAnswer = null
+        }
+        else if (state.correctAnswer === action.payload + 1){
+            correctAnswer = correctAnswer -1
+        }
+        return Object.assign({}, state, {
+            answers: newAnswers,
+            correctAnswer: correctAnswer
+        })
+    }
+    if(action.type ===  REMOVE_ANSWERS){
+        return Object.assign({}, state, {
+            answers: null,
+            correctAnswer:null
+        })
+    }
+    if(action.type === SET_CORRECT_ANSWER){
+        return Object.assign({}, state, {
+            correctAnswer: action.payload
+        })
+    }
+    if(action.type === SET_LIVE_LECTURE){
+        return Object.assign({}, state,{
+            live: action.payload
         })
     }
     return state;

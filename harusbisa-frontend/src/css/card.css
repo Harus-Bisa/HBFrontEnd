@@ -41,3 +41,65 @@
     position: absolute;
     bottom: 55%;
 }
+
+.quiz-card .card-content div{
+    display:flex;
+}
+
+.quiz-card .card-content p{
+    margin: auto;
+}
+
+.quiz-card .card-content #question{
+    margin: auto 0;
+}
+
+.quiz-card .collapse-content{
+    padding: 8px 16px;
+}
+
+.quiz-card .collapse-content .answer{
+    background-color: #FEF9DE;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 5px 0px;
+}
+
+.quiz-card .collapse-content .answer p{
+    font-weight: 700;
+}
+
+.quiz-card .collapse-content .answer-correct{
+    background-color: #82DAA4;
+}
+.quiz-card .action{
+    border-top: 1px solid #F2F2F2;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quiz-card .action div{
+    display:flex;
+    flex-direction: row;
+}
+.quiz-card .action .icon-button{
+    padding: 5px;
+}
+
+.quiz-card .action .expand-false{
+    transform: rotate(0deg);
+    transition: 1s transform;
+}
+.quiz-card .action .expand-true{
+    transform: rotate(180deg);
+    transition: 1s transform;
+}
+
+.quiz-card .action .clear-button{
+    background: transparent;
+    border: 1px solid #F2F2F2;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+

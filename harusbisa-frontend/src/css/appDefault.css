@@ -32,6 +32,11 @@ p, label{
     margin: 0;
 }
 
+input:focus{
+    outline-color: var(--hb-yellow);
+    outline-width: 1px;
+}
+
 /*BUTTON*/
 button{
     font-family: "Lato" !important;
@@ -134,4 +139,52 @@ img{
 
 .student-icon{
     color: var(--hb-yellow);
+}
+
+/*Hover animation*/
+@-webkit-keyframes hvr-pulse {
+	25% {
+	  -webkit-transform: scale(1.1);
+	  transform: scale(1.1);
+	}
+	75% {
+	  -webkit-transform: scale(0.9);
+	  transform: scale(0.9);
+	}
+  }
+  @keyframes hvr-pulse {
+	25% {
+	  -webkit-transform: scale(1.1);
+	  transform: scale(1.1);
+	}
+	75% {
+	  -webkit-transform: scale(0.9);
+	  transform: scale(0.9);
+	}
+  }
+  .hvr-pulse {
+	-webkit-animation-name: hvr-pulse;
+	animation-name: hvr-pulse;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+
+.react-datepicker-wrapper input{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 function Home(props){
     return(
-        <div className="content">
+        <div>
             <h1>{props.course.courseName}</h1>
             <p>{props.course.courseDescription}</p>
             <p>{props.course.startTerm} - {props.course.endTerm}</p>

@@ -189,7 +189,121 @@ class Services{
             return response.data;
         })
         .catch(error =>{
+            throw error
+        })
+    }
+
+    async addLecture(date, lectureDescription, participationRewardPercentage, courseId, role){
+        const headers = this.createHeaders();
+        const url = this.domain + "/" + role + "/courses/" + courseId + "/lectures"; 
+        const data = {
+            date: date,
+            lectureDescription: lectureDescription,
+            participationRewardPercentage: participationRewardPercentage
+        }
+
+        return await axios.post(url, data, {headers: headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error => {
             console.log(error.message)
+        })
+    }
+
+    async editLecture(date, lectureDescription, participationRewardPercentage, courseId, lectureId, role ){
+        const headers = this.createHeaders();
+        // const url = this.domain + "/" + role + "/courses/" + courseId + "/lectures"; 
+        const url = this.domain + "/" + role + "/lectures/" + lectureId; 
+        const data = {
+            date: date,
+            lectureDescription: lectureDescription,
+            participationRewardPercentage: participationRewardPercentage
+        }
+
+        return await axios.put(url, data, {headers: headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error => {
+            console.log(error.message)
+        })
+    }
+
+    async deleteLecture(lectureId, role){
+        const headers = this.createHeaders();
+        const url = this.domain + "/" + role + "/lectures/" + lectureId;
+        return await axios.delete(url, {headers:headers})
+        .then(response =>{
+            return response.data
+        })
+        .catch(error =>{
+            throw error
+        })
+
+    }
+    // QUIZZES
+    async getQuizzes(lectureId, role){
+        const headers = this.createHeaders();
+        const url = this.domain + "/" + role + "/lectures/" + lectureId + "/quizzes" 
+        return await axios.get(url,{
+            headers:headers
+        })
+        .then(response =>{
+            return response.data;
+        })
+        .catch(error =>{
+            throw error
+        })
+    }
+
+    async addQuiz(lectureId, question, answerOptions, correctAnswerIndex, duration, pointWorth){
+        const headers = this.createHeaders();
+        const url = this.domain + "/faculty/lectures/"+lectureId + "/quizzes";
+        const data = {
+            question: question,
+            answerOptions: answerOptions,
+            correctAnswerIndex: correctAnswerIndex,
+            duration: duration,
+            pointWorth: pointWorth,
+            includeForGrading:true
+        }
+        return await axios.post(url, data, {headers: headers})
+        .then(response =>{
+            return response.data;
+        })
+        .catch(error =>{
+            throw error;
+        })
+    }
+    async editQuiz(lectureId, question, answerOptions, correctAnswerIndex, duration, pointWorth, quizIndex){
+        const headers = this.createHeaders();
+        const url = this.domain + "/faculty/lectures/"+lectureId + "/quizzes/"+quizIndex;
+        const data = {
+            question: question,
+            answerOptions: answerOptions,
+            correctAnswerIndex: correctAnswerIndex,
+            duration: duration,
+            pointWorth: pointWorth,
+            includeForGrading:true
+        }
+        return await axios.put(url, data, {headers: headers})
+        .then(response =>{
+            return response.data;
+        })
+        .catch(error =>{
+            throw error;
+        })
+    }
+    async deleteQuiz(lectureId, quizIndex){
+        const headers = this.createHeaders();
+        const url = this.domain + "/faculty/lectures/"+lectureId + "/quizzes/"+quizIndex;
+        return await axios.delete(url,{headers: headers})
+        .then(response =>{
+            return response.data;
+        })
+        .catch(error =>{
+            throw error;
         })
     }
 }
