@@ -60,7 +60,7 @@ describe("CourseForm component", () =>{
         store = mockStore(initialState);
         component = mount(<Provider store={store}><CourseForm/></Provider>)
         
-        var labels = ["courseName", "startDate", "endDate"]
+        var labels = ["courseName"]
         labels.forEach(l =>{
             var input = component.find("#"+l).at(0)
             expect(setState).not.toHaveBeenCalled()
@@ -124,7 +124,7 @@ describe("CourseForm component", () =>{
         expect(store.dispatch).not.toHaveBeenCalled()
         expect(mockPreventDefault).not.toHaveBeenCalled()
         
-        var labels = ["courseName", "startDate", "endDate"]
+        var labels = ["courseName", "term"]
         labels.forEach(l =>{
             var input = component.find("#"+l).at(0)
             input.simulate("change", {target:{value:"Calcu"}})

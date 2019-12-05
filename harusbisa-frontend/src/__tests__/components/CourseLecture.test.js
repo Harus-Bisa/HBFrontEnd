@@ -10,11 +10,14 @@ describe("Course Lecture component", () =>{
     it("matches snapshot", () =>{
         let initialState = {
             selectedLecture: {
-                date: "15/02/2019",
+                date: 1574897055773,
                 quizzes:[{
                     "question": "1 + 1 = ?",
-                    "answers": ["4","2","0"]
+                    "answerOptions": ["4","2","0"]
                 }]
+            },
+            course:{
+                courseName:'abc'
             }
         }
         let store = mockStore(initialState);
