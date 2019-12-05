@@ -7,6 +7,7 @@ import Lecture from "../../../components/Content/Dashboard/Lecture";
 import Home from "../../../components/Content/Dashboard/Home";
 import Settings from "../../../components/Content/Dashboard/Settings";
 import { Button } from "@material-ui/core";
+import Gradebook from "../../../components/Content/Dashboard/Gradebook";
 
 function mapStateToProps(state){
     return{
@@ -54,7 +55,7 @@ class ProfDashboard extends React.Component{
                                 {this.props.contentType === HOME && <Home/>}
                                 {this.props.contentType === LECTURE && <Lecture/>}
                                 {this.props.contentType === SETTINGS && <Settings/>}
-                                {this.props.contentType === GRADEBOOK && <h1>GRADEBOOK</h1>}
+                                {this.props.contentType === GRADEBOOK && <Gradebook/>}
                             </div>
                             
                         </div>
