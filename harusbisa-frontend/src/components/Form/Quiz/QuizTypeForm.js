@@ -12,20 +12,20 @@ function QuizTypeForm(props){
             <div className="row">
                 <div className="col-5 content">
                     <div>
-                        <Button fullWidth onMouseEnter={()=> setImage(multipleChoicePic)} onClick={() => props.changeQuizType(MULTIPLE_CHOICE)}>
+                        <Button fullWidth id={"multiple-choice"} onMouseEnter={()=> setImage(multipleChoicePic)} onClick={() => props.changeQuizType(MULTIPLE_CHOICE)}>
                             <div style={style}>
                                 <h5>Pilihan Ganda</h5>
                                 <p>Tanggal ini akan menjadi nama sesi anda</p>
                             </div>
                         </Button>
-                        <Button fullWidth onMouseEnter={()=> setImage(wordPic)}>
+                        <Button fullWidth id={"word"} onMouseEnter={()=> setImage(wordPic)}>
                             <div style={style}>
                                 <h5>Isian</h5>
                                 <p>Tanggal ini akan menjadi nama sesi anda</p>
                             </div>
                         </Button>
                         <Button fullWidth onMouseEnter={()=> setImage(multipleChoicePic)}>
-                            <div style={style}>
+                            <div style={style} id={"numeric"}>
                                 <h5>Angka</h5>
                                 <p>Tanggal ini akan menjadi nama sesi anda</p>
                             </div>

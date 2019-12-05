@@ -35,6 +35,7 @@ function AnswerForm(props){
                 <div className="form-control" style={{height:'auto'}}>
                     <div style={{display:'flex', justifyContent:'space-between'}}>
                         <Input
+                            id={"answer-input-" + props.option}
                             type="textArea"
                             placeholder={"Tulis jawaban anda disini"}
                             style={{padding:"0 0 .75rem 0", border:"none", boxShadow:"none"}}
@@ -46,7 +47,7 @@ function AnswerForm(props){
                     <div style={{display:'flex', justifyContent:'flex-end'}}>
                         <FormControlLabel
                             control={
-                            <Switch checked={correct} onChange={changeCorrectAnswer}/>
+                            <Switch checked={correct} onChange={changeCorrectAnswer} id={"switch-" + props.option}/>
                             }
                             label="Jawaban benar"
                         />

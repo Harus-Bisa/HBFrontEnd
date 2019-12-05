@@ -58,7 +58,7 @@ function MultipleChoiceQuizForm(props){
                         <Label>Jawaban*</Label>
                         {makeAnswers()}
                         <div style={{display:'flex', justifyContent:"flex-end"}}>
-                            <RButton className="neutral-button" onClick={incrementNumOfAns}>Tambah Pilihan Jawaban</RButton>
+                            <RButton className="neutral-button" id="add-answer-button" onClick={incrementNumOfAns}>Tambah Pilihan Jawaban</RButton>
                         </div>
                     </FormGroup>
                     <FormGroup>
@@ -66,9 +66,10 @@ function MultipleChoiceQuizForm(props){
                         <div className="row justify-content-end">
                             <div className="col-11">
                                 <FormGroup row>
-                                    <Label id="point" sm={3}>Poin Soal Ini*</Label>
+                                    <Label sm={3}>Poin Soal Ini*</Label>
                                     <Col sm={9}>
                                         <Input
+                                            id="point"
                                             type="number"
                                             value={points}
                                             onChange={(event) => setPoints(event.target.value)}
@@ -80,6 +81,7 @@ function MultipleChoiceQuizForm(props){
                                     <Label sm={3}>Timer*</Label>
                                     <Col sm={6}>
                                         <Input
+                                            id="duration"
                                             type="number"
                                             value={duration}
                                             onChange={(event) => setDuration(event.target.value)}
@@ -97,7 +99,7 @@ function MultipleChoiceQuizForm(props){
                             <Button fullWidth className="prof-button" onClick={() => props.changeQuizType(null)}>Kembali</Button>
                         </div>}
                         <div className="col-3">
-                            <Button fullWidth className="prof-button" type="submit" disabled={!verified}>{type === "ADD" ? "Tambahkan" : "Edit"}</Button>
+                            <Button fullWidth className="prof-button" id="submit-button" type="submit" disabled={!verified}>{type === "ADD" ? "Tambahkan" : "Edit"}</Button>
                         </div>
                     </div>
                 </Form>
