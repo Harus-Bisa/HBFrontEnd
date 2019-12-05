@@ -57,7 +57,7 @@ function CourseForm(props){
         event.preventDefault();
         if (type === EDIT){
             props.editCourse(props.id, name, startTermText, endTermText, props.role);
-            props.closePopup();
+            {props.closePopup && props.closePopup();}
         }
         else{
             props.addCourse(name, startTermText, endTermText, props.role);
@@ -99,11 +99,11 @@ function CourseForm(props){
     }
     return(
         <div className="container-fluid">
-            <div className="row" style={{borderBottom:'2px solid '+HB_YELLOW}}>
+            {props.header && <div className="row" style={{borderBottom:'2px solid '+HB_YELLOW}}>
                 <div className="col-12" style={{display:'flex', justifyContent:'center', padding:'1rem 2rem'}}>
                     <h3>{type === ADD ? "Tambahkan Kelas Baru" : "Edit Kelas"}</h3>
                 </div>
-            </div>
+            </div>}
             <div className="content">
                 <Form onSubmit={submit} style={{minWidth:'50vw'}}>
                     <FormGroup row>
@@ -140,4 +140,7 @@ function CourseForm(props){
     )
 }
 
+CourseForm.defaultProps={
+    header: true
+}
 export default connect(mapStateToProps,{addCourse, editCourse})(CourseForm);

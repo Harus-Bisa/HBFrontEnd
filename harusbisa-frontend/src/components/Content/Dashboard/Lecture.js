@@ -18,7 +18,6 @@ import QuizForm from "../../Form/Quiz/QuizForm";
 function mapStateToProps(state){
     return {
         lecture: state.selectedLecture,
-        courseName: state.course.courseName,
         error: state.error,
         cLoading: state.cLoading,
         live: state.live
@@ -31,11 +30,7 @@ function Lecture(props){
             quizzes.push(<QuizCard key={i} index={i}/>)
         }
         return quizzes;
-    }
-    const goToHome = () =>{
-        props.changeContentType("HOME")
-    }
-    
+    }    
     if (props.cLoading){
         return <p>Loading</p>
 
@@ -46,9 +41,8 @@ function Lecture(props){
     else{
         var date = convertDate(props.lecture.date)
         return(
-            <div className="content">
+            <div>
                 <header>
-                    <Button onClick={goToHome}>{props.courseName}</Button>
                     <h1>Sesi {date}</h1>
                 </header>
                 <div style={{margin:"1rem 0"}}>

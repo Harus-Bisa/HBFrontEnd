@@ -67,6 +67,13 @@ function rootReducer(state = initialState, action){
         let index = findIndex(state.courses, targetCourse, "course")
         let newCourses = state.courses.slice();
         newCourses[index] = targetCourse
+        if (state.course){
+            targetCourse.lectures = state.course.lectures.slice()
+            return Object.assign({}, state, {
+                courses: newCourses,
+                course: targetCourse
+            })
+        }
         return Object.assign({}, state, {
             courses: newCourses
         })
