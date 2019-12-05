@@ -8,13 +8,15 @@ import { withStyles } from "@material-ui/styles";
 import Popup from "../Popup/Popup";
 import MenuOptions from "../MenuOptions/MenuOptions";
 import MultipleChoiceQuizForm from "../Form/Quiz/MultipleChoiceQuizForm";
+import { deleteQuiz } from "../../redux/actions";
 
 function mapStateToProps(state, ownProps){
     var quizzes = state.selectedLecture.quizzes
     
     return {
         quiz: quizzes[ownProps.index],
-        live: state.live
+        live: state.live,
+        lectureId: state.selectedLecture.lectureId
     }
 }
 
@@ -60,7 +62,9 @@ function QuizCard(props){
         track: {}
       })(Switch);
     
-    const deleteQuiz = () =>{}
+    const handleDelete = () =>{
+        props.deleteQuiz(props.lectureId, props.index)
+    }
     return(
         <Card className="card quiz-card">
             <CardContent className="card-content">
@@ -76,7 +80,7 @@ function QuizCard(props){
                             className="icon" 
                             options={[
                                 <Popup purpose={"Edit"} trigger={{component:Button, style:{width:'100%'}}} content={MultipleChoiceQuizForm} id={props.index}/>, 
-                                <Button fullWidth onClick={deleteQuiz}>Hapus</Button>]
+                                <Button fullWidth onClick={handleDelete}>Hapus</Button>]
                             }
                         />
                     </div>
@@ -105,4 +109,4 @@ function QuizCard(props){
     )
 }
 
-export default connect(mapStateToProps)(QuizCard);
+export default connect(mapStateToProps,{deleteQuiz})(QuizCard);

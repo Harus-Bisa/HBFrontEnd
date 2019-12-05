@@ -19,6 +19,8 @@ export const SET_ANSWER = "SET_ANSWER"
 export const REMOVE_ANSWER = "REMOVE_ANSWER";
 export const REMOVE_ANSWERS = "REMOVE_ANSWERS"
 export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER"
+export const EDIT_QUIZ = "EDIT_QUIZ";
+export const DELETE_QUIZ = "DELETE_QUIZ"
 
 /* ERROR */
 export const ERROR = "ERROR";

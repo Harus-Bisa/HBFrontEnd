@@ -1,4 +1,4 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE, DELETE_LECTURE } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE, DELETE_LECTURE, EDIT_QUIZ, DELETE_QUIZ } from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -220,6 +220,40 @@ function rootReducer(state = initialState, action){
     if(action.type === ADD_QUIZ){
         let newQuizzes = state.selectedLecture.quizzes.slice();
         newQuizzes.splice(newQuizzes.length,0,action.payload);
+        
+        return Object.assign({}, state, {
+            selectedLecture:{
+                date:state.selectedLecture.date,
+                participationRewardPercentage:state.selectedLecture.participationRewardPercentage,
+                courseId:state.selectedLecture.courseId,
+                live:state.selectedLecture.live,
+                hasLived:state.selectedLecture.hasLived,
+                lectureId:state.selectedLecture.lectureId,
+                attendanceNumber:state.selectedLecture.attendanceNumber,
+                quizzes:newQuizzes
+            }
+        })
+    }
+    if(action.type === EDIT_QUIZ){
+        let newQuizzes = state.selectedLecture.quizzes.slice();
+        newQuizzes.splice(action.payload.quizIndex,1,action.payload.quiz);
+        
+        return Object.assign({}, state, {
+            selectedLecture:{
+                date:state.selectedLecture.date,
+                participationRewardPercentage:state.selectedLecture.participationRewardPercentage,
+                courseId:state.selectedLecture.courseId,
+                live:state.selectedLecture.live,
+                hasLived:state.selectedLecture.hasLived,
+                lectureId:state.selectedLecture.lectureId,
+                attendanceNumber:state.selectedLecture.attendanceNumber,
+                quizzes:newQuizzes
+            }
+        })
+    }
+    if(action.type === DELETE_QUIZ){
+        let newQuizzes = state.selectedLecture.quizzes.slice();
+        newQuizzes.splice(action.payload.quizIndex,1);
         
         return Object.assign({}, state, {
             selectedLecture:{

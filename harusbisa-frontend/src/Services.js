@@ -276,6 +276,36 @@ class Services{
             throw error;
         })
     }
+    async editQuiz(lectureId, question, answerOptions, correctAnswerIndex, duration, pointWorth, quizIndex){
+        const headers = this.createHeaders();
+        const url = this.domain + "/faculty/lectures/"+lectureId + "/quizzes/"+quizIndex;
+        const data = {
+            question: question,
+            answerOptions: answerOptions,
+            correctAnswerIndex: correctAnswerIndex,
+            duration: duration,
+            pointWorth: pointWorth,
+            includeForGrading:true
+        }
+        return await axios.put(url, data, {headers: headers})
+        .then(response =>{
+            return response.data;
+        })
+        .catch(error =>{
+            throw error;
+        })
+    }
+    async deleteQuiz(lectureId, quizIndex){
+        const headers = this.createHeaders();
+        const url = this.domain + "/faculty/lectures/"+lectureId + "/quizzes/"+quizIndex;
+        return await axios.delete(url,{headers: headers})
+        .then(response =>{
+            return response.data;
+        })
+        .catch(error =>{
+            throw error;
+        })
+    }
 }
 
 const services = new Services()

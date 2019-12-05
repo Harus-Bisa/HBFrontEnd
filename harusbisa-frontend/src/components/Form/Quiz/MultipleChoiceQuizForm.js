@@ -3,7 +3,7 @@ import { Form, FormGroup, Label, Input, Button as RButton, Col} from 'reactstrap
 import {connect} from "react-redux";
 import { Button } from "@material-ui/core";
 import AnswerForm from "./AnswerForm";
-import { addQuiz, removeAnwers, setAnswer, setCorrectAnswer } from "../../../redux/actions";
+import { addQuiz, removeAnwers, setAnswer, setCorrectAnswer, editQuiz } from "../../../redux/actions";
 
 function MultipleChoiceQuizForm(props){
     var [question, setQuestion] = React.useState(props.quiz ? props.quiz.question : "")
@@ -14,7 +14,13 @@ function MultipleChoiceQuizForm(props){
 
     const submit = (event) =>{
         event.preventDefault();
-        props.addQuiz(props.lectureId, question, props.answers,props.correctAnswer, duration, points)
+        if (type === "ADD"){
+            props.addQuiz(props.lectureId, question, props.answers,props.correctAnswer, duration, points)
+        }
+        else if (type === "EDIT"){
+            props.editQuiz(props.lectureId, question, props.answers,props.correctAnswer, duration, points,props.id)
+        }
+        
     }
     const incrementNumOfAns = () =>{
         setNumOfAnswers(numOfAnswers + 1)
@@ -120,4 +126,4 @@ function mapStateToProps(state, ownProps){
         quiz: targetQuiz
     }
 }
-export default connect(mapStateToProps,{addQuiz, removeAnwers, setAnswer,setCorrectAnswer})(MultipleChoiceQuizForm);
+export default connect(mapStateToProps,{addQuiz, removeAnwers, setAnswer,setCorrectAnswer, editQuiz})(MultipleChoiceQuizForm);
