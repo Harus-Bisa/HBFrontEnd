@@ -71,7 +71,9 @@ class Services{
             }
         })
         .catch(error => {
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
     }
 
@@ -82,18 +84,65 @@ class Services{
             headers: headers
         })
         .then(response => {
-            var data = response.data
-            return{
-                firstName: data.firstName,
-                lastName: data.lastName,
-                role: data.role,
-                school: data.school,
-                email: data.email,
-                userId: data.userId
-            }
+            return response.data
         })
         .catch(error =>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
+        })
+    }
+    async changePassword(userId, oldPassword, newPassword){
+        const headers = this.createHeaders();
+        const data = {
+            oldPassword: oldPassword,
+            newPassword: newPassword
+        }
+        return await axios.put(this.domain + "/users/"+userId,data,{
+            headers: headers
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(error =>{
+            throw {
+                message: error.response.statusText
+            }
+        })
+    }
+    async editUser(userId, firstName, lastName, email, school){
+        const headers = this.createHeaders();
+        const data = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            school: school,
+        }
+        return await axios.put(this.domain + "/users/"+userId,data,{
+            headers: headers
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(error =>{
+            throw {
+                message: error.response.statusText
+            }
+        })
+    }
+
+    async deleteUser(userId){
+        const headers = this.createHeaders();
+        return await axios.delete(this.domain + "/users/"+userId,{
+            headers: headers
+        })
+        .then(response => {
+            return response.data
+        })
+        .catch(error =>{
+            throw {
+                message: error.response.statusText
+            }
         })
     }
 
@@ -108,7 +157,9 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw error;
+            throw {
+                message: error.response.statusText
+            };
         })
     }
 
@@ -134,7 +185,9 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
     }
     async deleteCourse(courseId,role){
@@ -144,7 +197,9 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
     }
 
@@ -160,7 +215,9 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
     }
 
@@ -176,7 +233,9 @@ class Services{
             })
         })
         .catch(error=>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
     }
     // LECTURES
@@ -189,7 +248,9 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
     }
 
@@ -238,7 +299,9 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
 
     }
@@ -253,7 +316,9 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw error
+            throw {
+                message: error.response.statusText
+            }
         })
     }
 
@@ -273,7 +338,9 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw error;
+            throw {
+                message: error.response.statusText
+            };
         })
     }
     async editQuiz(lectureId, question, answerOptions, correctAnswerIndex, duration, pointWorth, quizIndex){
@@ -292,7 +359,9 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw error;
+            throw {
+                message: error.response.statusText
+            };
         })
     }
     async deleteQuiz(lectureId, quizIndex){
@@ -303,7 +372,9 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw error;
+            throw {
+                message: error.response.statusText
+            };
         })
     }
 }
