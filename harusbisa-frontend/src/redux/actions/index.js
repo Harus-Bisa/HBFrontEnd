@@ -142,9 +142,9 @@ export function deleteUser(userId){
         return await services.deleteUser(userId)
         .then(async response =>{
             await dispatch({type: DELETE_USER, payload: response})
-            dispatch(logout())
             dispatch({type:REMOVE_COMPONENT_LOADING})
             dispatch(removeError())
+            dispatch(logout())
         })
         .catch(error =>{
             dispatch({type:ERROR, payload: error})

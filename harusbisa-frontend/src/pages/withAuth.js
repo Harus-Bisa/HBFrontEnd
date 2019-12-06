@@ -7,7 +7,7 @@ export function withAuth(Page){
             return <Page {...props}/>;
         }
         else{
-            alert("Unauthorized. You are not logged in.")
+            // alert("Unauthorized. You are not logged in.")
             props.history.push("/")
             return null;
         }

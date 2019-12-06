@@ -71,9 +71,7 @@ class Services{
             }
         })
         .catch(error => {
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
 
@@ -87,9 +85,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
     async changePassword(userId, oldPassword, newPassword){
@@ -105,9 +101,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
     async editUser(userId, firstName, lastName, email, school){
@@ -125,9 +119,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
 
@@ -140,9 +132,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
 
@@ -157,9 +147,7 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            };
+            throw new Error(error.response.statusText);
         })
     }
 
@@ -185,9 +173,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
     async deleteCourse(courseId,role){
@@ -197,9 +183,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
 
@@ -215,9 +199,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
 
@@ -233,9 +215,7 @@ class Services{
             })
         })
         .catch(error=>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
     // LECTURES
@@ -248,9 +228,7 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
 
@@ -299,9 +277,7 @@ class Services{
             return response.data
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
 
     }
@@ -316,9 +292,7 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            }
+            throw new Error(error.response.statusText)
         })
     }
 
@@ -338,9 +312,7 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            };
+            throw new Error(error.response.statusText);
         })
     }
     async editQuiz(lectureId, question, answerOptions, correctAnswerIndex, duration, pointWorth, quizIndex){
@@ -359,9 +331,7 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            };
+            throw new Error(error.response.statusText);
         })
     }
     async deleteQuiz(lectureId, quizIndex){
@@ -372,9 +342,7 @@ class Services{
             return response.data;
         })
         .catch(error =>{
-            throw {
-                message: error.response.statusText
-            };
+            throw new Error(error.response.statusText);
         })
     }
 }
