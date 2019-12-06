@@ -5,8 +5,9 @@ import '../../test-config';
 import {Provider} from 'react-redux';
 import AccountSettingsForm from "../../components/Form/Settings/AccountSettingsForm";
 import { Form } from "reactstrap";
+import thunk from "redux-thunk";
 
-const mockStore = configureMockStore();
+const mockStore = configureMockStore([thunk]);
 describe("AccountSettingsForm component", () =>{
     let initialState;
     let component;
@@ -14,14 +15,20 @@ describe("AccountSettingsForm component", () =>{
     const setState = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState');
     useStateSpy.mockImplementation((init) => [init, setState])
-    const mockChangeProfile = jest.fn();
 
     beforeEach(() =>{
         initialState = {
-              loading: false
+            loading: false,
+            userId: "5db6093a7f75df3ce6c12095",
+            firstName: "Wilson",
+            lastName: "Burnawan",
+            email: "wilson.burnawan@gmail.com",
+            school: "University of Illinois at Urbana-Champaign",
+            role: "faculty"
         }
         store = mockStore(initialState);
-        component = mount(<Provider store={store}><AccountSettingsForm changeProfile={mockChangeProfile}/></Provider>)
+        store.dispatch = jest.fn()
+        component = mount(<Provider store={store}><AccountSettingsForm/></Provider>)
     })
     
     afterEach(()=>{
@@ -47,13 +54,26 @@ describe("AccountSettingsForm component", () =>{
 
         formIds.forEach(id =>{
             var form = component.find("#"+id).at(0)
-            expect(mockChangeProfile).not.toHaveBeenCalled()
             expect(mockPreventDefault).not.toHaveBeenCalled()
-            form.simulate('submit',{preventDefault:mockPreventDefault})
-            expect(mockChangeProfile).toHaveBeenCalled()
+            if (id === "password-form"){
+                let passwordIds = ["oldPassword", "newPassword", "verifyNewPassword"]
+                passwordIds.forEach(id =>{
+                    var formEntry = component.find("#"+id).at(0)
+                    formEntry.simulate("change",{target:{value:"pass"}})
+                    component.update()
+                })
+            }
+            form.simulate('submit',{preventDefault:mockPreventDefault, target:{id:id}})
+            expect(store.dispatch).toHaveBeenCalled()
             expect(mockPreventDefault).toHaveBeenCalled()
             jest.clearAllMocks()
         })
+    })
+    it("Simulate delete", () =>{
+       var deleteButton = component.find("#delete-button").at(0)
+        expect(store.dispatch).not.toHaveBeenCalled();
+        deleteButton.simulate("click")
+        expect(store.dispatch).toHaveBeenCalled();
     })
 
     it("Simulate loading", () =>{
@@ -61,7 +81,7 @@ describe("AccountSettingsForm component", () =>{
             loading: true
         }
         store = mockStore(initialState);
-        component = mount(<Provider store={store}><AccountSettingsForm changeProfile={mockChangeProfile}/></Provider>)
+        component = mount(<Provider store={store}><AccountSettingsForm /></Provider>)
         var loading = component.find(<p>Loading</p>)
         expect(loading).toBeDefined();
     })

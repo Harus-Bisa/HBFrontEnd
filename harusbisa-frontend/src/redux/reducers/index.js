@@ -1,4 +1,9 @@
-import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE, DELETE_LECTURE, EDIT_QUIZ, DELETE_QUIZ } from "../constants/action-types";
+import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DELETE_COURSE, EDIT_COURSE, 
+    USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, 
+    REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, 
+    REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE, DELETE_LECTURE, EDIT_QUIZ, 
+    DELETE_QUIZ, EDIT_USER } 
+from "../constants/action-types";
 import services from "../../Services";
 
 function findIndex(array, target, type){
@@ -78,7 +83,7 @@ function rootReducer(state = initialState, action){
             courses: newCourses
         })
     }
-    if(action.type === USER_LOADED){
+    if(action.type === USER_LOADED || action.type === EDIT_USER){
         return Object.assign({}, state, {
             firstName: action.payload.firstName,
             lastName: action.payload.lastName,
@@ -107,9 +112,14 @@ function rootReducer(state = initialState, action){
         })
     }
     if(action.type === LOG_OUT){
-        return Object.assign({}, state, {
-            loggedIn: false,
-        })
+        return {
+            loadingCount:0, 
+            loading: false, 
+            cLoadingCount:0, 
+            cLoading:false,
+            loggedIn: services.isLoggedIn(),
+            live: false //remember to change this when u have socket setup
+        }
     }
     if(action.type === LOG_IN){
         return Object.assign({}, state, {
