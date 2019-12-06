@@ -47,6 +47,7 @@ class Services{
         }
     }
 
+    // AUTHENTICATION
     logout(){
         localStorage.removeItem('id_token')
     }
@@ -75,6 +76,22 @@ class Services{
         })
     }
 
+    async signup(firstName, lastName, email, school, role, password){
+        const data = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            school: school,
+            role: role,
+            password: password
+        }
+        return axios.post(`${this.domain}/signup`, data)
+        .then(response => {
+        })
+        .catch(error => {
+            throw new Error(error.response.statusText)
+        })
+    }
     //USERS
     async getUser(userId){
         const headers = this.createHeaders();
