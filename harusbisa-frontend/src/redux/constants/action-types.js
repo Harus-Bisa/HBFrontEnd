@@ -29,7 +29,11 @@ export const REMOVE_ERROR = "REMOVE_ERROR";
 /* USER */
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
+export const SIGN_UP = "SIGN_UP";
 export const USER_LOADED = "USER_LOADED";
+export const EDIT_USER = "EDIT_USER";
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
+export const DELETE_USER= "DELETE_USER";
 
 /*DASHBOARD CONTENT_TYPE */
 export const CHANGE_CONTENT_TYPE = "CHANGE_CONTENT_TYPE"

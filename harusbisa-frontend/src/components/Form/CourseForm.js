@@ -57,7 +57,9 @@ function CourseForm(props){
         event.preventDefault();
         if (type === EDIT){
             props.editCourse(props.id, name, startTermText, endTermText, props.role);
-            {props.closePopup && props.closePopup();}
+            if(props.closePopup){
+                props.closePopup()
+            }
         }
         else{
             props.addCourse(name, startTermText, endTermText, props.role);
