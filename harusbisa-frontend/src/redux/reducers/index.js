@@ -2,7 +2,7 @@ import { COURSES_LOADED, COURSE_LOADED, CHANGE_SELECTED_LECTURE, ADD_COURSE, DEL
     USER_LOADED, STUDENT_ADD_COURSE, ERROR, REMOVE_ERROR, LOG_OUT, LOG_IN, CHANGE_CONTENT_TYPE, SET_LOADING, 
     REMOVE_LOADING, ADD_LECTURE, SET_COMPONENT_LOADING, REMOVE_COMPONENT_LOADING, ADD_QUIZ, SET_ANSWER, 
     REMOVE_ANSWERS, SET_CORRECT_ANSWER, REMOVE_ANSWER, SET_LIVE_LECTURE, EDIT_LECTURE, DELETE_LECTURE, EDIT_QUIZ, 
-    DELETE_QUIZ, EDIT_USER } 
+    DELETE_QUIZ, EDIT_USER, SET_FULLSCREEN, SET_LIVE_QUIZ } 
 from "../constants/action-types";
 import services from "../../Services";
 
@@ -30,7 +30,7 @@ const initialState ={
     cLoadingCount:0, 
     cLoading:false,
     loggedIn: services.isLoggedIn(),
-    live: false //remember to change this when u have socket setup
+    liveLecture: false //remember to change this when u have socket setup
 }
 function rootReducer(state = initialState, action){
     if (action.type === COURSES_LOADED){
@@ -327,7 +327,19 @@ function rootReducer(state = initialState, action){
     }
     if(action.type === SET_LIVE_LECTURE){
         return Object.assign({}, state,{
-            live: action.payload
+            liveLecture: action.payload
+        })
+    }
+    if(action.type === SET_FULLSCREEN){
+        return Object.assign({}, state,{
+            fullscreen: action.payload
+        })
+    }
+    if(action.type === SET_LIVE_QUIZ){
+        let quiz= state.selectedLecture.quizzes[action.payload]
+        quiz.index = action.payload
+        return Object.assign({}, state,{
+            liveQuiz: quiz
         })
     }
     return state;

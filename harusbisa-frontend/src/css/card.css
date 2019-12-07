@@ -58,18 +58,15 @@
     padding: 8px 16px;
 }
 
-.quiz-card .collapse-content .answer{
+.answer{
     background-color: #FEF9DE;
     border-radius: 8px;
     padding: 10px 15px;
     margin: 5px 0px;
 }
 
-.quiz-card .collapse-content .answer p{
-    font-weight: 700;
-}
 
-.quiz-card .collapse-content .answer-correct{
+.answer-correct{
     background-color: #82DAA4;
 }
 .quiz-card .action{

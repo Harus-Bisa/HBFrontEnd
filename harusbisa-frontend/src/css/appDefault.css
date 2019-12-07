@@ -200,3 +200,11 @@ img{
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+.fullscreen{
+	background-color: white;
+	color: black;
+	height: 100%;
+	width: 100%;
+	z-index: 0;
+}

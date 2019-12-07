@@ -12,15 +12,18 @@ import LectureButtonContent from "../../LectureButton/LectureButtonContent";
 import { convertDate } from "../../Sidebar/Sidebar";
 import LectureForm from "../../Form/LectureForm";
 import ErrorMessage from "../../Error/ErrorMessage";
-import { changeContentType, setLiveLecture } from "../../../redux/actions";
+import { changeContentType, setLiveLecture, setFullscreen } from "../../../redux/actions";
 import QuizForm from "../../Form/Quiz/QuizForm";
+import FullScreen from "react-full-screen";
+import LiveLecture from "./Live/LiveLecture";
 
 function mapStateToProps(state){
     return {
         lecture: state.selectedLecture,
         error: state.error,
         cLoading: state.cLoading,
-        live: state.live
+        liveLecture: state.liveLecture,
+        fullscreen: state.fullscreen
     }
 }
 function Lecture(props){
@@ -41,7 +44,7 @@ function Lecture(props){
     else{
         var date = convertDate(props.lecture.date)
         var indicator = () =>{
-            if (props.live){
+            if (props.liveLecture){
                 return "Sedang berlangsung"
             }
             else{
@@ -55,13 +58,16 @@ function Lecture(props){
         }
         return(
             <div>
+                <FullScreen enabled={props.fullscreen} onChange={(fullscreen)=>{props.setFullscreen(fullscreen)}}>
+                    {props.fullscreen && <LiveLecture/>}
+                </FullScreen>
                 <header>
                     <div className="row">
                         <div className="col-5" style={{display:'flex'}}>
-                            <h1 style={{margin:"auto"}}>Sesi {date}</h1>
+                            <h1 style={{margin:"auto 0"}}>Sesi {date}</h1>
                         </div>
                         <div className="col" style={{display:'flex', flexDirection:'row'}}>
-                            <div className={"circle" + (props.live ? " green" : "")}/>
+                            <div className={"circle" + (props.liveLecture ? " green" : "")}/>
                             <h5 style={{margin:"auto 0"}}>{indicator()}</h5>
                         </div>
                     </div>
@@ -69,8 +75,8 @@ function Lecture(props){
                 <div style={{margin:"1rem 0"}}>
                     <div className="row">
                         <div className="col-3">
-                            <Button fullWidth className="lecture-button" onClick={() => props.setLiveLecture(!props.live)}>
-                                <LectureButtonContent icon={props.live ? StopIcon : PlayIcon} content={props.live ? "Tutup kelas":"Buka kelas"}/>
+                            <Button fullWidth className="lecture-button" onClick={() => props.setLiveLecture(!props.liveLecture)}>
+                                <LectureButtonContent icon={props.liveLecture ? StopIcon : PlayIcon} content={props.liveLecture ? "Tutup kelas":"Buka kelas"}/>
                             </Button>
                         </div>
                         <div className="col-3">
@@ -108,4 +114,4 @@ function Lecture(props){
     }
 }
 
-export default connect(mapStateToProps,{changeContentType, setLiveLecture})(Lecture);
+export default connect(mapStateToProps,{changeContentType, setLiveLecture, setFullscreen})(Lecture);

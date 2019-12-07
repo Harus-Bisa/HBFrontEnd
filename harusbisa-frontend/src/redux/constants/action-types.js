@@ -10,6 +10,7 @@ export const EDIT_COURSE = "EDIT_COURSE";
 export const CHANGE_SELECTED_LECTURE = "CHANGE_SELECTED_LECTURE";
 export const ADD_LECTURE = "ADD_LECTURE";
 export const SET_LIVE_LECTURE = "SET_LIVE_LECTURE";
+export const SET_FULLSCREEN = "SET_FULLSCREEN";
 export const EDIT_LECTURE = "EDIT_LECTURE";
 export const DELETE_LECTURE = "DELETE_LECTURE";
 
@@ -21,6 +22,7 @@ export const REMOVE_ANSWERS = "REMOVE_ANSWERS"
 export const SET_CORRECT_ANSWER = "SET_CORRECT_ANSWER"
 export const EDIT_QUIZ = "EDIT_QUIZ";
 export const DELETE_QUIZ = "DELETE_QUIZ"
+export const SET_LIVE_QUIZ = "SET_LIVE_QUIZ";
 
 /* ERROR */
 export const ERROR = "ERROR";

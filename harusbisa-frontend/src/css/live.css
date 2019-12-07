@@ -1,0 +1,52 @@
+.fullscreen{
+    font-family: "Lato";
+}
+
+.fullscreen .content{
+    padding-top: 5rem;
+}
+
+/*LIVE MENU*/
+.live-menu{
+    background-color: #323232;
+	color: white;
+	position: absolute;
+	left: 5.57%;
+	right: 7.13%;
+	top: 88.31%; /*88.31*/
+	bottom: 4.01%;
+}
+
+.live-menu button{
+    color: white;
+    margin: auto;
+}
+
+.live-menu .dropdown-item{
+    color:black;
+}
+
+.live-menu #change-quiz{
+    margin: auto;
+    background: transparent;
+}
+
+.live-menu .btn-secondary{
+    background: transparent;
+    border-color: transparent;
+}
+.live-menu #control-button{
+    background-color: white;
+    border-radius: 8px;
+    color: black
+}
+
+.live-menu .col{
+    display: flex;
+}
+
+/* LIVE QUIZ*/
+.live-quiz p{
+    font-size: 30px !important;
+    line-height: 34px !important;
+}

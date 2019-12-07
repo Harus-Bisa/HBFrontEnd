@@ -8,45 +8,44 @@ import { withStyles } from "@material-ui/styles";
 import Popup from "../Popup/Popup";
 import MenuOptions from "../MenuOptions/MenuOptions";
 import MultipleChoiceQuizForm from "../Form/Quiz/MultipleChoiceQuizForm";
-import { deleteQuiz } from "../../redux/actions";
+import { deleteQuiz, setFullscreen, setLiveQuiz } from "../../redux/actions";
 
 function mapStateToProps(state, ownProps){
     var quizzes = state.selectedLecture.quizzes
     
     return {
         quiz: quizzes[ownProps.index],
-        live: state.live,
+        liveLecture: state.liveLecture,
         lectureId: state.selectedLecture.lectureId
     }
 }
-
+export function timeFormat(duration){
+    var minute = String(Math.floor(duration/60))
+    var second = String(duration%60);
+    if(minute < 10){
+        minute = "0" + String(minute)
+    }
+    if(second < 10){
+        second = "0" + String(second);
+    }
+    return minute + ":" + second
+}
+export function makeProfAnswers(answerOptions, showCorrectAnswer, correctAnswerIndex){
+    var answers = []
+    for (let i=0; i<answerOptions.length; i++){
+        if(showCorrectAnswer && i === correctAnswerIndex){
+            answers.push(<div className="answer answer-correct" key={i}><p>{String.fromCharCode(i+65)}. {answerOptions[i]}</p></div>)
+        }
+        else{
+            answers.push(<div className="answer" key={i}><p>{String.fromCharCode(i+65)}. {answerOptions[i]}</p></div>)
+        }
+    }
+    return answers
+}
 function QuizCard(props){
     var [expand, setExpand] = React.useState(false)
     var [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false)
-    const makeAnswers = () =>{
-        var answers = []
-        for (let i=0; i<props.quiz.answerOptions.length; i++){
-            if(showCorrectAnswer && i === props.quiz.correctAnswerIndex){
-                answers.push(<div className="answer answer-correct" key={i}><p>{String.fromCharCode(i+65)}. {props.quiz.answerOptions[i]}</p></div>)
-            }
-            else{
-                answers.push(<div className="answer" key={i}><p>{String.fromCharCode(i+65)}. {props.quiz.answerOptions[i]}</p></div>)
-            }
-        }
-        return answers
-    }
-    const time = () =>{
-        var duration = props.quiz.duration;
-        var minute = String(Math.floor(duration/60))
-        var second = String(duration%60);
-        if(minute < 10){
-            minute = "0" + String(minute)
-        }
-        if(second < 10){
-            second = "0" + String(second);
-        }
-        return minute + ":" + second
-    }
+    
     const GreenSwitch = withStyles({
         switchBase: {
           color: "#ffffff",
@@ -64,6 +63,10 @@ function QuizCard(props){
     
     const handleDelete = () =>{
         props.deleteQuiz(props.lectureId, props.index)
+    }
+    const handleLiveQuiz = () =>{
+        props.setLiveQuiz(props.index)
+        props.setFullscreen(true)
     }
     return(
         <Card className="card quiz-card">
@@ -90,7 +93,7 @@ function QuizCard(props){
                 <div className="row">
                     <div className="col-12">
                         <div className="collapse-content">
-                            {makeAnswers()}
+                            {makeProfAnswers(props.quiz.answerOptions, showCorrectAnswer, props.quiz.correctAnswerIndex)}
                         </div>
                     </div>
                 </div>
@@ -101,12 +104,18 @@ function QuizCard(props){
                     {expand && <FormControlLabel style={{marginRight:'15px', marginLeft:'15px'}} control={<GreenSwitch checked={showCorrectAnswer} onChange={() =>setShowCorrectAnswer(!showCorrectAnswer)}/>} label="Jawaban benar"/>}
                 </div>
                 <div>
-                    <p style={{margin:'auto 15px'}}>{time()}</p>
-                    <Button className={props.live ? "prof-button hvr-pulse" : "clear-button"}>Mulai</Button>
+                    <p style={{margin:'auto 15px'}}>{timeFormat(props.quiz.duration)}</p>
+                    <Button 
+                        className={props.liveLecture ? "prof-button hvr-pulse" : "clear-button"} 
+                        disabled={!props.liveLecture}
+                        onClick={handleLiveQuiz} 
+                    >
+                        Mulai
+                    </Button>
                 </div>
             </CardActions>
         </Card>
     )
 }
 
-export default connect(mapStateToProps,{deleteQuiz})(QuizCard);
+export default connect(mapStateToProps,{deleteQuiz, setFullscreen, setLiveQuiz})(QuizCard);
