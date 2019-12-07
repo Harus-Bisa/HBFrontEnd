@@ -93,6 +93,18 @@ header{
     margin-bottom: 1.5rem;
 }
 
+.circle{
+    border-radius: 50%;
+    background-color: #C4C4C4;
+    height: 26px;
+    width: 26px;
+    margin: auto 15px;
+}
+
+.green{
+    background-color: #82DAA4;
+}
+
 /*GENERAL COMPONENTS*/
 .search-bar{
 	display: flex;

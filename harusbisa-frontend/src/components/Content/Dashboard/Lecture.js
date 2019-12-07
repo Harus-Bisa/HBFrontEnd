@@ -40,10 +40,31 @@ function Lecture(props){
     }
     else{
         var date = convertDate(props.lecture.date)
+        var indicator = () =>{
+            if (props.live){
+                return "Sedang berlangsung"
+            }
+            else{
+                if(props.lecture.hasLived){
+                    return "Telah berlangsung"
+                }
+                else{
+                    return "Baru"
+                }
+            }
+        }
         return(
             <div>
                 <header>
-                    <h1>Sesi {date}</h1>
+                    <div className="row">
+                        <div className="col-5" style={{display:'flex'}}>
+                            <h1 style={{margin:"auto"}}>Sesi {date}</h1>
+                        </div>
+                        <div className="col" style={{display:'flex', flexDirection:'row'}}>
+                            <div className={"circle" + (props.live ? " green" : "")}/>
+                            <h5 style={{margin:"auto 0"}}>{indicator()}</h5>
+                        </div>
+                    </div>
                 </header>
                 <div style={{margin:"1rem 0"}}>
                     <div className="row">
